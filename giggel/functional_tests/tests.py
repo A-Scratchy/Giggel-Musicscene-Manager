@@ -14,6 +14,4 @@ class basicFunctionalTests(LiveServerTestCase):
     def test_site_reachable(self):
         browser = self.browser
         browser.get(self.live_server_url)
-        print(self.live_server_url)
         self.assertIn('Giggel', browser.title)
-        sleep(5)
