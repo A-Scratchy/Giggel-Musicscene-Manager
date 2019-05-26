@@ -37,6 +37,5 @@ class basicFunctionalTests(LiveServerTestCase):
         browser.find_element_by_id("id_password1").send_keys(password)
         browser.find_element_by_id("id_password2").send_keys(password)
         browser.find_element_by_id("submit").click()
-        time.sleep(self.SLEEP_TIME)
-        welcome = browser.find_element_by_id("welcome").text
-        assertIn(username, welcome)
+        welcome = browser.find_element_by_id("messages").text
+        self.assertIn(username, welcome)
