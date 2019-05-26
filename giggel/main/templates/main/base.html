@@ -30,7 +30,7 @@
             <a class="nav-link" name="home" href="{% url 'home' %}">Home</a>
           </li>
           <li class="nav-item {% block myProfile_active %}{% endblock %}">
-            <a class="nav-link" name="myProfile" href="#">My profile</a>
+            <a class="nav-link" name="myProfile" href="{% url 'profile' %}">My profile</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" name="Django admin" href="{% url 'admin:index' %}">Django-admin</a>

@@ -1,7 +1,7 @@
 {% extends "main/base.html" %}
 {% load static %}
 {% block myProfile_active %}active{% endblock %}
-{% block title %}{{ username }}
+{% block title %}{{ user.username }}
   - User Profile{% endblock %}
 
 {% block headerText %}{{ username }}
