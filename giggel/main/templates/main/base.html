@@ -18,7 +18,7 @@
     <!-- navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <!-- Logo - to add later when designed-->
-      <a class="navbar-brand" href="#"><img src="" width="30" height="30" alt=""></a>
+      <a class="navbar-brand" href=""><img src="{% static 'img/temp.png' %}" width="30" height="30" alt=""></a>
       <!-- dropdown for small screens -->
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -50,6 +50,30 @@
             </div>
           </li>
         </ul>
+        <!-- right side of nav -->
+        <ul class="navbar-nav">
+          {% if user.is_authenticated %}
+            <li class="nav-item">
+              <a class="nav-link" name="logOut" href="/">Log out</a>
+            </li>
+            <li class="nav-item">
+              <p class="nav-link disabled" name="loggedInUser" href="#">Current user:
+                {{ user.username }}</p>
+            </li>
+            <li>
+              <a class="navbar-brand float-left" href="/user/profile"><img class="circle" src="{% static 'img/temp.png' %}" width="30" height="30" alt=""></a>
+            </li>
+          {% else %}
+            <li class="nav-item">
+              <a class="nav-link" name="logIn" href="/register">Sign up</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" name="logIn" href="/">Log in</a>
+            </li>
+          {% endif %}
+
+        </ul>
+
       </div>
     </nav>
 
