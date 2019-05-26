@@ -55,3 +55,9 @@ class basicFunctionalTests(LiveServerTestCase):
         browser.find_element_by_id("submit").click()
         loggedInUser = browser.find_element_by_name("loggedInUser").text
         self.assertIn(username, loggedInUser)
+
+    def test_login_button_present(self):
+        browser = self.browser
+        url = self.live_server_url
+        browser.get(url)
+        self.assertTrue(browser.find_element_by_name("login"))

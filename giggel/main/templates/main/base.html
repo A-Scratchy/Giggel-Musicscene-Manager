@@ -54,7 +54,7 @@
         <ul class="navbar-nav">
           {% if user.is_authenticated %}
             <li class="nav-item">
-              <a class="nav-link" name="logOut" href="{% url 'logout' %}">Log out</a>
+              <a class="nav-link" name="logout" href="{% url 'logout' %}">Log out</a>
             </li>
             <li class="nav-item">
               <p class="nav-link disabled" name="loggedInUser" href="#">Current user:
