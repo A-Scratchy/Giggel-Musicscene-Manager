@@ -1,4 +1,5 @@
 from django.test import TestCase
+from django.urls import reverse
 from django.contrib.auth.models import User
 
 # Unit tests for user app
@@ -7,7 +8,7 @@ from django.contrib.auth.models import User
 class BasicUnitTestsUsers(TestCase):
 
     def test_user_register_url_retruns_correct_template(self):
-        response = self.client.get('/register/')
+        response = self.client.get(reverse('register'))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'user/register.html')
 

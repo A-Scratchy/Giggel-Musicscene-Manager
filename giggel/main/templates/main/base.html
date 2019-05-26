@@ -27,13 +27,13 @@
         <ul class="navbar-nav mr-auto">
           <!--links -->
           <li class="nav-item {% block home_active %}{% endblock %}">
-            <a class="nav-link" name="home" href="/">Home</a>
+            <a class="nav-link" name="home" href="{% url 'home' %}">Home</a>
           </li>
           <li class="nav-item {% block myProfile_active %}{% endblock %}">
             <a class="nav-link" name="myProfile" href="#">My profile</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" name="Django admin" href="/admin">Django-admin</a>
+            <a class="nav-link" name="Django admin" href="{% url 'admin:index' %}">Django-admin</a>
           </li>
           <li class="nav-item {% block settings_active %}{% endblock %}">
             <a class="nav-link" name="settings" href="#">Settings</a>
@@ -53,6 +53,7 @@
         <!-- right side of nav -->
         <ul class="navbar-nav">
           {% if user.is_authenticated %}
+            <!-- show log out button nd user info + pic-->
             <li class="nav-item">
               <a class="nav-link" name="logout" href="{% url 'logout' %}">Log out</a>
             </li>
@@ -64,6 +65,7 @@
               <a class="navbar-brand float-left" href="/user/profile"><img class="circle" src="{% static 'img/temp.png' %}" width="30" height="30" alt=""></a>
             </li>
           {% else %}
+            <!-- show log in and sign up buttons -->
             <li class="nav-item">
               <a class="nav-link" name="signup" href="/register">Sign up</a>
             </li>
@@ -71,42 +73,36 @@
               <a class="nav-link" name="login" href="{% url 'login' %}">Log in</a>
             </li>
           {% endif %}
-
         </ul>
-
       </div>
     </nav>
 
     <!-- header content logo etc.. -->
     <header>
-      {% block header %}{% endblock %}
-
-      <!-- display any messges -->
-      {% if messages %}
-        <div class="messages">
-          {% for message in messages %}
-            <p{% if message.tags %} id="messages" class="alert alert-{{ message.tags }}" {% endif %}>{{ message }}</p>
-          {% endfor %}
-        </div>
-      {% endif %}
-
+      <div class="jumbotron text-center h1 giggel-header">
+        {% block headerText %}{% endblock %}
+      </div>
     </header>
 
-    <!-- main content -->
+    <!-- display any messges -->
+    {% if messages %}
+      <div class="messages">
+        {% for message in messages %}
+          <p{% if message.tags %} id="messages" class="alert alert-{{ message.tags }}" {% endif %}>{{ message }}</p>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    <!-- main page content -->
     <main>
       {% block content %}{% endblock %}
     </main>
 
     <!-- Footer -->
     <footer class="page-footer font-small bg-secondary">
-
-      <!-- Copyright -->
       <div class="text-center py-2">
         <p>Design - 2019 a scratcherd</p>
       </div>
-      <!-- Copyright -->
-
-      {% block footer %}{% endblock %}
     </footer>
 
   </body>
