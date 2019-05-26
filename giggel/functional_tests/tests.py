@@ -45,6 +45,12 @@ class basicFunctionalTests(LiveServerTestCase):
         self.browser.find_element_by_id("submit").click()
         welcome = self.browser.find_element_by_id("messages").text
         self.assertIn(new_username, welcome)
+        self.assertIn(new_username, self.browser.title)
+        self.assertIn('Profile', self.browser.title)
+
+    def test_cannot_access_profile_when_not_logged_in(self):
+        url = self.live_server_url + reverse('profile')
+        self.assertNotIn('Profile', self.browser.title)
 
 
 class loggedInFunctionalTests(LiveServerTestCase):
@@ -56,7 +62,7 @@ class loggedInFunctionalTests(LiveServerTestCase):
         self.username = helperMethods.generate_string(9)
         self.password = helperMethods.generate_string(9)
         self.user = User.objects.create_user(
-            username=self.username, password=self.password)
+            username=self.username, password=self.password, email='testUser@test.com')
 
     def tearDown(self):
         self.browser.quit()
@@ -69,3 +75,19 @@ class loggedInFunctionalTests(LiveServerTestCase):
         self.browser.find_element_by_id("submit").click()
         self.assertIn(self.username, self.browser.find_element_by_name(
             "loggedInUser").text)
+
+    def user_sent_to_profile_after_logging_in(self):
+        self.browser.get(self.live_server_url + reverse('login'))
+        self.browser.find_element_by_id("id_username").send_keys(self.username)
+        self.browser.find_element_by_id("id_password").send_keys(self.password)
+        self.browser.find_element_by_id("submit").click()
+        self.assertIn(self.username, self.browser.title)
+        self.assertIn('Profile', self.browser.title)
+
+    def user_sees_correct_info_on_profile(self):
+        self.client.login(username=self.username, password=self.password)
+        self.browser.get(self.live_server_url + reverse('profile'))
+        self.assertIn(
+            self.username, self.browser.find_element_by_id("username").text)
+        self.assertIn('testUser@test.com',
+                      self.browser.find_element_by_id("email").text)
