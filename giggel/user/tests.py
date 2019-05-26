@@ -13,6 +13,10 @@ class BasicUnitTestsUsers(TestCase):
         self.assertTemplateUsed(response, 'user/register.html')
 
     def test_user_profile_url_retruns_correct_template(self):
+        username = 'testUser'
+        self.user = User.objects.create_user(
+            username=username, password='AB12345')
+        self.client.login(username=username, password='AB12345')
         response = self.client.get(reverse('profile'))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'user/profile.html')
@@ -39,6 +43,7 @@ class BasicUnitTestsUsers(TestCase):
         self.assertNotIn(username, html)
 
     def test_cannot_access_profile_while_logged_out(self):
-        response = self.client.get(reverse('profile'), follow=True)
+        response = self.client.get(reverse('profile'))
         self.assertEqual(response.status_code, 302)
-        self.assertTemplateUsed(response, 'user/login.html')
+        html = response.content.decode('utf8')
+        self.assertNotIn('profile', html)

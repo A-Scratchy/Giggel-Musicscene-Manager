@@ -1,0 +1,27 @@
+{% extends "main/base.html" %}
+{% load static %}
+{% block myProfile_active %}active{% endblock %}
+{% block title %}{{ username }}
+  - User Profile{% endblock %}
+
+{% block headerText %}{{ username }}
+{% endblock %}
+
+{% block content %}
+  <div class="container">
+    <ul>
+      <li id="username">Username -
+        {{ user.username }}</li>
+      <li id="email">Email -
+        {{ user.email }}</li>
+      <li id="county">County -
+        {{ user.county }}</li>
+      <li id="membershipLevel">Membership Level -
+        {{ user.membershipLevel }}</li>
+      <li id="birth_date">DOB -
+        {{ user.birth_date }}</li>
+      <li id="confrimation_status">User Confirmed? -
+        {{ user.confrimation_status }}</li>
+    </ul>
+  </div>
+{% endblock %}
