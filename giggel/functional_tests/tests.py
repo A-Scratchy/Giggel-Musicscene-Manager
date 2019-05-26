@@ -1,4 +1,5 @@
 from django.test import LiveServerTestCase
+from django.contrib.auth.models import User
 from selenium import webdriver
 import string
 import random
@@ -39,3 +40,18 @@ class basicFunctionalTests(LiveServerTestCase):
         browser.find_element_by_id("submit").click()
         welcome = browser.find_element_by_id("messages").text
         self.assertIn(username, welcome)
+
+    def test_site_indicates_user_logged_in(self):
+        username = self.generate_string(9)
+        password = self.generate_string(9)
+        self.user = User.objects.create_user(
+            username=username, password=password)
+        browser = self.browser
+        url = self.live_server_url
+        browser.get(url)
+        browser.find_element_by_name("login").click()
+        browser.find_element_by_id("id_username").send_keys(username)
+        browser.find_element_by_id("id_password").send_keys(password)
+        browser.find_element_by_id("submit").click()
+        loggedInUser = browser.find_element_by_name("loggedInUser").text
+        self.assertIn(username, loggedInUser)
