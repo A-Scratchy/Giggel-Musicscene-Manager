@@ -18,7 +18,8 @@ def register(request):
                 request, f'Thanks {username}! Your account is now set up.')
             return redirect('profile')
         else:
-            messages.warning(request, 'from not valid')
+            messages.warning(
+                request, 'We\'re sorry, your form contains errors. Please fix and try again.')
             return redirect('register')
     else:
         form = UserCreationForm()

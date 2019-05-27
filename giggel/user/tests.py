@@ -47,3 +47,18 @@ class BasicUnitTestsUsers(TestCase):
         self.assertEqual(response.status_code, 302)
         html = response.content.decode('utf8')
         self.assertNotIn('profile', html)
+
+    def test_cannot_access_modify_profile_while_logged_out(self):
+        response = self.client.get(reverse('updateProfile'))
+        self.assertEqual(response.status_code, 302)
+        html = response.content.decode('utf8')
+        self.assertNotIn('profile', html)
+
+    def test_user_update_profile_form_displayed_correctly(self):
+        username = 'testUser'
+        self.user = User.objects.create_user(
+            username=username, password='AB12345')
+        self.client.login(username=username, password='AB12345')
+        response = self.client.get(reverse('updateProfile'))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'user/register.html')
