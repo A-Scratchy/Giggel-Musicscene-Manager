@@ -15,13 +15,13 @@
       <li id="email">Email -
         {{ user.email }}</li>
       <li id="county">County -
-        {{ user.county }}</li>
+        {{ user.profile.county }}</li>
       <li id="membershipLevel">Membership Level -
-        {{ user.membershipLevel }}</li>
+        {{ user.profile.membershipLevel }}</li>
       <li id="birth_date">DOB -
-        {{ user.birth_date }}</li>
+        {{ user.profile.birth_date }}</li>
       <li id="confrimation_status">User Confirmed? -
-        {{ user.confrimation_status }}</li>
+        {{ user.profile.confrimation_status }}</li>
     </ul>
   </div>
 {% endblock %}
