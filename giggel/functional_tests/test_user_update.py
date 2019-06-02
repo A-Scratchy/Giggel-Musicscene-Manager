@@ -15,7 +15,10 @@ class loggedInFunctionalTests(LiveServerTestCase):
         self.username = helperMethods.generate_string(9)
         self.password = helperMethods.generate_string(9)
         self.user = User.objects.create_user(
-            username=self.username, password=self.password, email='testUser@test.com')
+            username=self.username, password=self.password, first_name='test', last_name='test', email='testUser@test.com')
+        self.user.profile.county = 'York'
+        self.user.profile.birth_date = '1999-01-01'
+        self.user.save()
 
     def tearDown(self):
         self.browser.quit()
