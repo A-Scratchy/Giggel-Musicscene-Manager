@@ -42,6 +42,10 @@ class basicFunctionalTests(LiveServerTestCase):
             "id_password1").send_keys(new_password)
         self.browser.find_element_by_id(
             "id_password2").send_keys(new_password)
+        self.browser.find_element_by_id(
+            "id_county").send_keys('Yorkshire')
+        self.browser.find_element_by_id(
+            "id_birth_date").send_keys('1991-06-02')
         self.browser.find_element_by_id("submit").click()
         welcome = self.browser.find_element_by_id("messages").text
         self.assertIn(new_username, welcome)
@@ -57,6 +61,10 @@ class basicFunctionalTests(LiveServerTestCase):
             "id_password1").send_keys('test1')
         self.browser.find_element_by_id(
             "id_password2").send_keys('test2')
+        self.browser.find_element_by_id(
+            "id_county").send_keys('Yorkshire')
+        self.browser.find_element_by_id(
+            "id_birth_date").send_keys('1991-06-02')
         self.browser.find_element_by_id("submit").click()
         self.assertIn('Register', self.browser.title)
         messages = self.browser.find_element_by_id("messages").text

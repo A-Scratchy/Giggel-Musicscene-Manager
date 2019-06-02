@@ -61,4 +61,4 @@ class BasicUnitTestsUsers(TestCase):
         self.client.login(username=username, password='AB12345')
         response = self.client.get(reverse('updateProfile'))
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'user/register.html')
+        self.assertTemplateUsed(response, 'user/update.html')

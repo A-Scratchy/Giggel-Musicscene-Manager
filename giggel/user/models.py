@@ -9,7 +9,8 @@ class Profile(models.Model):
     confirmation_key = models.SlugField(max_length=80, default='')
     confrimation_status = models.BooleanField(default=False)
     membershipLevel = models.CharField(max_length=15, default='free')
-    county = models.CharField(max_length=40, blank=True)
+    county = models.CharField(
+        max_length=40, blank=True, null=True)
     birth_date = models.DateField(null=True, blank=True)
 
 

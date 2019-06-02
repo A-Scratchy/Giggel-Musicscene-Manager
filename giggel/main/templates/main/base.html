@@ -62,7 +62,7 @@
                 {{ user.username }}</p>
             </li>
             <li>
-              <a class="navbar-brand float-left" href="/user/profile"><img class="circle" src="{% static 'img/temp.png' %}" width="30" height="30" alt=""></a>
+              <a class="navbar-brand float-left" href="{% url 'profile' %}"><img class="circle" src="{% static 'img/temp.png' %}" width="30" height="30" alt=""></a>
             </li>
           {% else %}
             <!-- show log in and sign up buttons -->
