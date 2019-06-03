@@ -6,3 +6,9 @@ from django.http import HttpResponse
 
 def home(request):
     return render(request, 'main/home.html', {})
+
+# blank page used for testing
+
+
+def blankPage(request):
+    return HttpResponse('<html>a blank page</html>')

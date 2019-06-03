@@ -13,7 +13,7 @@ class basicFunctionalTests(LiveServerTestCase):
         options.set_headless(headless=True)
         self.browser = webdriver.Firefox(
             firefox_options=options)
-        self.browser.implicitly_wait(5)
+        self.browser.implicitly_wait(1)
         self.new_username = helperMethods.generate_string(9)
         self.new_password = helperMethods.generate_string(9)
 
@@ -57,3 +57,9 @@ class basicFunctionalTests(LiveServerTestCase):
         self.assertIn('Register', self.browser.title)
         messages = self.browser.find_element_by_id("messages").text
         self.assertIn('contains errors', messages)
+
+    def test_user_sent_to_profile_after_logging_in(self):
+        self.fillInRegForm(self.new_username,
+                           self.new_password, self.new_password)
+        self.assertIn(self.new_username, self.browser.title)
+        self.assertIn('Profile', self.browser.title)

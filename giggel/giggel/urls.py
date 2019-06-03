@@ -19,6 +19,7 @@ from main import views as main_views
 from user import views as user_views
 
 urlpatterns = [
+    path('blankPage/', main_views.blankPage, name='blankPage'),
     path('admin/', admin.site.urls),
     path('', main_views.home, name='home'),
     path('register/', user_views.register, name='register'),

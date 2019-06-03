@@ -40,12 +40,13 @@ def profile(request):
 @login_required
 def updateProfile(request):
     if request.method == 'POST':
-        form = updateProfileForm(request.POST)
+        form = updateProfileForm(request.POST, instance=request.user)
         if form.is_valid():
             user = form.save()
             user.refresh_from_db()
             user.profile.county = form.cleaned_data.get('county')
             user.profile.birth_date = form.cleaned_data.get('birth_date')
+            username = form.cleaned_data.get('username')
             user.save()
             messages.success(
                 request, f'Thanks {username}! Your account has been updated.')
