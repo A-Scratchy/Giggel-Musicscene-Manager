@@ -1,0 +1,6 @@
+This is an email.
+you have {{ expiration_days }} days left to activate.
+
+{{ activation_key }}
+
+{{ user.username }}

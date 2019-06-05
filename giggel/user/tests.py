@@ -1,11 +1,13 @@
 from django.test import TestCase
 from django.urls import reverse
 from django.contrib.auth.models import User
-
+from django.conf import settings
 # Unit tests for user app
 
 
 class BasicUnitTestsUsers(TestCase):
+
+    username = 'testUser'
 
     def test_user_register_url_retruns_correct_template(self):
         response = self.client.get(reverse('register'))
@@ -55,10 +57,17 @@ class BasicUnitTestsUsers(TestCase):
         self.assertNotIn('profile', html)
 
     def test_user_update_profile_form_displayed_correctly(self):
-        username = 'testUser'
         self.user = User.objects.create_user(
-            username=username, password='AB12345')
-        self.client.login(username=username, password='AB12345')
+            username=self.username, password='AB12345')
+        self.client.login(username=self.username, password='AB12345')
         response = self.client.get(reverse('updateProfile'))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'user/update.html')
+
+    def test_email(self):
+        self.user = User.objects.create_user(
+            username=self.username, password='AB12345', email='ascratcherd@brake.org.uk')
+        subject = 'test'
+        message = 'some message'
+        from_email = settings.DEFAULT_FROM_EMAIL
+        self.user.email_user(subject, message, from_email)

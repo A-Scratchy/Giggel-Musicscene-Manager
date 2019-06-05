@@ -1,0 +1,14 @@
+{% extends "main/base.html" %}
+
+{% block content %}
+
+  <div id="activated" class="alert alert-warning text-center">
+    <h3>Boo, sorry. That didn't work :-(</h3>
+    {% for key, value in activation_error.items %}
+      {% if key == 'message' %}
+        <p>{{ value }}</p>
+      {% endif %}
+    {% endfor %}
+  </div>
+
+{% endblock %}

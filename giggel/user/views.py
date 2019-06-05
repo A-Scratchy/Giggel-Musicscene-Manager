@@ -1,10 +1,14 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
+from django.conf import settings
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
+from django.http import HttpResponse
 from .forms import RegistrationForm, updateProfileForm
 from .models import Profile
+from django.core.mail import send_mail
 
 
 def register(request):
@@ -61,3 +65,17 @@ def updateProfile(request):
                 'email': user.email, 'county': user.profile.county, 'birth_date': user.profile.birth_date}
         form = updateProfileForm(initial=data)
     return render(request, 'user/update.html', {'form': form})
+
+# used to test email settings. Sends a one off email
+
+
+def testEmail(request):
+    # user = User.objects.create_user(
+    #     username='Mr Test11', password='AB12345', email='ascratcherd@brake.org.uk')
+    subject = 'test'
+    message = 'some new message'
+    from_email = settings.DEFAULT_FROM_EMAIL
+    # user.email_user(subject, message, settings.DEFAULT_FROM_EMAIL)
+    email = user.email
+    # send_mail(subject, message, from_email, [email], fail_silently=False,)
+    return HttpResponse('<html>' + settings.DEFAULT_FROM_EMAIL + '</html>')
