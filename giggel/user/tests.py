@@ -12,7 +12,8 @@ class BasicUnitTestsUsers(TestCase):
     def test_user_register_url_retruns_correct_template(self):
         response = self.client.get(reverse('register'))
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'user/register.html')
+        self.assertTemplateUsed(
+            response, 'django_registration/registration_form.html')
 
     def test_user_profile_url_retruns_correct_template(self):
         username = 'testUser'

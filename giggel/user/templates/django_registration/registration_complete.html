@@ -1,6 +1,10 @@
-{% block title %}Email Sent{% endblock %}
-
+{% extends 'main/base.html' %}
+{% block title %}Check your inbox{% endblock %}
+{% block headerText %}
+  Check your inbox
+{% endblock %}
 {% block content %}
-  <h1>Check your inbox.</h1>
-  <p>We've emailed you a confirmation. Click the link to verify your email address</p>
+  <div class="alert alert-warning text-center">
+    <p>We've emailed you a confirmation. Click the link to verify your email address</p>
+  </div>
 {% endblock %}

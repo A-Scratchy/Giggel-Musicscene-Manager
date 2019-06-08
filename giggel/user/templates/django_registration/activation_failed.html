@@ -1,8 +1,9 @@
 {% extends "main/base.html" %}
-
+{% block title %}Problem with activation{% endblock %}
+{% block headerText %}Problem with activation :-({% endblock %}
 {% block content %}
 
-  <div id="activated" class="alert alert-warning text-center">
+  <div id="activated" class="alert alert-danger text-center">
     <h3>Boo, sorry. That didn't work :-(</h3>
     {% for key, value in activation_error.items %}
       {% if key == 'message' %}

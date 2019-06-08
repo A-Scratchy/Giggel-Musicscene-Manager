@@ -30,6 +30,17 @@ class loggedInFunctionalTests(LiveServerTestCase):
     def tearDown(self):
         self.browser.quit()
 
+    def test_user_sent_to_profile_after_logging_in(self):
+        self.browser.get(self.live_server_url)
+        self.browser.find_element_by_name("login").click()
+        self.browser.find_element_by_id(
+            "id_username").send_keys(self.username)
+        self.browser.find_element_by_id(
+            "id_password").send_keys(self.password)
+        self.browser.find_element_by_id("submit").click()
+        self.assertIn(self.username, self.browser.title)
+        self.assertIn('Profile', self.browser.title)
+
     def test_site_indicates_user_logged_in(self):
         self.setUpCookie()
         self.browser.get(self.live_server_url)

@@ -26,6 +26,12 @@ class basicFunctionalTests(LiveServerTestCase):
         self.browser.find_element_by_id(
             "id_username").send_keys(username)
         self.browser.find_element_by_id(
+            "id_first_name").send_keys('Mr')
+        self.browser.find_element_by_id(
+            "id_last_name").send_keys('Test')
+        self.browser.find_element_by_id(
+            "id_email").send_keys('MrTest@test.com')
+        self.browser.find_element_by_id(
             "id_password1").send_keys(password1)
         self.browser.find_element_by_id(
             "id_password2").send_keys(password2)
@@ -46,20 +52,11 @@ class basicFunctionalTests(LiveServerTestCase):
     def test_user_can_create_account(self):
         self.fillInRegForm(self.new_username,
                            self.new_password, self.new_password)
-        welcome = self.browser.find_element_by_id("messages").text
-        self.assertIn(self.new_username, welcome)
-        self.assertIn(self.new_username, self.browser.title)
-        self.assertIn('Profile', self.browser.title)
+        self.assertIn('Check your inbox', self.browser.title)
 
     def test_register_form_returns_with_errors_if_invalid(self):
         self.fillInRegForm(self.new_username,
                            self.new_password, 'BadPassword')
         self.assertIn('Register', self.browser.title)
-        messages = self.browser.find_element_by_id("messages").text
-        self.assertIn('contains errors', messages)
-
-    def test_user_sent_to_profile_after_logging_in(self):
-        self.fillInRegForm(self.new_username,
-                           self.new_password, self.new_password)
-        self.assertIn(self.new_username, self.browser.title)
-        self.assertIn('Profile', self.browser.title)
+        text = self.browser.find_element_by_name("error_text").text
+        self.assertIn('The two password fields didn\'t match.', text)

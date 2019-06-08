@@ -1,6 +1,12 @@
-This is an email.
-you have {{ expiration_days }} days left to activate.
+Hi {{ user.username }}
 
-{{ activation_key }}
+Thanks for registering at giggle.com
 
-{{ user.username }}
+Before you can get started you will need to visit the following URL to activate your account.
+https://giggel.com/accounts/activate/{{ activation_key }}
+
+Once you have done this you can get going and create your artist or venue profile.
+
+you have {{ expiration_days }} days left to activate with this token. If you run out of time, you can always regester.
+
+To stop receiving these emails, please send message to stopemailingme@giggel.com
