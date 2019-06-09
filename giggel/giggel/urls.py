@@ -18,17 +18,13 @@ from django.urls import path, include
 from main import views as main_views
 from user import views as user_views
 from django_registration.backends.activation.views import RegistrationView
-from user.forms import RegistrationForm
 
 urlpatterns = [
     path('blankPage/', main_views.blankPage, name='blankPage'),
     path('admin/', admin.site.urls),
     path('', main_views.home, name='home'),
-    path('accounts/register/', RegistrationView.as_view(form_class=RegistrationForm),
-         name='register'),
     path('accounts/', include('django_registration.backends.activation.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
     path('profile/', user_views.profile, name='profile'),
     path('profile/update', user_views.updateProfile, name='updateProfile'),
-    path('testEmail/', user_views.testEmail, name='testEmail'),
 ]

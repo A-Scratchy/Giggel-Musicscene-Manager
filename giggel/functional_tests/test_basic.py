@@ -21,24 +21,17 @@ class basicFunctionalTests(LiveServerTestCase):
         self.browser.quit()
 
     def fillInRegForm(self, username, password1, password2):
-        url = self.live_server_url + reverse('register')
+        url = self.live_server_url
         self.browser.get(url)
+        self.browser.find_element_by_name('signup').click()
         self.browser.find_element_by_id(
             "id_username").send_keys(username)
-        self.browser.find_element_by_id(
-            "id_first_name").send_keys('Mr')
-        self.browser.find_element_by_id(
-            "id_last_name").send_keys('Test')
         self.browser.find_element_by_id(
             "id_email").send_keys('MrTest@test.com')
         self.browser.find_element_by_id(
             "id_password1").send_keys(password1)
         self.browser.find_element_by_id(
             "id_password2").send_keys(password2)
-        self.browser.find_element_by_id(
-            "id_county").send_keys('Yorkshire')
-        self.browser.find_element_by_id(
-            "id_birth_date").send_keys('1991-06-02')
         self.browser.find_element_by_id("submit").click()
 
     def test_home_page_is_loaded(self):

@@ -60,19 +60,19 @@ class loggedInFunctionalTests(LiveServerTestCase):
     #     # email address to jsmith@test.com
 
     def test_user_can_update_profile(self):
-        new_email = 'jsmith@test.com'
+        new_county = 'Lincolnshire'
         self.setUpCookie()
         self.browser.get(self.live_server_url + reverse('profile'))
         # check we are on the profile detail page and it has old email in
         self.assertIn('testUser@test.com',
                       self.browser.find_element_by_id("email").text)
         self.browser.find_element_by_id("updateProfile").click()
-        # check we are on the update page and enter new email
-        email_field = self.browser.find_element_by_id("id_email")
-        email_field.clear()
-        email_field.send_keys(new_email)
+        # check we are on the update page and enter new county
+        county = self.browser.find_element_by_id("id_county")
+        county.clear()
+        county.send_keys(new_county)
         self.browser.find_element_by_id("submit").click()
         # check we have gone back to the profile detail page and new email is present
         self.assertIn('User Profile', self.browser.title)
-        self.assertIn(new_email,
-                      self.browser.find_element_by_id("email").text)
+        self.assertIn(new_county,
+                      self.browser.find_element_by_id("id_county").text)

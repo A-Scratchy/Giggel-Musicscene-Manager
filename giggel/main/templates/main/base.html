@@ -67,7 +67,7 @@
           {% else %}
             <!-- show log in and sign up buttons -->
             <li class="nav-item">
-              <a class="nav-link" name="signup" href="/register">Sign up</a>
+              <a class="nav-link" name="signup" href="{% url 'django_registration_register' %}">Sign up</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" name="login" href="{% url 'login' %}">Log in</a>

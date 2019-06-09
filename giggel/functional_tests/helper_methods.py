@@ -16,10 +16,8 @@ class helperMethods():
 
         # creates a session cookie
     def create_cookie(username, password):
-        user = User.objects.create_user(username=username, password=password, first_name='Mr', last_name='test',
+        user = User.objects.create_user(username=username, password=password,
                                         email='testUser@test.com')
-        user.profile.county = 'Yorkshire'
-        user.profile.birth_date = '1999-01-01'
         user.save()
         session = SessionStore()
         session[SESSION_KEY] = user.pk

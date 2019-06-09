@@ -6,34 +6,10 @@ from django.conf import settings
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
 from django.http import HttpResponse
+from django_registration.backends.activation.views import RegistrationView
 from .forms import RegistrationForm, updateProfileForm
 from .models import Profile
 from django.core.mail import send_mail
-
-
-def register(request):
-    if request.method == 'POST':
-        form = RegistrationForm(request.POST)
-        if form.is_valid():
-            user = form.save()
-            user.refresh_from_db()
-            user.profile.county = form.cleaned_data.get('county')
-            user.profile.birth_date = form.cleaned_data.get('birth_date')
-            username = form.cleaned_data.get('username')
-            password = form.cleaned_data.get('password1')
-            user.save()
-            user = authenticate(username=username, password=password)
-            login(request, user)
-            messages.success(
-                request, f'Thanks {username}! Your account is now set up.')
-            return redirect('profile')
-        else:
-            messages.warning(
-                request, 'We\'re sorry, your form contains errors. Please fix and try again.')
-            return redirect('register')
-    else:
-        form = RegistrationForm()
-    return render(request, 'user/register.html', {'form': form})
 
 
 @login_required
@@ -65,17 +41,3 @@ def updateProfile(request):
                 'email': user.email, 'county': user.profile.county, 'birth_date': user.profile.birth_date}
         form = updateProfileForm(initial=data)
     return render(request, 'user/update.html', {'form': form})
-
-# used to test email settings. Sends a one off email
-
-
-def testEmail(request):
-    # user = User.objects.create_user(
-    #     username='Mr Test11', password='AB12345', email='ascratcherd@brake.org.uk')
-    subject = 'test'
-    message = 'some new message'
-    from_email = settings.DEFAULT_FROM_EMAIL
-    # user.email_user(subject, message, settings.DEFAULT_FROM_EMAIL)
-    email = user.email
-    # send_mail(subject, message, from_email, [email], fail_silently=False,)
-    return HttpResponse('<html>' + settings.DEFAULT_FROM_EMAIL + '</html>')
