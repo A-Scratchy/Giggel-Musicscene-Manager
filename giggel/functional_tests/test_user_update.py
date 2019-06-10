@@ -6,10 +6,9 @@ from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
 from .helper_methods import helperMethods
 import time
-# 54
 
 
-class loggedInFunctionalTests(LiveServerTestCase):
+class loggedInFunctionalUserTest(LiveServerTestCase):
 
     def setUp(self):
         options = Options()

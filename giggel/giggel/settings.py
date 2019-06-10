@@ -34,6 +34,7 @@ ACCOUNT_ACTIVATION_DAYS = 7
 INSTALLED_APPS = [
     'main.apps.MainConfig',
     'user.apps.UserConfig',
+    'artist.apps.ArtistConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
