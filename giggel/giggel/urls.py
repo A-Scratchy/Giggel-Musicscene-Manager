@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 from main import views as main_views
 from user import views as user_views
-from django_registration.backends.activation.views import RegistrationView
+from artist import views as artist_views
 
 urlpatterns = [
     path('blankPage/', main_views.blankPage, name='blankPage'),
@@ -27,4 +27,15 @@ urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),
     path('profile/', user_views.profile, name='profile'),
     path('profile/update', user_views.updateProfile, name='updateProfile'),
+    path('artist/create', artist_views.ArtistCreate.as_view(), name='artist_create'),
+    path('artist/detail/<slug:slug>/',
+         artist_views.ArtistDetail.as_view(), name='artist_detail'),
+    path('artist/update', artist_views.ArtistUpdate.as_view(), name='artist_update'),
+    path('artist/delete', artist_views.ArtistDelte.as_view(), name='artist_delete'),
+    path('artist/dashboard', artist_views.ArtistDashboard.as_view(),
+         name='artist_dashboard'),
+
+
+
+
 ]

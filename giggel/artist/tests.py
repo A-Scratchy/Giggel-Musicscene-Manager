@@ -13,32 +13,35 @@ class BasicUnitTestsArtist(TestCase):
         self.user = User.objects.create_user(
             username=username, password='AB12345')
         self.client.login(username=username, password='AB12345')
-        self.user.artist = Artist.objects.create(
-            name='DJtest', artist_id='#djtest5364')
+        self.user.artist = Artist.objects.create(artist_owner=self.user,
+                                                 artist_name='DJtest',
+                                                 artist_id='djtest5364')
         response = self.client.get(reverse('artist_dashboard'))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(
             response, 'artist/artist_dashboard.html')
 
-    def test_artist_profile_url_retruns_correct_template(self):
+    def test_artist_detail_url_retruns_correct_template(self):
         username = 'testUser'
         self.user = User.objects.create_user(
             username=username, password='AB12345')
         self.client.login(username=username, password='AB12345')
-        self.user.artist = Artist.objects.create(name='DJtest')
-        artist_id = '#djtest5364'
-        response = self.client.get(reverse('artist_profile') + artist_id)
+        self.user.artist = Artist.objects.create(artist_owner=self.user,
+                                                 artist_name='DJtest',
+                                                 artist_id='djtest5364')
+        url = reverse('artist_detail', args=('djtest5364',))
+        response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(
-            response, 'artist/artist_dashboard.html')
+            response, 'artist/artist_detail.html')
 
     def test_artist_dashboard_url_cannot_be_access_anonymously(self):
         username = 'testUser'
         self.user = User.objects.create_user(
             username=username, password='AB12345')
-        self.user.artist = Artist.objects.create(
-            name='DJtest', artist_id='#djtest5364')
+        self.user.artist = Artist.objects.create(artist_owner=self.user,
+                                                 artist_name='DJtest',
+                                                 artist_id='djtest5364')
         response = self.client.get(reverse('artist_dashboard'))
         self.assertEqual(response.status_code, 302)
-        self.assertTemplateUsed(
-            response, 'artist/login.html')
+        self.assertTemplateNotUsed(response, 'artist/artist_dashboard.html')

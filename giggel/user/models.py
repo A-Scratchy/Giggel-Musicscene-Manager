@@ -12,6 +12,7 @@ class Profile(models.Model):
     county = models.CharField(
         max_length=40, blank=True, null=True)
     birth_date = models.DateField(null=True, blank=True)
+    account_type = models.CharField(max_length=10, null=True, blank=True)
 
 
 @receiver(post_save, sender=User)
@@ -19,3 +20,6 @@ def update_user_profile(sender, instance, created, **kwargs):
     if created:
         Profile.objects.create(user=instance)
     instance.profile.save()
+    # if (User.account_type == 'Artist'):
+    #     Artist.objects.create(user = instance)
+    # instance.artist.save()

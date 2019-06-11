@@ -7,6 +7,8 @@ from django.conf import settings
 
 class BasicUnitTestsUsers(TestCase):
 
+    username = 'Mr Test'
+
     def test_user_register_url_retruns_correct_template(self):
         response = self.client.get(reverse('django_registration_register'))
         self.assertEqual(response.status_code, 200)
