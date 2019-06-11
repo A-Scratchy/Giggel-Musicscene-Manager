@@ -1,0 +1,24 @@
+{% extends "main/base.html" %}
+{% load static %}
+{% block myProfile_active %}Artist -
+  {{ user.Artist.artist_name }}
+{% endblock %}
+{% block title %}Artist{% endblock %}
+
+{% block headerText %}{{ user.username }}
+{% endblock %}
+
+{% block content %}
+  <ul>
+    <li>artist id:
+      {{ user.artist.artist_id }}</li>
+    <li>artist name:
+      {{ user.artist.artist_name }}</li>
+    <li>artist owner:
+      {{ user.artist.artist_owner }}</li>
+    <li>artist description:
+      {{ user.artist.artist_description }}</li>
+  </ul>
+
+  <a id="artist_update" href="update/{{user.artist.artist_id}}">Edit details<a/>
+  {% endblock %}

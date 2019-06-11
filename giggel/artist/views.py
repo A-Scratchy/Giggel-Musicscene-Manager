@@ -12,10 +12,10 @@ class ArtistDetail(DetailView):
     model = Artist
     template_name = 'artist/artist_detail.html'
     slug_field = 'artist_id'
+    context_object_name = 'artist'
 
 
 class ArtistDashboard(LoginRequiredMixin, TemplateView):
-    model = Artist
     template_name = 'artist/artist_dashboard.html'
     login_url = reverse_lazy('login')
 
@@ -30,7 +30,10 @@ class ArtistCreate(CreateView):
 
 class ArtistUpdate(UpdateView):
     model = Artist
+    fields = ['artist_id', 'artist_owner', 'artist_name', 'artist_description']
     template_name = 'artist/Artist_update.html'
+    slug_field = 'artist_id'
+    success_url = reverse_lazy('profile')
 
 
 class ArtistDelte(DeleteView):

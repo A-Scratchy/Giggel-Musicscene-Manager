@@ -1,0 +1,18 @@
+{% extends "main/base.html" %}
+{% load static %}
+{% block myProfile_active %}Artist -
+  {{ user.Artist.artist_name }}
+{% endblock %}
+{% block title %}Artist{% endblock %}
+
+{% block headerText %}{{ user.username }}
+{% endblock %}
+
+{% block content %}
+
+  {{ artist.artist_name }}
+  {{ artist.artist_id }}
+  {{ artist.artist_owner }}
+  {{ artist.artist_description }}
+
+{% endblock %}

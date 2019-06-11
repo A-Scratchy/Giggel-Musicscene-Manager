@@ -30,12 +30,9 @@ urlpatterns = [
     path('artist/create', artist_views.ArtistCreate.as_view(), name='artist_create'),
     path('artist/detail/<slug:slug>/',
          artist_views.ArtistDetail.as_view(), name='artist_detail'),
-    path('artist/update', artist_views.ArtistUpdate.as_view(), name='artist_update'),
+    path('artist/update/<slug:slug>/',
+         artist_views.ArtistUpdate.as_view(), name='artist_update'),
     path('artist/delete', artist_views.ArtistDelte.as_view(), name='artist_delete'),
     path('artist/dashboard', artist_views.ArtistDashboard.as_view(),
          name='artist_dashboard'),
-
-
-
-
 ]
