@@ -29,7 +29,7 @@ def updateProfile(request):
             username = form.cleaned_data.get('username')
             user.save()
             messages.success(
-                request, f'Thanks {username}! Your account has been updated.')
+                request, f'Thanks { user.username }! Your account has been updated.')
             return redirect('profile')
         else:
             messages.warning(
