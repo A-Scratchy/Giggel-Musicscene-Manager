@@ -26,6 +26,7 @@ def updateProfile(request):
             user.refresh_from_db()
             user.profile.county = form.cleaned_data.get('county')
             user.profile.birth_date = form.cleaned_data.get('birth_date')
+            user.profile.account_type = form.cleaned_data.get('account_type')
             username = form.cleaned_data.get('username')
             user.save()
             messages.success(
