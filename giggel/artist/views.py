@@ -20,7 +20,7 @@ class ArtistDashboard(LoginRequiredMixin, TemplateView):
     login_url = reverse_lazy('login')
 
 
-class ArtistCreate(CreateView):
+class ArtistCreate(LoginRequiredMixin, CreateView):
     model = Artist
     fields = ['artist_id', 'artist_owner', 'artist_name', 'artist_description']
     template_name = 'artist/artist_create.html'
@@ -28,14 +28,22 @@ class ArtistCreate(CreateView):
     # form_class = ContactForm
 
 
-class ArtistUpdate(UpdateView):
+class ArtistUpdate(LoginRequiredMixin, UpdateView):
+    #need to check if user is owner of artist before allowing update
     model = Artist
     fields = ['artist_id', 'artist_owner', 'artist_name', 'artist_description']
-    template_name = 'artist/Artist_update.html'
+    template_name = 'artist/artist_update.html'
     slug_field = 'artist_id'
+    success_url = reverse_lazy('artist_dashboard')
+
+
+class ArtistDelte(LoginRequiredMixin, DeleteView):
+    model = Artist
+    slug_field = 'artist_id'
+    template_name = 'artist/artist_delete.html'
     success_url = reverse_lazy('profile')
 
-
-class ArtistDelte(DeleteView):
-    model = Artist
-    template_name = 'artist/Artist_delete.html'
+    #need to check if user is owner of artist before allowing update
+    def get_queryset(self):
+        owner = self.request.user
+        return self.model.objects.filter(artist_owner=owner)

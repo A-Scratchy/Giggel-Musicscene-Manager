@@ -1,0 +1,15 @@
+[
+{
+    "model": "user.profile",
+    "pk": 1,
+    "fields": {
+        "user": 1,
+        "confirmation_key": "",
+        "confrimation_status": false,
+        "membershipLevel": "free",
+        "county": "dfhdfgdf",
+        "birth_date": null,
+        "account_type": "artist"
+    }
+}
+]

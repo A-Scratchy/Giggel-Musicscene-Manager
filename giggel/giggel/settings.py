@@ -25,7 +25,8 @@ SECRET_KEY = 'tuo9ott6nx18dbe%dxa%wc6(a*&xsw48u2dl12-1b!nhzzfmpz'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['10.0.1.51']
+ALLOWED_HOSTS = ['10.0.1.51',
+'127.0.0.1']
 # Django_regestartion settings
 ACCOUNT_ACTIVATION_DAYS = 7
 

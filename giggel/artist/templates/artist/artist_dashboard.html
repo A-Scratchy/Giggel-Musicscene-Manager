@@ -1,24 +1,25 @@
 {% extends "main/base.html" %}
 {% load static %}
-{% block myProfile_active %}Artist -
-  {{ user.Artist.artist_name }}
+{% block myProfile_active %}
 {% endblock %}
 {% block title %}Artist{% endblock %}
 
-{% block headerText %}{{ user.username }}
+{% block headerText %}
+  {{ user.artist.artist_name }}
 {% endblock %}
 
 {% block content %}
   <ul>
-    <li>artist id:
+    <li id="artist_id">artist id:
       {{ user.artist.artist_id }}</li>
-    <li>artist name:
+    <li id="artist_name">artist name:
       {{ user.artist.artist_name }}</li>
-    <li>artist owner:
+    <li id="artist_owner">artist owner:
       {{ user.artist.artist_owner }}</li>
-    <li>artist description:
+    <li id="artist_description">artist description:
       {{ user.artist.artist_description }}</li>
   </ul>
 
-  <a id="artist_update" href="update/{{user.artist.artist_id}}">Edit details<a/>
+  <a id="artist_update" href="/artist/update/{{user.artist.artist_id}}"><button class=' alert alert-info'>Edit details</button><a/>
+    <a id="artist_delete" href="/artist/delete/{{user.artist.artist_id}}"><button class='alert alert-danger'>Delete my artist</button><a/>
   {% endblock %}

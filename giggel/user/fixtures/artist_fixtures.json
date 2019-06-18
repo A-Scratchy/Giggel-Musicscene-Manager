@@ -1,0 +1,12 @@
+[
+  {
+      "model": "artist.artist",
+      "pk": 1,
+      "fields": {
+          "artist_owner": 1,
+          "artist_id": "111111",
+          "artist_name": "TestArtist1",
+          "artist_description": "a test artist"
+      }
+  }
+]
