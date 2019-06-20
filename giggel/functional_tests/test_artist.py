@@ -2,7 +2,6 @@ from django.test import LiveServerTestCase, Client
 from django.urls import reverse
 from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
-from .helper_methods import helperMethods
 from django.contrib.auth.models import User
 from artist.models import Artist
 from django.core.management import call_command

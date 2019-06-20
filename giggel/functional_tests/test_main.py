@@ -1,11 +1,10 @@
 from django.test import LiveServerTestCase
-from django.urls import reverse
-from django.contrib.auth.models import User
-from selenium.webdriver.firefox.options import Options
 from selenium import webdriver
+from selenium.webdriver.firefox.options import Options
+import time
 
+class BasicTests(LiveServerTestCase):
 
-class basicFunctionalTests(LiveServerTestCase):
 
     def setUp(self):
         options = Options()
@@ -13,8 +12,6 @@ class basicFunctionalTests(LiveServerTestCase):
         self.browser = webdriver.Firefox(
             firefox_options=options)
         self.browser.implicitly_wait(1)
-        self.new_username = helperMethods.generate_string(9)
-        self.new_password = helperMethods.generate_string(9)
 
     def tearDown(self):
         self.browser.quit()
