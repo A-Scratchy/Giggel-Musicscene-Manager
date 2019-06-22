@@ -4,7 +4,7 @@ from django.test import Client
 from django.contrib.auth.models import User
 from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
-import time
+
 
 class TestAnonUser(LiveServerTestCase):
 
@@ -32,12 +32,10 @@ class TestAnonUser(LiveServerTestCase):
             "id_password2").send_keys(password2)
         self.browser.find_element_by_id("submit").click()
 
-
     def test_user_can_create_account(self):
         self.fillInRegForm('MrTest',
-                           'APassword123','APassword123')
+                           'APassword123', 'APassword123')
         self.assertIn('Check your inbox', self.browser.title)
-
 
     def test_register_form_returns_with_errors_if_invalid(self):
         self.fillInRegForm('MrTest',
@@ -47,8 +45,8 @@ class TestAnonUser(LiveServerTestCase):
         self.assertIn('The two password fields didn\'t match.', text)
 
 
-
 class TestNewUser(LiveServerTestCase):
+    fixtures = ['user_fixtures.json']
 
     def setUp(self):
         options = Options()
@@ -56,6 +54,7 @@ class TestNewUser(LiveServerTestCase):
         self.browser = webdriver.Firefox(
             firefox_options=options)
         self.browser.implicitly_wait(1)
+        self.user = User.objects.get(pk=1)
 
     def test_user_sent_to_profile_after_logging_in(self):
         self.browser.get(self.live_server_url)
@@ -63,15 +62,14 @@ class TestNewUser(LiveServerTestCase):
         self.browser.find_element_by_id(
             "id_username").send_keys(self.user.username)
         self.browser.find_element_by_id(
-            "id_password").send_keys(self.user.password)
+                "id_password").send_keys('testPassword1')
         self.browser.find_element_by_id("submit").click()
-        self.assertIn(self.username, self.browser.title)
+        self.assertIn(self.user.username, self.browser.title)
         self.assertIn('Profile', self.browser.title)
 
 
 class TestLoggedInUSer(LiveServerTestCase):
     fixtures = ['user_fixtures.json']
-
 
     def setUp(self):
         options = Options()
@@ -80,12 +78,12 @@ class TestLoggedInUSer(LiveServerTestCase):
             firefox_options=options)
         self.browser.implicitly_wait(1)
         # get a user and make sure they are logged in for each test
-        self.user =  User.objects.get(pk=1)
+        self.user = User.objects.get(pk=1)
         client = Client()
         client.force_login(self.user)
         self.browser.get(self.live_server_url)
-        self.browser.add_cookie({'name':'sessionid',
-            'value':client.cookies.get('sessionid').value})
+        self.browser.add_cookie({'name': 'sessionid',
+            'value': client.cookies.get('sessionid').value})
 
 
     def tearDown(self):

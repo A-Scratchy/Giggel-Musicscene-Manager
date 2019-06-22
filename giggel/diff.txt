@@ -1,0 +1,210 @@
+diff --git a/giggel/artist/views.py b/giggel/artist/views.py
+index d7ff23d..d1d99d9 100644
+--- a/giggel/artist/views.py
++++ b/giggel/artist/views.py
+@@ -1,10 +1,9 @@
+-from django.urls import reverse_lazy
++from django.urls import redirect, reverse_lazy
+ from django.shortcuts import render
+ from django.contrib.auth.mixins import LoginRequiredMixin
+ from django.views.generic import DetailView, CreateView, DeleteView, UpdateView, TemplateView
+ from .models import Artist
+ 
+-
+ # Create your views here.
+ 
+ 
+@@ -47,3 +46,15 @@ class ArtistDelte(LoginRequiredMixin, DeleteView):
+     def get_queryset(self):
+         owner = self.request.user
+         return self.model.objects.filter(artist_owner=owner)
++
++#def artist_create_auto(request):
++#    user = request.user
++#    try:
++#        user.artist
++#    except Artist.DoesNotExist:
++#        return redirect(reverse_lazy('profile'))
++#    else:
++#        Artist.objects.create(artist_owner=user, artist_name='')
++
++
++    
+diff --git a/giggel/functional_tests/test_artist.py b/giggel/functional_tests/test_artist.py
+index 25ad994..62755b2 100644
+--- a/giggel/functional_tests/test_artist.py
++++ b/giggel/functional_tests/test_artist.py
+@@ -1,11 +1,12 @@
+ from django.test import LiveServerTestCase, Client
+-from django.urls import reverse
++from django.urls import reverse_lazy
+ from selenium import webdriver
+ from selenium.webdriver.firefox.options import Options
+ from django.contrib.auth.models import User
+ from artist.models import Artist
+ from django.core.management import call_command
+ 
++
+ class ArtistTestsAnonUser(LiveServerTestCase):
+     fixtures = ['user_fixtures.json','profile_fixtures.json','artist_fixtures.json']
+ 
+@@ -17,10 +18,10 @@ class ArtistTestsAnonUser(LiveServerTestCase):
+         self.browser.implicitly_wait(1)
+ 
+     def test_artist_read_anon(self):
+-        self.browser.get(self.live_server_url
+-            + reverse('artist_detail', args=('111111',)))
+-        self.assertIn('artist name: TestArtist1', self.browser.find_element_by_id(
+-            'artist_name').text)
++        self.browser.get(self.live_server_url + reverse_lazy('artist_detail',
++            args=('111111',)))
++        self.assertIn('artist name: TestArtist1',
++                self.browser.find_element_by_id('artist_name').text)
+ 
+ 
+ class ArtistTestsNewUser(LiveServerTestCase):
+@@ -61,10 +62,10 @@ class ArtistTestsNewUser(LiveServerTestCase):
+         self.browser.get(self.live_server_url + reverse('artist_create'))
+         self.assertIn('Create', self.browser.title)
+         self.browser.find_element_by_id('id_artist_id').send_keys('99999')
+-        self.browser.find_element_by_id('id_artist_name').sekd_keys('testArtist99')
++        self.browser.find_element_by_id('id_artist_name').send_keys('testArtist99')
+         self.browser.find_element_by_id('submit').click()
+         self.assertIn('Artist', self.browser.title)
+-        self.assertIn('testArtist99', self.find_element_by_id(
++        self.assertIn('testArtist99', self.browser.find_element_by_id(
+             'artist_name'))
+ 
+         # No anonymous user can access the edit page
+@@ -100,7 +101,8 @@ class ArtistTestsExistingUser(LiveServerTestCase):
+ 
+         # User goes to thier profile and loads up thier artist
+         # User clicks modify and adds a new description
+-        # User clicks save and description is now present on the live artist profile
++        # User clicks save and description is now present on the 
++        # live artist profile
+     def test_artist_update(self):
+         self.browser.get(self.live_server_url + reverse('profile'))
+         self.assertIn('Profile', self.browser.title)
+@@ -110,10 +112,9 @@ class ArtistTestsExistingUser(LiveServerTestCase):
+         new_description = 'a description of an artist'
+         self.browser.find_element_by_id(
+             'id_artist_description').send_keys(new_description)
+-        artist_id = 'some_artist_id'
+-        self.browser.get(self.live_server_url + reverse('profile') + artist_id)
++        self.browser.find_element_by_id('submit').click()
+         self.assertIn(new_description, self.browser.find_element_by_id(
+-            'Artist_description'))
++            'artist_description'))
+ 
+     def test_artist_delete(self):
+         self.browser.get(self.live_server_url + reverse('profile'))
+diff --git a/giggel/functional_tests/test_basic.py b/giggel/functional_tests/test_basic.py
+index f2f4a24..a64cb96 100644
+--- a/giggel/functional_tests/test_basic.py
++++ b/giggel/functional_tests/test_basic.py
+@@ -13,8 +13,8 @@ class basicFunctionalTests(LiveServerTestCase):
+         self.browser = webdriver.Firefox(
+             firefox_options=options)
+         self.browser.implicitly_wait(1)
+-        self.new_username = helperMethods.generate_string(9)
+-        self.new_password = helperMethods.generate_string(9)
++        self.new_username = 'MrTest1'
++        self.new_password = 'APAssword123@'
+ 
+     def tearDown(self):
+         self.browser.quit()
+diff --git a/giggel/functional_tests/test_user.py b/giggel/functional_tests/test_user.py
+index ccf8963..dcfe96e 100644
+--- a/giggel/functional_tests/test_user.py
++++ b/giggel/functional_tests/test_user.py
+@@ -4,7 +4,7 @@ from django.test import Client
+ from django.contrib.auth.models import User
+ from selenium import webdriver
+ from selenium.webdriver.firefox.options import Options
+-import time
++
+ 
+ class TestAnonUser(LiveServerTestCase):
+ 
+@@ -32,13 +32,11 @@ class TestAnonUser(LiveServerTestCase):
+             "id_password2").send_keys(password2)
+         self.browser.find_element_by_id("submit").click()
+ 
+-
+     def test_user_can_create_account(self):
+         self.fillInRegForm('MrTest',
+-                           'APassword123','APassword123')
++                           'APassword123', 'APassword123')
+         self.assertIn('Check your inbox', self.browser.title)
+ 
+-
+     def test_register_form_returns_with_errors_if_invalid(self):
+         self.fillInRegForm('MrTest',
+                            'GoodPassword', 'BadPassword')
+@@ -47,8 +45,8 @@ class TestAnonUser(LiveServerTestCase):
+         self.assertIn('The two password fields didn\'t match.', text)
+ 
+ 
+-
+ class TestNewUser(LiveServerTestCase):
++    fixtures = ['user_fixtures.json']
+ 
+     def setUp(self):
+         options = Options()
+@@ -56,6 +54,7 @@ class TestNewUser(LiveServerTestCase):
+         self.browser = webdriver.Firefox(
+             firefox_options=options)
+         self.browser.implicitly_wait(1)
++        self.user = User.objects.get(pk=1)
+ 
+     def test_user_sent_to_profile_after_logging_in(self):
+         self.browser.get(self.live_server_url)
+@@ -72,7 +71,6 @@ class TestNewUser(LiveServerTestCase):
+ class TestLoggedInUSer(LiveServerTestCase):
+     fixtures = ['user_fixtures.json']
+ 
+-
+     def setUp(self):
+         options = Options()
+         options.set_headless(headless=True)
+@@ -80,12 +78,12 @@ class TestLoggedInUSer(LiveServerTestCase):
+             firefox_options=options)
+         self.browser.implicitly_wait(1)
+         # get a user and make sure they are logged in for each test
+-        self.user =  User.objects.get(pk=1)
++        self.user = User.objects.get(pk=1)
+         client = Client()
+         client.force_login(self.user)
+         self.browser.get(self.live_server_url)
+-        self.browser.add_cookie({'name':'sessionid',
+-            'value':client.cookies.get('sessionid').value})
++        self.browser.add_cookie({'name': 'sessionid',
++            'value': client.cookies.get('sessionid').value})
+ 
+ 
+     def tearDown(self):
+diff --git a/giggel/user/views.py b/giggel/user/views.py
+index 6d98a5d..f138860 100644
+--- a/giggel/user/views.py
++++ b/giggel/user/views.py
+@@ -10,7 +10,7 @@ from django_registration.backends.activation.views import RegistrationView
+ from .forms import RegistrationForm, updateProfileForm
+ from .models import Profile
+ from django.core.mail import send_mail
+-
++from django.views import TemplateView
+ 
+ @login_required
+ def profile(request):
+@@ -42,3 +42,10 @@ def updateProfile(request):
+                 'email': user.email, 'county': user.profile.county, 'birth_date': user.profile.birth_date}
+         form = updateProfileForm(initial=data)
+     return render(request, 'user/update.html', {'form': form})
++
++
++#class ArtVenCreate(TemplateView):
++#   template_name = 'user/artven_create.html'
++
++
++

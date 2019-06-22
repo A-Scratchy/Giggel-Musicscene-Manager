@@ -13,8 +13,8 @@ class basicFunctionalTests(LiveServerTestCase):
         self.browser = webdriver.Firefox(
             firefox_options=options)
         self.browser.implicitly_wait(1)
-        self.new_username = helperMethods.generate_string(9)
-        self.new_password = helperMethods.generate_string(9)
+        self.new_username = 'MrTest1'
+        self.new_password = 'APAssword123@'
 
     def tearDown(self):
         self.browser.quit()

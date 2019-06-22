@@ -6,6 +6,7 @@ from django.conf import settings
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
 from django.http import HttpResponse
+from django.views.generic import TemplateView
 from django_registration.backends.activation.views import RegistrationView
 from .forms import RegistrationForm, updateProfileForm
 from .models import Profile
@@ -42,3 +43,10 @@ def updateProfile(request):
                 'email': user.email, 'county': user.profile.county, 'birth_date': user.profile.birth_date}
         form = updateProfileForm(initial=data)
     return render(request, 'user/update.html', {'form': form})
+
+
+class ArtVenCreate(TemplateView):
+   template_name = 'user/artven_create.html'
+
+
+

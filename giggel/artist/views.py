@@ -4,7 +4,6 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import DetailView, CreateView, DeleteView, UpdateView, TemplateView
 from .models import Artist
 
-
 # Create your views here.
 
 
@@ -47,3 +46,15 @@ class ArtistDelte(LoginRequiredMixin, DeleteView):
     def get_queryset(self):
         owner = self.request.user
         return self.model.objects.filter(artist_owner=owner)
+
+def artist_create_auto(request):
+    user = request.user
+    try:
+        user.artist
+    except Artist.DoesNotExist:
+        return redirect(reverse_lazy('profile'))
+    else:
+        Artist.objects.create(artist_owner=user, artist_name='')
+
+
+    

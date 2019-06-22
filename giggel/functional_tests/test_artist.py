@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from artist.models import Artist
 from django.core.management import call_command
 
+
 class ArtistTestsAnonUser(LiveServerTestCase):
     fixtures = ['user_fixtures.json','profile_fixtures.json','artist_fixtures.json']
 
@@ -17,10 +18,10 @@ class ArtistTestsAnonUser(LiveServerTestCase):
         self.browser.implicitly_wait(1)
 
     def test_artist_read_anon(self):
-        self.browser.get(self.live_server_url
-            + reverse('artist_detail', args=('111111',)))
-        self.assertIn('artist name: TestArtist1', self.browser.find_element_by_id(
-            'artist_name').text)
+        self.browser.get(self.live_server_url + reverse('artist_detail',
+            args=('111111',)))
+        self.assertIn('artist name: TestArtist1',
+                self.browser.find_element_by_id('artist_name').text)
 
 
 class ArtistTestsNewUser(LiveServerTestCase):
@@ -61,10 +62,10 @@ class ArtistTestsNewUser(LiveServerTestCase):
         self.browser.get(self.live_server_url + reverse('artist_create'))
         self.assertIn('Create', self.browser.title)
         self.browser.find_element_by_id('id_artist_id').send_keys('99999')
-        self.browser.find_element_by_id('id_artist_name').sekd_keys('testArtist99')
+        self.browser.find_element_by_id('id_artist_name').send_keys('testArtist99')
         self.browser.find_element_by_id('submit').click()
         self.assertIn('Artist', self.browser.title)
-        self.assertIn('testArtist99', self.find_element_by_id(
+        self.assertIn('testArtist99', self.browser.find_element_by_id(
             'artist_name'))
 
         # No anonymous user can access the edit page
@@ -100,7 +101,8 @@ class ArtistTestsExistingUser(LiveServerTestCase):
 
         # User goes to thier profile and loads up thier artist
         # User clicks modify and adds a new description
-        # User clicks save and description is now present on the live artist profile
+        # User clicks save and description is now present on the 
+        # live artist profile
     def test_artist_update(self):
         self.browser.get(self.live_server_url + reverse('profile'))
         self.assertIn('Profile', self.browser.title)
@@ -110,10 +112,9 @@ class ArtistTestsExistingUser(LiveServerTestCase):
         new_description = 'a description of an artist'
         self.browser.find_element_by_id(
             'id_artist_description').send_keys(new_description)
-        artist_id = 'some_artist_id'
-        self.browser.get(self.live_server_url + reverse('profile') + artist_id)
+        self.browser.find_element_by_id('submit').click()
         self.assertIn(new_description, self.browser.find_element_by_id(
-            'Artist_description'))
+            'artist_description').text)
 
     def test_artist_delete(self):
         self.browser.get(self.live_server_url + reverse('profile'))
