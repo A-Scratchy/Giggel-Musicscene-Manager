@@ -62,7 +62,7 @@ class TestNewUser(LiveServerTestCase):
         self.browser.find_element_by_id(
             "id_username").send_keys(self.user.username)
         self.browser.find_element_by_id(
-                "id_password").send_keys('testPassword1')
+                "id_password").send_keys('TestPassword1')
         self.browser.find_element_by_id("submit").click()
         self.assertIn(self.user.username, self.browser.title)
         self.assertIn('Profile', self.browser.title)
@@ -124,14 +124,12 @@ class TestLoggedInUSer(LiveServerTestCase):
     def test_user_profile_update_returns_errors(self):
         New_DOB = 'NotADOB'
         self.browser.get(self.live_server_url + reverse('profile'))
-        # check we are on the profile detail page and it has old email in
         self.assertIn('testuser1@test.com',
                       self.browser.find_element_by_id("email").text)
         self.browser.find_element_by_id("updateProfile").click()
-        # check we are on the update page and enter new county
-        county = self.browser.find_element_by_id("id_birth_date")
-        county.clear()
-        county.send_keys(New_DOB)
+        dob = self.browser.find_element_by_id("id_birth_date")
+        dob.clear()
+        dob.send_keys(New_DOB)
         self.browser.find_element_by_id("submit").click()
         self.assertIn('error',
                       self.browser.find_element_by_id("messages").text)

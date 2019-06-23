@@ -15,19 +15,19 @@ from .models import Profile
 from django.core.mail import send_mail
 
 
-class profile(TemplateView, LoginRequiredMixin):
+class profile(LoginRequiredMixin, TemplateView):
     template_name = 'user/profile.html'
 
 
-class updateProfile(UpdateView, LoginRequiredMixin):
+class updateProfile(LoginRequiredMixin, UpdateView):
     template_name = 'user/update.html'
     model = Profile
     fields = ['county', 'birth_date']
     success_url = reverse_lazy('profile')
 
 
-class ArtVenCreate(TemplateView, LoginRequiredMixin):
-    template_name = 'user/artven_create.html'
+class ArtVenCreate(LoginRequiredMixin, TemplateView):
+    template_name = 'user/artven.html'
 
 
 

@@ -28,9 +28,11 @@ class ArtistCreate(View):
             user.artist
             messages.add_message(self.request, messages.WARNING, 'you already have an artist')
         except Artist.DoesNotExist:
-            user.artist = Artist.objects.create(artist_owner=user, artist_name="", artist_id='art' + user.username)
+            artist_id = 'art' + user.username
+            user.artist = Artist.objects.create(artist_owner=user, artist_name="", artist_id=artist_id)
             # consider changing this auto slug to a randomised number/string to make it hard to guess
             user.profile.account_type = 'artist'
+            return HttpResponseRedirect(reverse_lazy('artist_update', kwargs={'slug':artist_id}))
         else:
             return HttpResponseRedirect(reverse_lazy('artist_dashboard'))
 

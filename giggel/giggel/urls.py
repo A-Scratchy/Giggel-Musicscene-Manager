@@ -35,4 +35,5 @@ urlpatterns = [
     path('artist/delete/<slug:slug>/', artist_views.ArtistDelte.as_view(), name='artist_delete'),
     path('artist/dashboard', artist_views.ArtistDashboard.as_view(),
          name='artist_dashboard'),
+    path('profile/artven', user_views.ArtVenCreate.as_view(), name='artven')
 ]

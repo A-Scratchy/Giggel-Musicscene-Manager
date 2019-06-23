@@ -42,8 +42,13 @@
 
     <div class="row text-center">
       <div class="col-4 ">
-        <h3>My artist/venue profile</h3>
-        <a id="artist_dashboard" href="{% url 'artist_dashboard' %}">
+          {%  if user.artist  %}
+              <h3>My artist/venue profile</h3>
+              <a id="artist_dashboard" href="{% url 'artist_dashboard' %}">
+          {% else %}
+              <h3>create an artist or venue profile</h3>
+              <a id="artven" href="{% url 'artven' %}">
+          {% endif %}
           <img src="{% static 'img/temp.png' %}" class="img-fluid" alt="Pic">
         </a>
       </div>

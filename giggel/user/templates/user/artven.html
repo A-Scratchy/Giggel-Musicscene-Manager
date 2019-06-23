@@ -1,0 +1,14 @@
+{% extends "main/base.html" %}
+{% load static %}
+{% block title %}{{ user.username }}
+  - Choose a profile type{% endblock %}
+
+{% block headerText %}{{ user.username }}
+{% endblock %}
+
+{% block content %}
+
+<a href={% url 'artist_create' %}><button id="artist_create" class="btn btn-outline-info">Artist</button></a>
+<a href='#' ><button id="venue_create" class="btn btn-outline-danger">Venue</button></a>
+
+{% endblock %}
