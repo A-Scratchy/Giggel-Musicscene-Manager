@@ -34,7 +34,7 @@ class ArtistTestsNewUser(LiveServerTestCase):
             firefox_options=options)
         self.browser.implicitly_wait(1)
         # get a user and make sure they are logged in for each test
-        self.user =  User.objects.get(pk=1)
+        self.user = User.objects.get(pk=1)
         client = Client()
         client.force_login(self.user)
         self.browser.get(self.live_server_url)
@@ -59,7 +59,11 @@ class ArtistTestsNewUser(LiveServerTestCase):
         # User fills in form and submits
         # User is taken to the artist dashboard and information is displayed
     def test_create_artist(self):
-        self.browser.get(self.live_server_url + reverse('artist_create'))
+        self.browser.get(self.live_server_url)
+        self.browser.find_element_by_name('myProfile').click()
+        self.browser.find_element_by_id('create_artven'.click())
+        self.assertIn('Choose', self.browser.title)
+        self.browser.find_element_by_id('create_artist').click()
         self.assertIn('Create', self.browser.title)
         self.browser.find_element_by_id('id_artist_id').send_keys('99999')
         self.browser.find_element_by_id('id_artist_name').send_keys('testArtist99')
