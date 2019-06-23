@@ -1,8 +1,9 @@
-from django.urls import reverse_lazy 
+from django.urls import reverse_lazy, reverse
+from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import DetailView, CreateView, DeleteView, UpdateView, TemplateView, View
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from .models import Artist
 
 # Create your views here.
@@ -22,8 +23,16 @@ class ArtistDashboard(LoginRequiredMixin, TemplateView):
 
 class ArtistCreate(View):
     def get(self, request):
-
-        return HttpResponse('result')
+        user = request.user
+        try:
+            user.artist
+            messages.add_message(self.request, messages.WARNING, 'you already have an artist')
+        except Artist.DoesNotExist:
+            user.artist = Artist.objects.create(artist_owner=user, artist_name="", artist_id='art' + user.username)
+            # consider changing this auto slug to a randomised number/string to make it hard to guess
+            user.profile.account_type = 'artist'
+        else:
+            return HttpResponseRedirect(reverse_lazy('artist_dashboard'))
 
 class ArtistUpdate(LoginRequiredMixin, UpdateView):
     # need to check if user is owner of artist before allowing update
