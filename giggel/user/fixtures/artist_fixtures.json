@@ -1,7 +1,7 @@
 [
   {
       "model": "artist.artist",
-      "pk": 1,
+      "pk": 2,
       "fields": {
           "artist_owner": 1,
           "artist_id": "111111",

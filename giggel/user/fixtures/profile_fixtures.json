@@ -1,7 +1,7 @@
 [
 {
     "model": "user.profile",
-    "pk": 1,
+    "pk": 2,
     "fields": {
         "user": 1,
         "confirmation_key": "",
