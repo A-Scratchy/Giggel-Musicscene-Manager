@@ -26,7 +26,7 @@ urlpatterns = [
     path('accounts/', include('django_registration.backends.activation.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
     path('profile/', user_views.profile.as_view(), name='profile'),
-    path('profile/update/<int:pk>/', user_views.updateProfile.as_view(), name='updateProfile'),
+    path('profile/update/<slug:pk>/', user_views.updateProfile.as_view(), name='updateProfile'),
     path('artist/create', artist_views.ArtistCreate.as_view(), name='artist_create'),
     path('artist/detail/<slug:slug>/',
          artist_views.ArtistDetail.as_view(), name='artist_detail'),

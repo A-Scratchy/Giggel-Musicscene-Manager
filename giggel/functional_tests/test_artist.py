@@ -5,6 +5,7 @@ from selenium.webdriver.firefox.options import Options
 from django.contrib.auth.models import User
 from artist.models import Artist
 from django.core.management import call_command
+import time
 
 
 class ArtistTestsAnonUser(LiveServerTestCase):
@@ -47,30 +48,22 @@ class ArtistTestsNewUser(LiveServerTestCase):
     def test_user_is_logged_in(self):
         self.assertIn('TestUser1', self.user.username)
 
-        # User goes to thier profile and loads up thier artist
-        # Artist dashboard is presented with options to edit profile.
-    def test_user_can_reach_thier_artist_dashboard(self):
-        self.browser.get(self.live_server_url + reverse('profile'))
-        self.assertIn('Profile', self.browser.title)
-        self.browser.find_element_by_id('artist_dashboard').click()
-        self.assertIn('Artist', self.browser.title)
-
         # User goes to thier profile and clicks to create a new artist [TO-DO]
         # User fills in form and submits
         # User is taken to the artist dashboard and information is displayed
     def test_create_artist(self):
         self.browser.get(self.live_server_url)
         self.browser.find_element_by_name('myProfile').click()
-        self.browser.find_element_by_id('create_artven'.click())
+        self.browser.find_element_by_id('create_artven').click()
         self.assertIn('Choose', self.browser.title)
         self.browser.find_element_by_id('create_artist').click()
-        self.assertIn('Create', self.browser.title)
+        self.assertIn('Update artist', self.browser.title)
         self.browser.find_element_by_id('id_artist_id').send_keys('99999')
         self.browser.find_element_by_id('id_artist_name').send_keys('testArtist99')
         self.browser.find_element_by_id('submit').click()
         self.assertIn('Artist', self.browser.title)
         self.assertIn('testArtist99', self.browser.find_element_by_id(
-            'artist_name'))
+            'artist_name').text)
 
         # No anonymous user can access the edit page
     # def test_anon_user_cannot_modify_an_artist_profile(self):
@@ -79,7 +72,7 @@ class ArtistTestsNewUser(LiveServerTestCase):
 
 
 class ArtistTestsExistingUser(LiveServerTestCase):
-    fixtures = ['user_fixtures.json','artist_fixtures.json']
+    fixtures = ['user_fixtures.json', 'artist_fixtures.json']
 
     def setUp(self):
         options = Options()
@@ -112,7 +105,7 @@ class ArtistTestsExistingUser(LiveServerTestCase):
         self.assertIn('Profile', self.browser.title)
         self.browser.find_element_by_id('artist_dashboard').click()
         self.browser.find_element_by_id('artist_update').click()
-        self.assertIn('Artist', self.browser.title)
+        self.assertIn('Update artist', self.browser.title)
         new_description = 'a description of an artist'
         self.browser.find_element_by_id(
             'id_artist_description').send_keys(new_description)
@@ -128,5 +121,12 @@ class ArtistTestsExistingUser(LiveServerTestCase):
         self.browser.find_element_by_id('submit').click()
         self.assertIn('Profile', self.browser.title)
         self.browser.get(self.live_server_url
-            + reverse('artist_detail', args=('111111')))
-        self.assertIn('Page not found', self.browser.title)
+            + reverse('artist_detail', args=('111111',)))
+        self.assertNotIn('Artist', self.browser.title)
+
+    def test_artist_directory(self):
+        self.brower.get(self.live_server_url)
+        self.browser.find_element_by_id('directories').click()
+        self.browser.find_element_by_id('artist_directory').click()
+        self.browser.assertIn('Artist directory', self.browser.title)
+        self.assertIn('TestArtist1', self.browser.find_element_by_id('artist_name'))

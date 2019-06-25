@@ -74,7 +74,7 @@ class TestLoggedInUser(LiveServerTestCase):
 
     def setUp(self):
         options = Options()
-        #options.set_headless(headless=True)
+        options.set_headless(headless=True)
         self.browser = webdriver.Firefox(
             firefox_options=options)
         self.browser.implicitly_wait(1)
@@ -114,7 +114,6 @@ class TestLoggedInUser(LiveServerTestCase):
         county = self.browser.find_element_by_id("id_county")
         county.clear()
         county.send_keys(new_county)
-        time.sleep(20)
         self.browser.find_element_by_id("submit").click()
         # check we have gone back to the profile detail page and new email is present
         self.assertIn('User Profile', self.browser.title)
@@ -127,10 +126,9 @@ class TestLoggedInUser(LiveServerTestCase):
         self.assertIn('testuser1@test.com',
                       self.browser.find_element_by_id("email").text)
         self.browser.find_element_by_id("updateProfile").click()
-        time.sleep(20)
         dob = self.browser.find_element_by_id("id_birth_date")
         dob.clear()
         dob.send_keys(New_DOB)
         self.browser.find_element_by_id("submit").click()
-        self.assertIn('error',
+        self.assertIn('Enter a valid date',
                       self.browser.find_element_by_id("messages").text)

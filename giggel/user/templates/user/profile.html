@@ -31,7 +31,7 @@
       </div>
       <div class="col-4">
         <h3>Update Profile</h3>
-        <a href="/profile/update/{{user.pk }}">
+        <a href="{% url 'updateProfile' user.profile.pk %}">
           <img id="updateProfile" src="{% static 'img/temp.png' %}" class="img-fluid" alt="Pic">
         </a>
       </div>
@@ -48,7 +48,7 @@
               <a id="artist_dashboard" href="{% url 'artist_dashboard' %}">
           {% else %}
               <h3>create an artist or venue profile</h3>
-              <a id="artven" href="{% url 'artven' %}">
+              <a id="create_artven" href="{% url 'artven' %}">
           {% endif %}
           <img src="{% static 'img/temp.png' %}" class="img-fluid" alt="Pic">
         </a>

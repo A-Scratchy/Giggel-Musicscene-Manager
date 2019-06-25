@@ -45,3 +45,17 @@ class BasicUnitTestsArtist(TestCase):
         response = self.client.get(reverse('artist_dashboard'))
         self.assertEqual(response.status_code, 302)
         self.assertTemplateNotUsed(response, 'artist/artist_dashboard.html')
+    
+    def test_artist_create_url_creates_and_redirects(self):
+        username = 'testUser'
+        self.user = User.objects.create_user(
+            username=username, password='AB12345')
+        self.client.login(username=username, password='AB12345')
+        assert(User.objects.all().filter(artist__isnull=True).exists())
+        response = self.client.get(reverse('artist_create'), follow=True)
+        self.assertTemplateUsed(
+            response, 'artist/artist_update.html')
+
+    def test_artist_directory_url_uses_correct_template(self):
+        response = self.client.get(reverse('artist_directory'))
+        self.assertTemplateUsed(response, 'artist/artist_directory')

@@ -2,6 +2,7 @@
 {% block title %}Update Profile -
   {{ user.username }}
 {% endblock %}
+
 {% block content %}
   <form method="POST">
     {% csrf_token %}

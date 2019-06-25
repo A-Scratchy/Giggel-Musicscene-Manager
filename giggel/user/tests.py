@@ -52,7 +52,7 @@ class BasicUnitTestsUsers(TestCase):
         self.assertNotIn('profile', html)
 
     def test_cannot_access_modify_profile_while_logged_out(self):
-        response = self.client.get(reverse('updateProfile'))
+        response = self.client.get(reverse('updateProfile', args=(1,)))
         self.assertEqual(response.status_code, 302)
         html = response.content.decode('utf8')
         self.assertNotIn('profile', html)
@@ -61,7 +61,7 @@ class BasicUnitTestsUsers(TestCase):
         self.user = User.objects.create_user(
             username=self.username, password='AB12345')
         self.client.login(username=self.username, password='AB12345')
-        response = self.client.get(reverse('updateProfile'))
+        response = self.client.get(reverse('updateProfile', args=(self.user.profile.pk,)))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'user/update.html')
 
