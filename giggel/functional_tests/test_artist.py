@@ -125,8 +125,8 @@ class ArtistTestsExistingUser(LiveServerTestCase):
         self.assertNotIn('Artist', self.browser.title)
 
     def test_artist_directory(self):
-        self.brower.get(self.live_server_url)
+        self.browser.get(self.live_server_url)
         self.browser.find_element_by_id('directories').click()
         self.browser.find_element_by_id('artist_directory').click()
-        self.browser.assertIn('Artist directory', self.browser.title)
-        self.assertIn('TestArtist1', self.browser.find_element_by_id('artist_name'))
+        self.assertIn('Artist directory', self.browser.title)
+        self.assertIn('TestArtist1', self.browser.find_element_by_id('artist_name').text)
