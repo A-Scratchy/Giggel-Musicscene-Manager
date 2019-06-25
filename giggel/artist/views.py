@@ -2,7 +2,7 @@ from django.urls import reverse_lazy, reverse
 from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import DetailView, CreateView, DeleteView, UpdateView, TemplateView, View
+from django.views.generic import DetailView, CreateView, DeleteView, UpdateView, TemplateView, View, ListView
 from django.http import HttpResponse, HttpResponseRedirect
 from .models import Artist
 
@@ -55,4 +55,9 @@ class ArtistDelte(LoginRequiredMixin, DeleteView):
     def get_queryset(self):
         owner = self.request.user
         return self.model.objects.filter(artist_owner=owner)
+
+
+class ArtistDirectory(ListView):
+    model = Artist
+    template_name = 'artist/artist_directory.html'
 

@@ -58,4 +58,4 @@ class BasicUnitTestsArtist(TestCase):
 
     def test_artist_directory_url_uses_correct_template(self):
         response = self.client.get(reverse('artist_directory'))
-        self.assertTemplateUsed(response, 'artist/artist_directory')
+        self.assertTemplateUsed(response, 'artist/artist_directory.html')
