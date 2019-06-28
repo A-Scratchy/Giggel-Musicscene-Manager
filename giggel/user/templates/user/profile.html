@@ -43,8 +43,11 @@
 
     <div class="row text-center">
       <div class="col-4 ">
-          {%  if user.artist  %}
-              <h3>My artist/venue profile</h3>
+          {% if user.profile.account_type == 'venue' %}
+              <h3>My venue profile</h3>
+              <a id="venue_dashboard" href="{% url 'venue_dashboard' %}">
+          {% elif user.profile.account_type == 'artist' %}
+              <h3>My artist profile</h3>
               <a id="artist_dashboard" href="{% url 'artist_dashboard' %}">
           {% else %}
               <h3>create an artist or venue profile</h3>

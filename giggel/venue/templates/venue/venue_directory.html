@@ -1,0 +1,18 @@
+{% extends "main/base.html" %}
+{% load static %}
+{% block myProfile_directories %}
+{% endblock %}
+{% block title %}Venue directory{% endblock %}
+
+{% block headerText %}Venues
+{% endblock %}
+
+{% block content %}
+<ul>
+    {% for venue in object_list %}
+        <li id=><a href={% url 'venue_detail' venue.venue_id %}>{{ venue.venue_name }}</a></li>
+    {% empty %}
+        <li>We didn't find anything!</li>
+    {% endfor %}
+</ul>
+{% endblock %}

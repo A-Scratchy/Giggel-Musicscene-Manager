@@ -132,3 +132,5 @@ class TestLoggedInUser(LiveServerTestCase):
         self.browser.find_element_by_id("submit").click()
         self.assertIn('Enter a valid date',
                       self.browser.find_element_by_id("messages").text)
+
+# test when user creatse artist or venue and deletes it that account type goes back to none        

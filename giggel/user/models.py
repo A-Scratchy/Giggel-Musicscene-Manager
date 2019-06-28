@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from artist.models import Artist
+from venue.models import Venue
 
 
 class Profile(models.Model):
@@ -20,6 +22,7 @@ def update_user_profile(sender, instance, created, **kwargs):
     if created:
         Profile.objects.create(user=instance)
     instance.profile.save()
-    # if (User.account_type == 'Artist'):
-    #     Artist.objects.create(user = instance)
-    # instance.artist.save()
+#    if (User.account_type == 'artist'):
+#        Artist.objects.create(user=instance)
+#    if (User.account_type == 'venue'):
+#        Venue.objects.create(user=instance)

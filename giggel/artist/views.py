@@ -32,6 +32,7 @@ class ArtistCreate(View):
             user.artist = Artist.objects.create(artist_owner=user, artist_name="", artist_id=artist_id)
             # consider changing this auto slug to a randomised number/string to make it hard to guess
             user.profile.account_type = 'artist'
+            user.save()
             return HttpResponseRedirect(reverse_lazy('artist_update', kwargs={'slug':artist_id}))
         else:
             return HttpResponseRedirect(reverse_lazy('artist_dashboard'))
@@ -45,7 +46,7 @@ class ArtistUpdate(LoginRequiredMixin, UpdateView):
     success_url = reverse_lazy('artist_dashboard')
 
 
-class ArtistDelte(LoginRequiredMixin, DeleteView):
+class ArtistDelete(LoginRequiredMixin, DeleteView):
     model = Artist
     slug_field = 'artist_id'
     template_name = 'artist/artist_delete.html'

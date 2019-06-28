@@ -1,0 +1,16 @@
+{% extends "main/base.html" %}
+{% load static %}
+{% block myProfile_active %}{% endblock %}
+{% block title %}Venue - DELETE{% endblock %}
+
+{% block headerText %}<h1 class="alert alert-danger">You are about to delete {{ object.venue_name }}</h1>
+{% endblock %}
+
+{% block content %}
+<form method="post">
+  {% csrf_token %}
+  <p>Are you sure you want to delete "{{ object.venue_name }}"?</p>
+  <a href='{% url 'profile' %}'<button id="cancel" class="btn btn-outline-info">Cancel</button><a/>
+  <button id="submit" class="btn btn-outline-danger" type="confirm">
+DELETE</button>
+{% endblock %}

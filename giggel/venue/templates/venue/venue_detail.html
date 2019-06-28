@@ -1,0 +1,24 @@
+{% extends "main/base.html" %}
+{% load static %}
+{% block myProfile_active %}Venue -
+  {{ user.Venue.venue_name }}
+{% endblock %}
+{% block title %}Venue{% endblock %}
+
+{% block headerText %}{{ user.username }}
+{% endblock %}
+
+{% block content %}
+
+<ul>
+  <li id="venue_id">venue id:
+    {{ venue.venue_id }}</li>
+  <li id="venue_name">venue name:
+    {{ venue.venue_name }}</li>
+  <li id="venue_owner">venue owner:
+    {{ venue.venue_owner }}</li>
+  <li id="venue_description">venue description:
+    {{ venue.venue_description }}</li>
+</ul>
+
+{% endblock %}

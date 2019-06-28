@@ -18,6 +18,7 @@ from django.urls import path, include
 from main import views as main_views
 from user import views as user_views
 from artist import views as artist_views
+from venue import views as venue_views
 
 urlpatterns = [
     path('blankPage/', main_views.blankPage, name='blankPage'),
@@ -32,9 +33,21 @@ urlpatterns = [
          artist_views.ArtistDetail.as_view(), name='artist_detail'),
     path('artist/update/<slug:slug>/',
          artist_views.ArtistUpdate.as_view(), name='artist_update'),
-    path('artist/delete/<slug:slug>/', artist_views.ArtistDelte.as_view(), name='artist_delete'),
+    path('artist/delete/<slug:slug>/', artist_views.ArtistDelete.as_view(), name='artist_delete'),
     path('artist/dashboard', artist_views.ArtistDashboard.as_view(),
          name='artist_dashboard'),
     path('profile/artven', user_views.ArtVenCreate.as_view(), name='artven'),
-    path('artist/directory', artist_views.ArtistDirectory.as_view(), name='artist_directory')
+    
+    path('artist/directory', artist_views.ArtistDirectory.as_view(), name='artist_directory'),
+    path('venue/create', venue_views.VenueCreate.as_view(), name='venue_create'),
+    path('venue/detail/<slug:slug>/',
+         venue_views.VenueDetail.as_view(), name='venue_detail'),
+    path('venue/update/<slug:slug>/',
+         venue_views.VenueUpdate.as_view(), name='venue_update'),
+    path('venue/delete/<slug:slug>/', venue_views.VenueDelete.as_view(), name='venue_delete'),
+    path('venue/dashboard', venue_views.VenueDashboard.as_view(),
+         name='venue_dashboard'),
+    path('venue/directory', venue_views.VenueDirectory.as_view(), name='venue_directory')
+
 ]
+

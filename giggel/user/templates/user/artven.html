@@ -9,6 +9,6 @@
 {% block content %}
 
 <a href={% url 'artist_create' %}><button id="create_artist" class="btn btn-outline-info">Artist</button></a>
-<a href='#' ><button id="venue_create" class="btn btn-outline-danger">Venue</button></a>
+<a href={% url 'venue_create' %}><button id="create_venue" class="btn btn-outline-danger">Venue</button></a>
 
 {% endblock %}

@@ -23,7 +23,7 @@ class updateProfile(LoginRequiredMixin, UpdateView):
     template_name = 'user/update.html'
     pslug = 'pk'
     model = Profile
-    fields = ['county', 'birth_date']
+    fields = ['county', 'birth_date', 'account_type']
     success_url = reverse_lazy('profile')
 
 
