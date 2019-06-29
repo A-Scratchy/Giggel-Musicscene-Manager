@@ -1,4 +1,3 @@
-
 from django.test import TestCase
 from django.urls import reverse
 from django.contrib.auth.models import User
@@ -35,6 +34,10 @@ class BasicUnitTestsVenue(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(
             response, 'venue/venue_detail.html')
+
+        # to do
+    def test_venue_update_url_returns_correct_template(serlf):
+        pass
 
     def test_venue_dashboard_url_cannot_be_access_anonymously(self):
         username = 'testUser'

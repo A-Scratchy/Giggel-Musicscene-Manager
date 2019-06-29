@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'user.apps.UserConfig',
     'artist.apps.ArtistConfig',
     'venue.apps.VenueConfig',
+    'gig.apps.GigConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

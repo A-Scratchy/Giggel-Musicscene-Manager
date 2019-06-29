@@ -45,7 +45,11 @@ class BasicUnitTestsArtist(TestCase):
         response = self.client.get(reverse('artist_dashboard'))
         self.assertEqual(response.status_code, 302)
         self.assertTemplateNotUsed(response, 'artist/artist_dashboard.html')
-    
+   
+        # to do
+    def test_venue_update_url_returns_correct_template(serlf):
+        pass
+
     def test_artist_create_url_creates_and_redirects(self):
         username = 'testUser'
         self.user = User.objects.create_user(

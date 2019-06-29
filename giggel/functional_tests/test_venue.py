@@ -4,9 +4,6 @@ from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
 from django.contrib.auth.models import User
 from venue.models import Venue
-from django.core.management import call_command
-# importing time for debugging
-import time
 
 
 class VenueTestsAnonUser(LiveServerTestCase):

@@ -21,7 +21,6 @@ from artist import views as artist_views
 from venue import views as venue_views
 
 urlpatterns = [
-    path('blankPage/', main_views.blankPage, name='blankPage'),
     path('admin/', admin.site.urls),
     path('', main_views.home, name='home'),
     path('accounts/', include('django_registration.backends.activation.urls')),
