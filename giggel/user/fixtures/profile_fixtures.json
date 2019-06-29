@@ -3,7 +3,9 @@
     "model": "user.profile",
     "pk": 1,
     "fields": {
-        "user": 1,
+        "user_id": [
+            "bcratchy"
+        ],
         "confirmation_key": "",
         "confrimation_status": false,
         "membershipLevel": "free",

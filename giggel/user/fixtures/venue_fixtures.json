@@ -1,0 +1,12 @@
+[
+  {
+      "model": "venue.venue",
+      "pk": 1,
+      "fields": {
+          "venue_owner": 1,
+          "venue_id": "111111",
+          "venue_name": "TestVenue1",
+          "venue_description": "a test venue"
+      }
+  }
+]

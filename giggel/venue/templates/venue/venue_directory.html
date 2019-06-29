@@ -10,7 +10,7 @@
 {% block content %}
 <ul>
     {% for venue in object_list %}
-        <li id=><a href={% url 'venue_detail' venue.venue_id %}>{{ venue.venue_name }}</a></li>
+        <li id="venue_name"><a href={% url 'venue_detail' venue.venue_id %}>{{ venue.venue_name }}</a></li>
     {% empty %}
         <li>We didn't find anything!</li>
     {% endfor %}

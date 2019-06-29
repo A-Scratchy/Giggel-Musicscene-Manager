@@ -5,11 +5,13 @@ from selenium.webdriver.firefox.options import Options
 from django.contrib.auth.models import User
 from artist.models import Artist
 from django.core.management import call_command
+# importing time for debugging
 import time
 
 
 class ArtistTestsAnonUser(LiveServerTestCase):
-    fixtures = ['user_fixtures.json','profile_fixtures.json','artist_fixtures.json']
+    fixtures = ['user_fixtures.json',
+                'artist_fixtures.json']
 
     def setUp(self):
         options = Options()
@@ -20,9 +22,9 @@ class ArtistTestsAnonUser(LiveServerTestCase):
 
     def test_artist_read_anon(self):
         self.browser.get(self.live_server_url + reverse('artist_detail',
-            args=('111111',)))
+                         args=('111111',)))
         self.assertIn('artist name: TestArtist1',
-                self.browser.find_element_by_id('artist_name').text)
+                      self.browser.find_element_by_id('artist_name').text)
 
 
 class ArtistTestsNewUser(LiveServerTestCase):
@@ -39,8 +41,10 @@ class ArtistTestsNewUser(LiveServerTestCase):
         client = Client()
         client.force_login(self.user)
         self.browser.get(self.live_server_url)
-        self.browser.add_cookie({'name':'sessionid',
-            'value':client.cookies.get('sessionid').value})
+        self.browser.add_cookie({
+                       'name': 'sessionid',
+                       'value': client.cookies.get('sessionid').value
+                                 })
 
     def tearDown(self):
         self.browser.quit()
@@ -72,7 +76,11 @@ class ArtistTestsNewUser(LiveServerTestCase):
 
 
 class ArtistTestsExistingUser(LiveServerTestCase):
-    fixtures = ['user_fixtures.json', 'artist_fixtures.json']
+    # populate test DB with predfined instances of models.
+    fixtures = [
+                'user_fixtures.json',
+                'artist_fixtures.json'
+               ]
 
     def setUp(self):
         options = Options()
@@ -81,12 +89,16 @@ class ArtistTestsExistingUser(LiveServerTestCase):
             firefox_options=options)
         self.browser.implicitly_wait(1)
         # get a user and make sure they are logged in for each test
-        self.user =  User.objects.get(pk=1)
+        self.user = User.objects.get(pk=1)
+        self.user.profile.account_type = 'artist'
+        self.user.save()
         client = Client()
         client.force_login(self.user)
         self.browser.get(self.live_server_url)
-        self.browser.add_cookie({'name':'sessionid',
-            'value':client.cookies.get('sessionid').value})
+        self.browser.add_cookie({
+                       'name': 'sessionid',
+                       'value': client.cookies.get('sessionid').value
+                                 })
 
     def test_artist_read_dashboard(self):
         self.browser.get(self.live_server_url + reverse('profile'))
@@ -121,7 +133,7 @@ class ArtistTestsExistingUser(LiveServerTestCase):
         self.browser.find_element_by_id('submit').click()
         self.assertIn('Profile', self.browser.title)
         self.browser.get(self.live_server_url
-            + reverse('artist_detail', args=('111111',)))
+                         + reverse('artist_detail', args=('111111',)))
         self.assertNotIn('Artist', self.browser.title)
 
     def test_artist_directory(self):
@@ -129,4 +141,5 @@ class ArtistTestsExistingUser(LiveServerTestCase):
         self.browser.find_element_by_id('directories').click()
         self.browser.find_element_by_id('artist_directory').click()
         self.assertIn('Artist directory', self.browser.title)
-        self.assertIn('TestArtist1', self.browser.find_element_by_id('artist_name').text)
+        self.assertIn('TestArtist1',
+                      self.browser.find_element_by_id('artist_name').text)
