@@ -19,6 +19,7 @@ from main import views as main_views
 from user import views as user_views
 from artist import views as artist_views
 from venue import views as venue_views
+from gig import views as gig_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -36,8 +37,8 @@ urlpatterns = [
     path('artist/dashboard', artist_views.ArtistDashboard.as_view(),
          name='artist_dashboard'),
     path('profile/artven', user_views.ArtVenCreate.as_view(), name='artven'),
-    
     path('artist/directory', artist_views.ArtistDirectory.as_view(), name='artist_directory'),
+
     path('venue/create', venue_views.VenueCreate.as_view(), name='venue_create'),
     path('venue/detail/<slug:slug>/',
          venue_views.VenueDetail.as_view(), name='venue_detail'),
@@ -46,7 +47,16 @@ urlpatterns = [
     path('venue/delete/<slug:slug>/', venue_views.VenueDelete.as_view(), name='venue_delete'),
     path('venue/dashboard', venue_views.VenueDashboard.as_view(),
          name='venue_dashboard'),
-    path('venue/directory', venue_views.VenueDirectory.as_view(), name='venue_directory')
+    path('venue/directory', venue_views.VenueDirectory.as_view(), name='venue_directory'),
+
+    path('gig/create', gig_views.GigCreate.as_view(), name='gig_create'),
+    path('gig/detail/<slug:slug>/',
+         gig_views.GigDetail.as_view(), name='gig_detail'),
+    path('gig/update/<slug:slug>/',
+         gig_views.GigUpdate.as_view(), name='gig_update'),
+    path('gig/delete/<slug:slug>/', gig_views.GigDelete.as_view(), name='gig_delete'),
+    path('gig/directory', gig_views.GigDirectory.as_view(), name='gig_directory'),
+    path('my_gigs', gig_views.MyGigs.as_view(), name='my_gigs')
 
 ]
 

@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from artist.models import Artist
 from django.conf import settings
 from .models import Gig
+from venue.models import Venue
 # Unit tests for user app
 
 
@@ -14,16 +15,21 @@ class BasicUnitTestsGig(TestCase):
         self.user = User.objects.create_user(
             username=username, password='AB12345')
         self.client.login(username=username, password='AB12345')
-        Artist.objects.create(
-                artist_owner=self.user,
-                artist_id='111111',
-                artist_name='TestArtist1'
+        artist = Artist.objects.create(
+                    artist_owner=self.user,
+                    artist_id='111111',
+                    artist_name='TestArtist1'
+                )
+        venue = Venue.objects.create(
+                    venue_owner=User.objects.create_user(username='bob', password='bob'),
+                    venue_id='222222',
+                    venue_name='testVen3'
                 )
         Gig.objects.create(
                 gig_id='444444',
                 gig_owner=self.user,
-                gig_artist=self.user.artist,
-                gig_venue='222222',
+                gig_artist=artist,
+                gig_venue=venue,
                 gig_name='DJtest',
                 )
         url = reverse('gig_detail', args=('444444',))
@@ -52,5 +58,9 @@ class BasicUnitTestsGig(TestCase):
         self.assertTemplateUsed(response, 'gig/gig_directory.html')
 
     def test_my_gigs_url_uses_correct_template(self):
+        username = 'testUser'
+        self.user = User.objects.create_user(
+            username=username, password='AB12345')
+        self.client.login(username=username, password='AB12345')
         response = self.client.get(reverse('my_gigs'))
         self.assertTemplateUsed(response, 'gig/my_gigs.html')

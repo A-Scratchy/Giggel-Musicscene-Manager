@@ -37,6 +37,7 @@ class ArtistCreate(View):
         else:
             return HttpResponseRedirect(reverse_lazy('artist_dashboard'))
 
+
 class ArtistUpdate(LoginRequiredMixin, UpdateView):
     # need to check if user is owner of artist before allowing update
     model = Artist
