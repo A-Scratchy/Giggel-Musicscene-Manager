@@ -1,10 +1,18 @@
-
 {% extends "main/base.html" %}
 {% load static %}
-{% block title %}Title{% endblock %}
+{% block title %}My Gigs{% endblock %}
 
-{% block headerText %}Header{% endblock %}
+{% block headerText %}My Gigs{% endblock %}
 
 {% block content %}
-body
+
+<ul>
+    {% for gig in object_list %}
+    <li id="{{gig.gig_name }}"><a href={% url 'gig_detail' gig.gig_id %}>{{ gig.gig_name }}</a></li>
+    {% empty %}
+        <li>We didn't find anything!</li>
+    {% endfor %}
+</ul>
+
+<a id="create_gig" href="{% url 'gig_create' %}"><button class="alert alert-info">Create a new gig</button></a>
 {% endblock %}

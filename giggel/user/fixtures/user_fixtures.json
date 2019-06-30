@@ -16,5 +16,39 @@
       "groups": [],
       "user_permissions": []
     }
+  },
+  {
+    "model": "auth.user",
+    "fields": {
+        "password": "pbkdf2_sha256$150000$wAnwc9UIuSla$fHf8+mKyr5YSa4obJicZR390EDXA8xnCB5fG4XiauXM=",
+        "last_login": "2019-06-30T10:35:30.915Z",
+        "is_superuser": false,
+        "username": "james@test.com",
+        "first_name": "",
+        "last_name": "",
+        "email": "james@test.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2019-06-30T10:35:04.873Z",
+        "groups": [],
+        "user_permissions": []
+    }
+  },
+  {
+    "model": "auth.user",
+    "fields": {
+        "password": "pbkdf2_sha256$150000$LTEf7VfG3gBF$ve5mi6u0h4nlzmqpYDxa1yEmfOFclDLT+f9zrR15Anw=",
+        "last_login": "2019-06-30T11:03:26.448Z",
+        "is_superuser": false,
+        "username": "Jim@test.com",
+        "first_name": "",
+        "last_name": "",
+        "email": "Jim@test.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2019-06-30T11:02:52.383Z",
+        "groups": [],
+        "user_permissions": []
+    }
   }
 ]

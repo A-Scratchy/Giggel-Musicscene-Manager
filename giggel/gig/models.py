@@ -9,8 +9,8 @@ from venue.models import Venue
 class Gig(models.Model):
     gig_owner = models.ForeignKey(User, on_delete=models.CASCADE)
     gig_id = models.SlugField(max_length=80, default='')
-    gig_artist = models.OneToOneField(Artist, on_delete=models.CASCADE)
-    gig_venue = models.OneToOneField(Venue, on_delete=models.CASCADE)
+    gig_artist = models.ForeignKey(Artist, on_delete=models.CASCADE, blank=True, null=True)
+    gig_venue = models.ForeignKey(Venue, on_delete=models.CASCADE, blank=True, null=True)
     gig_name = models.CharField(max_length=80)
     gig_date = models.DateField(null=True, blank=True)
     gig_description = models.CharField(max_length=250, null=True, blank=True)

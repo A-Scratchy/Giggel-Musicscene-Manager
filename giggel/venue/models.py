@@ -13,6 +13,8 @@ class Venue(models.Model):
     venue_description = models.CharField(
         max_length=250, null=True, blank=True)
     
+    def __str__(self):
+        return self.venue_name
 
 @receiver(pre_delete, sender=Venue, dispatch_uid='question_delete_signal')
 def reset_account_type(sender, instance, using, **kwargs):

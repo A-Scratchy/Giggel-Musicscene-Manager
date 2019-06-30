@@ -1,0 +1,113 @@
+[
+{
+    "model": "auth.user",
+    "fields": {
+        "password": "pbkdf2_sha256$150000$wAnwc9UIuSla$fHf8+mKyr5YSa4obJicZR390EDXA8xnCB5fG4XiauXM=",
+        "last_login": "2019-06-30T10:35:30.915Z",
+        "is_superuser": false,
+        "username": "james@test.com",
+        "first_name": "",
+        "last_name": "",
+        "email": "james@test.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2019-06-30T10:35:04.873Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "auth.user",
+    "fields": {
+        "password": "pbkdf2_sha256$150000$LTEf7VfG3gBF$ve5mi6u0h4nlzmqpYDxa1yEmfOFclDLT+f9zrR15Anw=",
+        "last_login": "2019-06-30T11:03:26.448Z",
+        "is_superuser": false,
+        "username": "Jim@test.com",
+        "first_name": "",
+        "last_name": "",
+        "email": "Jim@test.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2019-06-30T11:02:52.383Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "j4f816nlfxuo2vc4ofddj3e6dkhvi7jg",
+    "fields": {
+        "session_data": "ZjFkMmFiNGQ2MjA1MGYyZjk3ZWY3YWUwNmIyM2E4NzMwMzc5YWFhMjp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6IjEwMyIsIl9hdXRoX3VzZXJfaGFzaCI6IjdiZmE3YjRjYTI4ZTViNDFkMjk5MTM0OTE0YTMzOWE2YjNmNTRjYTcifQ==",
+        "expire_date": "2019-07-14T11:03:26.651Z"
+    }
+},
+{
+    "model": "gig.gig",
+    "pk": 4,
+    "fields": {
+        "gig_owner": [
+            "Jim@test.com"
+        ],
+        "gig_id": "123kjgh123KVh1",
+        "gig_artist": 18,
+        "gig_venue": 19,
+        "gig_name": "Jim's First Gig",
+        "gig_date": "2019-05-05",
+        "gig_description": "Jim's first ever gig!"
+    }
+},
+{
+    "model": "venue.venue",
+    "pk": 19,
+    "fields": {
+        "venue_owner": [
+            "james@test.com"
+        ],
+        "venue_id": "lT75sSwrUWcVieIYIaQs",
+        "venue_name": "Jame's pub",
+        "venue_description": "A test Venue"
+    }
+},
+{
+    "model": "artist.artist",
+    "pk": 18,
+    "fields": {
+        "artist_owner": [
+            "Jim@test.com"
+        ],
+        "artist_id": "f0MPVSK4bsye8rSxzOdZ",
+        "artist_name": "Jim",
+        "artist_description": "just Jim"
+    }
+},
+{
+    "model": "user.profile",
+    "pk": 6,
+    "fields": {
+        "user": [
+            "james@test.com"
+        ],
+        "confirmation_key": "",
+        "confrimation_status": false,
+        "membershipLevel": "free",
+        "county": null,
+        "birth_date": null,
+        "account_type": "venue"
+    }
+},
+{
+    "model": "user.profile",
+    "pk": 7,
+    "fields": {
+        "user": [
+            "Jim@test.com"
+        ],
+        "confirmation_key": "",
+        "confrimation_status": false,
+        "membershipLevel": "free",
+        "county": null,
+        "birth_date": null,
+        "account_type": "artist"
+    }
+}
+]

@@ -19,7 +19,8 @@ class GigDetail(DetailView):
 class GigCreate(CreateView):
     model = Gig
     template_name = 'gig/gig_create.html'
-    fields = ['gig_artist', 'gig_venue', 'gig_name', 'gig_date', 'gig_description']
+    fields = ['gig_owner', 'gig_id', 'gig_artist', 'gig_venue', 'gig_name', 'gig_date', 'gig_description']
+    success_url = reverse_lazy('my_gigs')
 
 
 class GigUpdate(LoginRequiredMixin, UpdateView):
@@ -28,7 +29,7 @@ class GigUpdate(LoginRequiredMixin, UpdateView):
     slug_field = 'gig_id'
     fields = ['gig_id', 'gig_owner', 'gig_name', 'gig_description']
     template_name = 'gig/gig_update.html' 
-    success_url = reverse_lazy('profile')
+    success_url = reverse_lazy('my_gigs')
 
 
 class GigDelete(LoginRequiredMixin, DeleteView):

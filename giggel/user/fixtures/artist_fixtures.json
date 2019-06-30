@@ -8,5 +8,17 @@
           "artist_name": "TestArtist1",
           "artist_description": "a test artist"
       }
+  },
+  {
+    "model": "artist.artist",
+    "pk": 18,
+    "fields": {
+        "artist_owner": [
+            "Jim@test.com"
+        ],
+        "artist_id": "f0MPVSK4bsye8rSxzOdZ",
+        "artist_name": "Jim",
+        "artist_description": "just Jim"
+    }
   }
 ]

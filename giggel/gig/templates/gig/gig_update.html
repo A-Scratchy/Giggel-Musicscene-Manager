@@ -1,10 +1,21 @@
-
 {% extends "main/base.html" %}
 {% load static %}
-{% block title %}Title{% endblock %}
+{% block title %}Update gig{% endblock %}
 
 {% block headerText %}Header{% endblock %}
 
 {% block content %}
-body
+
+  <form method="POST">
+    {% csrf_token %}
+    <fieldset class="form-group">
+      <legend class="border-bottom mb-4">Update</legend>
+      {{ form.as_p}}
+    </fieldset>
+    <div class="form-group">
+      <button id="submit" class="btn btn-outline-info" type="submit">Update</button>
+      <button id="cancel" class="btn btn-outline-danger" type="cancel">Cancel</button>
+    </div>
+  </form>
+
 {% endblock %}

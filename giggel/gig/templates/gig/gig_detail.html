@@ -1,12 +1,33 @@
 
 {% extends "main/base.html" %}
 {% load static %}
-{% block title %}Title{% endblock %}
+{% block title %}Gig {{ gig.gig_name }}{% endblock %}
 
-{% block headerText %}Header{% endblock %}
+{% block headerText %}{{ gig.gig_name }} - {{ gig.gig_date }}{% endblock %}
 
 {% block content %}
-body
+
+<!-- Display gig info --!>
+<ul>
+  <li id="gig_id">gig id:
+    {{ gig.gig_id }}</li>
+  <li id="gig_name">gig name:
+    {{ gig.gig_name }}</li>
+  <li id="gig_owner">gig owner:
+    {{ gig.gig_owner }}</li>
+  <li id="gig_date">gig date:
+    {{ gig.gig_date }}</li>
+  <li id="gig_description">gig description:
+    {{ gig.gig_description }}</li>
+  <li id="gig_artist">artist:
+    {{ gig.gig_artist }}</li>
+  <li id="gig_venue">venue:
+    {{ gig.gig_venue }}</li>
+</ul>
+
+<!-- button links to update or delte --!>
+    <a id="update_gig" href="{% url 'gig_update' gig.gig_id %}"><button class="alert alert-info">Update</button></a>
+    <a id="delete_gig" href="{% url 'gig_delete' gig.gig_id %}"><button class='alert alert-danger'>Delete gig</button><a/>
 {% endblock %}
 
 

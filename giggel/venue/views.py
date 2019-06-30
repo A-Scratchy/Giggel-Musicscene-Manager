@@ -5,7 +5,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import DetailView, CreateView, DeleteView, UpdateView, TemplateView, View, ListView
 from django.http import HttpResponse, HttpResponseRedirect
 from .models import Venue
-
+import random
+import string
 # Create your views here.
 
 
@@ -28,7 +29,10 @@ class VenueCreate(View):
             user.venue
             messages.add_message(self.request, messages.WARNING, 'you already have an venue')
         except Venue.DoesNotExist:
-            venue_id = 'ven' + user.username
+            venue_id = "".join(
+                    [random.choice(string.digits +
+                                   string.ascii_letters) for i in range(20)]
+                    )
             user.venue = Venue.objects.create(venue_owner=user, venue_name="", venue_id=venue_id)
             # consider changing this auto slug to a randomised number/string to make it hard to guess
             user.profile.account_type = 'venue'

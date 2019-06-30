@@ -20,6 +20,9 @@ class ArtistTestsAnonUser(LiveServerTestCase):
             firefox_options=options)
         self.browser.implicitly_wait(1)
 
+    def tearDown(self):
+        self.browser.quit()
+
     def test_artist_read_anon(self):
         self.browser.get(self.live_server_url + reverse('artist_detail',
                          args=('111111',)))

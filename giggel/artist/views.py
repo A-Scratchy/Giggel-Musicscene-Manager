@@ -5,7 +5,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import DetailView, CreateView, DeleteView, UpdateView, TemplateView, View, ListView
 from django.http import HttpResponse, HttpResponseRedirect
 from .models import Artist
-
+import random
+import string
 # Create your views here.
 
 
@@ -28,7 +29,12 @@ class ArtistCreate(View):
             user.artist
             messages.add_message(self.request, messages.WARNING, 'you already have an artist')
         except Artist.DoesNotExist:
-            artist_id = 'art' + user.username
+
+            artist_id = "".join(
+                    [random.choice(string.digits +
+                                   string.ascii_letters) for i in range(20)]
+                    )
+
             user.artist = Artist.objects.create(artist_owner=user, artist_name="", artist_id=artist_id)
             # consider changing this auto slug to a randomised number/string to make it hard to guess
             user.profile.account_type = 'artist'

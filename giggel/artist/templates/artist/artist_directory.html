@@ -1,6 +1,6 @@
 {% extends "main/base.html" %}
 {% load static %}
-{% block myProfile_directories %}
+{% block myProfile_directories %}active
 {% endblock %}
 {% block title %}Artist directory{% endblock %}
 
@@ -8,6 +8,7 @@
 {% endblock %}
 
 {% block content %}
+
 <ul>
     {% for artist in object_list %}
         <li id="artist_name"><a href={% url 'artist_detail' artist.artist_id %}>{{ artist.artist_name }}</a></li>
@@ -15,4 +16,5 @@
         <li>We didn't find anything!</li>
     {% endfor %}
 </ul>
+
 {% endblock %}

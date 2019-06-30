@@ -1,9 +1,16 @@
 {% extends "main/base.html" %}
 {% load static %}
-{% block title %}Title{% endblock %}
+{% block title %}DELETE gig{% endblock %}
 
-{% block headerText %}Header{% endblock %}
+{% block headerText %}Are you sure???{% endblock %}
 
 {% block content %}
-body
+
+<form method="post">
+  {% csrf_token %}
+  <p>Are you sure you want to delete "{{ object.gig_name }}"?</p>
+  <a href='{% url 'profile' %}'<button id="cancel" class="btn btn-outline-info">Cancel</button><a/>
+  <button id="submit" class="btn btn-outline-danger" type="confirm">
+DELETE</button>
+
 {% endblock %}

@@ -20,6 +20,8 @@
       {{ user.artist.artist_description }}</li>
   </ul>
 
+  <!-- TODO refactor into reverse urls --!>
+
   <a id="artist_update" href="/artist/update/{{user.artist.artist_id}}"><button class=' alert alert-info'>Edit details</button><a/>
     <a id="artist_delete" href="/artist/delete/{{user.artist.artist_id}}"><button class='alert alert-danger'>Delete my artist</button><a/>
   {% endblock %}

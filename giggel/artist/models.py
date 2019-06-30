@@ -16,6 +16,9 @@ class Artist(models.Model):
     # artist distance willing to travel
     # artist genres, multi select list
 
+    def __str__(self):
+        return self.artist_name
+
 
 @receiver(pre_delete, sender=Artist, dispatch_uid='question_delete_signal')
 def reset_account_type(sender, instance, using, **kwargs):

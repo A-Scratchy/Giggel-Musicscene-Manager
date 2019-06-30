@@ -8,5 +8,17 @@
           "venue_name": "TestVenue1",
           "venue_description": "a test venue"
       }
+  },
+  {
+    "model": "venue.venue",
+    "pk": 19,
+    "fields": {
+        "venue_owner": [
+            "james@test.com"
+        ],
+        "venue_id": "lT75sSwrUWcVieIYIaQs",
+        "venue_name": "Jame's pub",
+        "venue_description": "A test Venue"
+    }
   }
 ]
