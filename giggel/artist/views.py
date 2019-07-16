@@ -41,7 +41,6 @@ class ArtistCreate(View):
                     )
 
             user.artist = Artist.objects.create(artist_owner=user, artist_name="", artist_id=artist_id)
-            # consider changing this auto slug to a randomised number/string to make it hard to guess
             user.profile.account_type = 'artist'
             user.save()
             return HttpResponseRedirect(reverse_lazy('artist_update', kwargs={'slug':artist_id}))

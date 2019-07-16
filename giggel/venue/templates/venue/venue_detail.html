@@ -21,6 +21,6 @@
     {{ venue.venue_description }}</li>
 </ul>
 
-<a href="{% url 'gig_request_create' %}"> request gig here </a>
+<a id='request_gig_at_venue' href="{% url 'gig_request_at_venue' %}?gig_request_venue={{ venue.venue_id }}"> request gig here </a>
 
 {% endblock %}

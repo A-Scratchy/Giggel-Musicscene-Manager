@@ -1,0 +1,50 @@
+[
+{
+    "model": "gig.gigrequest",
+    "pk": 1,
+    "fields": {
+        "gig_request_owner": [
+            "james@test.com"
+        ],
+        "gig_request_id": "dsfgsdsdf78sd",
+        "gig_request_artist": 18,
+        "gig_request_venue": 19,
+        "gig_request_name": "GigReqTest1",
+        "gig_request_date": "2020-01-01",
+        "gig_request_description": "First test",
+        "gig_request_confimred": false
+    }
+},
+{
+    "model": "gig.gigrequest",
+    "pk": 2,
+    "fields": {
+        "gig_request_owner": [
+            "james@test.com"
+        ],
+        "gig_request_id": "dsfgsddfgd87",
+        "gig_request_artist": 18,
+        "gig_request_venue": 19,
+        "gig_request_name": "GigReqTest2",
+        "gig_request_date": "2019-06-06",
+        "gig_request_description": "Second test",
+        "gig_request_confimred": false
+    }
+},
+{
+    "model": "gig.gigrequest",
+    "pk": 3,
+    "fields": {
+        "gig_request_owner": [
+            "Jim@test.com"
+        ],
+        "gig_request_id": "dsfgsdf7d87",
+        "gig_request_artist": 18,
+        "gig_request_venue": 19,
+        "gig_request_name": "GigReqTest3",
+        "gig_request_date": "2019-01-01",
+        "gig_request_description": "Third test",
+        "gig_request_confimred": true
+    }
+}
+]

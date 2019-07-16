@@ -5,6 +5,9 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import DetailView, CreateView, DeleteView, UpdateView, ListView
 from django.http import HttpResponse, HttpResponseRedirect
 from .models import Gig, GigRequest
+from venue.models import Venue
+import random
+import string
 
 # Create your views here.
 
@@ -54,7 +57,36 @@ class MyGigs(ListView):
 
 # Gig requests
 
-class GigRequestCreate(CreateView):
+class GigRequestAtVenueCreate(CreateView):
+    model = GigRequest
+    template_name = 'gig/gig_request_create.html'
+    fields = ['gig_request_name', 'gig_request_description', 'gig_request_date']
+    success_url = reverse_lazy('my_gig_requests')
+
+    def form_valid(self, form):
+        gig_request_name = form.cleaned_data['gig_request_name']
+        gig_request_description = form.cleaned_data['gig_request_description']
+        gig_request_date = form.cleaned_data['gig_request_date']
+        gig_request_id= "".join(
+                [random.choice(string.digits +
+                               string.ascii_letters) for i in range(20)]
+                )
+        gig_request_owner = self.request.user
+        gig_request_artist = self.request.user.artist
+        gig_request_venue= Venue.objects.get(venue_id=self.request.GET['gig_request_venue'])
+        gr = GigRequest.objects.create(
+                                gig_request_name=gig_request_name,
+                                gig_request_description=gig_request_description,
+                                gig_request_date=gig_request_date,
+                                gig_request_id=gig_request_id,
+                                gig_request_owner=gig_request_owner,
+                                gig_request_artist=gig_request_artist,
+                                gig_request_venue=gig_request_venue
+                                )
+        gr.save()
+        return HttpResponseRedirect(self.success_url)
+
+class GigRequestToArtistCreate(CreateView):
     model = GigRequest
     template_name = 'gig/gig_request_create.html'
     fields = ['gig_request_id', 'gig_request_owner', 'gig_request_name', 'gig_request_description', 'gig_request_confimred', 'gig_request_date', 'gig_request_artist', 'gig_request_venue']
