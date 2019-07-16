@@ -15,3 +15,5 @@ class Gig(models.Model):
     gig_date = models.DateField(null=True, blank=True)
     gig_description = models.CharField(max_length=250, null=True, blank=True)
 
+    def __str__(self):
+        return self.gig_name

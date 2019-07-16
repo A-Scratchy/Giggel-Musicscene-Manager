@@ -81,7 +81,7 @@ class GigTestsExistingUser(LiveServerTestCase):
         self.assertIn('My Gigs', self.browser.title)
         self.assertIn('Jim\'s First Gig', self.browser.find_element_by_id(
             'Jim\'s First Gig').text)
-        
+
         # test update
 
     def test_update_gig(self):
@@ -119,3 +119,58 @@ class GigTestsExistingUser(LiveServerTestCase):
                         args=('123kjgh123KVh1',))
                 )
         self.assertNotIn('Jim', self.browser.title)
+
+
+        #User with an artist goes to an venue detail page
+        #User clicks requeast to play at venue
+        #A requestgigVenue is created with to, from, time and gig_description
+        #request is default unconfirmed
+        #request shows up in artists dashboard
+        #requset can be confirmed or denied by venue owner
+    def test_venue_request_create(self):
+        self.browser.get(self.live_server_url + reverse('venue_detail',
+                         args=('lT75sSwrUWcVieIYIaQs',)))
+        self.browser.find_element_by_id('venue_gig_request').click()
+        self.assertIn('Request', self.browser.title)
+        self.browser.find_element_by_id('gig_request_description').send_keys('a description')
+        self.browser.find_element_by_id('gig_request_date').send_keys('01/01/2020')
+        self.browser.find_element_by_id('submit').click()
+        self.assertIn('Success!', self.browser.find_element_by_name('messages'))
+        self.assertIn('James pub', self.browser.find_element_by_name('request_venue_name'))
+
+
+    def test_artist_request_read(self):
+        # addfixture to create request
+        self.browser.get(self.live_server_url + reverse('artist_dashboard'))
+        self.assertIn('James pub', self.browser.find_element_by_name('request_venue_name'))
+        self.browser.find_element_by_name('request_id').click()
+        self.assertIn('James pub', self.browser.find_element_by_name('request_venue_name'))
+
+    def test_artist_request_update(self):
+        # addfixture to create request
+        self.browser.get(self.live_server_url + reverse('artist_dashboard'))
+        self.assertIn('Jame\'s pub', self.browser.find_element_by_name('request_venue_name'))
+        self.browser.find_element_by_name('request_id').click()
+        self.browser.find_element_by_name('update_request').click()
+        self.browser.find_element_by_id('gig_request_description').clear()
+        self.browser.find_element_by_id('gig_request_description').send_keys('a new description')
+        self.browser.get(self.live_server_url + reverse('gig_request_detail', args=('gig_id',))
+        self.assertIn('a new description', self.browser.find_element_by_id('gig_request_description'))
+
+    def test_artist_request_delete(self):
+        self.browser.get(self.live_server_url + reverse('artist_dashboard'))
+        self.assertIn('Jame\'s pub', self.browser.find_element_by_name('request_venue_name'))
+        self.browser.find_element_by_name('request_id').click()
+        self.browser.find_element_by_name('delete_request').click()
+        self.browser.find_element_by_name('submit').click()
+        self.assertIn('Success!', self.browser.find_element_by_name('messages'))
+        self.assertNotIn('James pub', self.browser.find_element_by_name('request_venue_name'))
+
+    def test_artist_request_respond(self):
+        # addfixture to create request
+        self.browser.get(self.live_server_url + reverse('artist_dashboard'))
+        self.assertIn('Jame\'s pub', self.browser.find_element_by_name('request_venue_name'))
+        self.browser.find_element_by_name('request_id').click()
+        self.browser.find_element_by_name('submit').click()
+        self.browser.get(self.live_server_url + reverse('my_gigs'))
+        self.assertIn('James pub', self.browser.find_element_by_name('gig_venue_name'))
