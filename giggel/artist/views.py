@@ -5,6 +5,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import DetailView, CreateView, DeleteView, UpdateView, TemplateView, View, ListView
 from django.http import HttpResponse, HttpResponseRedirect
 from .models import Artist
+from gig.models import GigRequest
 import random
 import string
 # Create your views here.
@@ -17,9 +18,13 @@ class ArtistDetail(DetailView):
     context_object_name = 'artist'
 
 
-class ArtistDashboard(LoginRequiredMixin, TemplateView):
+class ArtistDashboard(LoginRequiredMixin, ListView):
     template_name = 'artist/artist_dashboard.html'
     login_url = reverse_lazy('login')
+
+    def get_queryset(self):
+        owner = self.request.user
+        return GigRequest.objects.filter(gig_request_artist=self.request.user.artist)
 
 
 class ArtistCreate(View):
@@ -49,7 +54,7 @@ class ArtistUpdate(LoginRequiredMixin, UpdateView):
     model = Artist
     slug_field = 'artist_id'
     fields = ['artist_id', 'artist_owner', 'artist_name', 'artist_description']
-    template_name = 'artist/artist_update.html' 
+    template_name = 'artist/artist_update.html'
     success_url = reverse_lazy('artist_dashboard')
 
 
@@ -68,4 +73,3 @@ class ArtistDelete(LoginRequiredMixin, DeleteView):
 class ArtistDirectory(ListView):
     model = Artist
     template_name = 'artist/artist_directory.html'
-

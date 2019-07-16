@@ -28,6 +28,7 @@ urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),
     path('profile/', user_views.profile.as_view(), name='profile'),
     path('profile/update/<slug:pk>/', user_views.updateProfile.as_view(), name='updateProfile'),
+    #artist
     path('artist/create', artist_views.ArtistCreate.as_view(), name='artist_create'),
     path('artist/detail/<slug:slug>/',
          artist_views.ArtistDetail.as_view(), name='artist_detail'),
@@ -38,7 +39,7 @@ urlpatterns = [
          name='artist_dashboard'),
     path('profile/artven', user_views.ArtVenCreate.as_view(), name='artven'),
     path('artist/directory', artist_views.ArtistDirectory.as_view(), name='artist_directory'),
-
+    #venue
     path('venue/create', venue_views.VenueCreate.as_view(), name='venue_create'),
     path('venue/detail/<slug:slug>/',
          venue_views.VenueDetail.as_view(), name='venue_detail'),
@@ -48,7 +49,7 @@ urlpatterns = [
     path('venue/dashboard', venue_views.VenueDashboard.as_view(),
          name='venue_dashboard'),
     path('venue/directory', venue_views.VenueDirectory.as_view(), name='venue_directory'),
-
+    #gigs
     path('gig/create', gig_views.GigCreate.as_view(), name='gig_create'),
     path('gig/detail/<slug:slug>/',
          gig_views.GigDetail.as_view(), name='gig_detail'),
@@ -56,7 +57,14 @@ urlpatterns = [
          gig_views.GigUpdate.as_view(), name='gig_update'),
     path('gig/delete/<slug:slug>/', gig_views.GigDelete.as_view(), name='gig_delete'),
     path('gig/directory', gig_views.GigDirectory.as_view(), name='gig_directory'),
-    path('my_gigs', gig_views.MyGigs.as_view(), name='my_gigs')
+    path('my_gigs', gig_views.MyGigs.as_view(), name='my_gigs'),
+    #gig_request
+    path('gig_request/create', gig_views.GigRequestCreate.as_view(), name='gig_request_create'),
+    path('gig_request/detail/<slug:slug>/',
+         gig_views.GigRequestDetail.as_view(), name='gig_request_detail'),
+    path('gig_request/update/<slug:slug>/',
+         gig_views.GigRequestUpdate.as_view(), name='gig_request_update'),
+    path('gig_request/delete/<slug:slug>/', gig_views.GigRequestDelete.as_view(), name='gig_request_delete'),
+    path('my_gig_requests', gig_views.MyGigRequests.as_view(), name='my_gig_requests'),
 
 ]
-

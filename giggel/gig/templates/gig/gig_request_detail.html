@@ -1,0 +1,31 @@
+
+{% extends "main/base.html" %}
+{% load static %}
+{% block title %}gig_request {{ gig_request.gig_request_name }}{% endblock %}
+
+{% block headerText %}{{ gig_request.gig_request_name }} - {{ gig_request.gig_request_date }}{% endblock %}
+
+{% block content %}
+
+<!-- Display gig_request info --!>
+<ul>
+  <li id="gig_request_id">gig_request id:
+    {{ gig_request.gig_request_id }}</li>
+  <li id="gig_request_name">gig_request name:
+    {{ gig_request.gig_request_name }}</li>
+  <li id="gig_request_owner">gig_request owner:
+    {{ gig_request.gig_request_owner }}</li>
+  <li id="gig_request_date">gig_request date:
+    {{ gig_request.gig_request_date }}</li>
+  <li id="gig_request_description">gig_request description:
+    {{ gig_request.gig_request_description }}</li>
+  <li id="gig_request_artist">artist:
+    {{ gig_request.gig_request_artist }}</li>
+  <li id="gig_request_venue">venue:
+    {{ gig_request.gig_request_venue }}</li>
+</ul>
+
+<!-- button links to update or delte --!>
+    <a id="update_gig_request" href="{% url 'gig_request_update' gig_request.gig_request_id %}"><button class="alert alert-info">Update</button></a>
+    <a id="delete_gig_request" href="{% url 'gig_request_delete' gig_request.gig_request_id %}"><button class='alert alert-danger'>Delete gig_request</button><a/>
+{% endblock %}

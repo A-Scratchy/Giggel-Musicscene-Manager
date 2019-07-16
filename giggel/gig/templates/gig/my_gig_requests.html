@@ -1,0 +1,24 @@
+{% extends "main/base.html" %}
+{% load static %}
+{% block title %}My Gig requests{% endblock %}
+
+{% block headerText %}My Gig requests{% endblock %}
+
+{% block content %}
+
+<ul>
+    {% for gig_request in object_list %}
+    <li name="{{gig_request.gig_request_name }}">
+      <a href='{% url 'gig_request_detail' gig_request.gig_request_id %}'>{{ gig_request.gig_request_name }}</a>
+      <p> -  {{ gig_request.gig_request_artist }} </p>
+      <p> - {{ gig_request.gig_request_venue }} </p>
+
+
+    </li>
+    {% empty %}
+        <li>We didn't find anything!</li>
+    {% endfor %}
+</ul>
+
+<a id="create_gig" href="{% url 'gig_create' %}"><button class="alert alert-info">Create a new gig</button></a>
+{% endblock %}

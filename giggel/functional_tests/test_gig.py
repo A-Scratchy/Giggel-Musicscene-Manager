@@ -121,7 +121,7 @@ class GigTestsExistingUser(LiveServerTestCase):
         self.assertNotIn('Jim', self.browser.title)
 
 
-        #User with an artist goes to an venue detail page
+        #User with an artist goes to a venue detail page
         #User clicks requeast to play at venue
         #A requestgigVenue is created with to, from, time and gig_description
         #request is default unconfirmed
@@ -144,7 +144,7 @@ class GigTestsExistingUser(LiveServerTestCase):
         self.browser.get(self.live_server_url + reverse('artist_dashboard'))
         self.assertIn('James pub', self.browser.find_element_by_name('request_venue_name'))
         self.browser.find_element_by_name('request_id').click()
-        self.assertIn('James pub', self.browser.find_element_by_name('request_venue_name'))
+        self.assertIn('James pub', self.browser.find_element_by_id('request_venue_name'))
 
     def test_artist_request_update(self):
         # addfixture to create request
@@ -154,15 +154,15 @@ class GigTestsExistingUser(LiveServerTestCase):
         self.browser.find_element_by_name('update_request').click()
         self.browser.find_element_by_id('gig_request_description').clear()
         self.browser.find_element_by_id('gig_request_description').send_keys('a new description')
-        self.browser.get(self.live_server_url + reverse('gig_request_detail', args=('gig_id',))
+        self.browser.get(self.live_server_url + reverse('gig_request_detail', args=('gig_id',)))
         self.assertIn('a new description', self.browser.find_element_by_id('gig_request_description'))
 
     def test_artist_request_delete(self):
         self.browser.get(self.live_server_url + reverse('artist_dashboard'))
         self.assertIn('Jame\'s pub', self.browser.find_element_by_name('request_venue_name'))
-        self.browser.find_element_by_name('request_id').click()
-        self.browser.find_element_by_name('delete_request').click()
-        self.browser.find_element_by_name('submit').click()
+        self.browser.find_element_by_id('request_id').click()
+        self.browser.find_element_by_id('delete_request').click()
+        self.browser.find_element_by_id('submit').click()
         self.assertIn('Success!', self.browser.find_element_by_name('messages'))
         self.assertNotIn('James pub', self.browser.find_element_by_name('request_venue_name'))
 

@@ -20,6 +20,22 @@
       {{ user.artist.artist_description }}</li>
   </ul>
 
+
+<h1>My requests</h1>
+<ul>
+    {% for gig_request in object_list %}
+    <li name="{{ gig_request.gig_request_name }}">
+      <a href='{% url 'gig_request_detail' gig_request.gig_request_id %}'>{{ gig_request.gig_request_name }}</a>
+      <p> -  {{ gig_request.gig_request_artist }} </p>
+      <p> - {{ gig_request.gig_request_venue }} </p>
+
+
+    </li>
+    {% empty %}
+        <li>We didn't find anything!</li>
+    {% endfor %}
+</ul>
+
   <!-- TODO refactor into reverse urls --!>
 
   <a id="artist_update" href="/artist/update/{{user.artist.artist_id}}"><button class=' alert alert-info'>Edit details</button><a/>
