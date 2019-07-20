@@ -9,9 +9,8 @@
 <ul>
     {% for gig_request in object_list %}
     <li name="{{gig_request.gig_request_name }}">
-      <a href='{% url 'gig_request_detail' gig_request.gig_request_id %}'>{{ gig_request.gig_request_name }}</a>
-      <p> -  {{ gig_request.gig_request_artist }} </p>
-      <p> - {{ gig_request.gig_request_venue }} </p>
+      <a href='{% url 'gig_request_detail' gig_request.gig_request_id %}'>{{ gig_request.gig_request_name }}
+      -  {{ gig_request.gig_request_artist }} @ {{ gig_request.gig_request_venue }}</a>
 
 
     </li>

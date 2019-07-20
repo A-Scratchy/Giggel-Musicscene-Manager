@@ -14,6 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+from django.conf import settings
 from django.urls import path, include
 from main import views as main_views
 from user import views as user_views
@@ -69,3 +70,9 @@ urlpatterns = [
     path('my_gig_requests', gig_views.MyGigRequests.as_view(), name='my_gig_requests'),
 
 ]
+
+if settings.DEBUG:
+    import debug_toolbar
+    urlpatterns = [
+        path('__debug__/', include(debug_toolbar.urls)),
+    ] + urlpatterns

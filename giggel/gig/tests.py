@@ -113,7 +113,7 @@ class BasicUnitTestsGigRequestArtist(TestCase):
                     venue_id='222222',
                     venue_name='testVen3'
                 )
-        url = reverse('gig_request_create')
+        url = reverse('gig_request_at_venue')
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'gig/gig_request_create.html')

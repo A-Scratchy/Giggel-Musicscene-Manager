@@ -4,6 +4,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import DetailView, CreateView, DeleteView, UpdateView, TemplateView, View, ListView
 from django.http import HttpResponse, HttpResponseRedirect
+from django.contrib.messages.views import SuccessMessageMixin
 from .models import Artist
 from gig.models import GigRequest
 import random
@@ -48,13 +49,14 @@ class ArtistCreate(View):
             return HttpResponseRedirect(reverse_lazy('artist_dashboard'))
 
 
-class ArtistUpdate(LoginRequiredMixin, UpdateView):
+class ArtistUpdate(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
     # need to check if user is owner of artist before allowing update
     model = Artist
     slug_field = 'artist_id'
     fields = ['artist_id', 'artist_owner', 'artist_name', 'artist_description']
     template_name = 'artist/artist_update.html'
     success_url = reverse_lazy('artist_dashboard')
+    success_message = '%(artist_name)s has been updated successfully'
 
 
 class ArtistDelete(LoginRequiredMixin, DeleteView):
@@ -62,6 +64,10 @@ class ArtistDelete(LoginRequiredMixin, DeleteView):
     slug_field = 'artist_id'
     template_name = 'artist/artist_delete.html'
     success_url = reverse_lazy('profile')
+
+    def post(self, request, *args, **kwargs):
+        messages.warning(request, 'Artist has been deleted')
+        return super().post(self, request, *args, **kwargs)
 
     # need to check if user is owner of artist before allowing update
     def get_queryset(self):
