@@ -137,42 +137,42 @@ class GigTestsExistingUser(LiveServerTestCase):
         self.browser.find_element_by_id('id_gig_request_description').send_keys('a description')
         self.browser.find_element_by_id('id_gig_request_date').send_keys('01/01/2020')
         self.browser.find_element_by_id('submit').click()
-        self.assertIn('Success!', self.browser.find_element_by_name('messages'))
-        self.assertIn('James pub', self.browser.find_element_by_id('request_venue_name_James pub'))
-
+        self.assertIn('created successfully', self.browser.find_element_by_id('messages').text)
+        self.assertIn('TestReq5', self.browser.find_element_by_id('request_id_TestReq5').text)
 
     def test_venue_request_read(self):
         # addfixture to create request
         self.browser.get(self.live_server_url + reverse('artist_dashboard'))
-        self.assertIn('James pub', self.browser.find_element_by_id('request_venue_name_TestReq1'))
-        self.browser.find_element_by_id('request_id').click()
-        self.assertIn('James pub', self.browser.find_element_by_id('request_venue_name'))
+        self.assertIn('James pub', self.browser.find_element_by_id('request_venue_name_GigReqTest3').text)
+        self.browser.find_element_by_id('request_id_GigReqTest3').click()
+        self.assertIn('James pub', self.browser.find_element_by_id('gig_request_venue').text)
 
     def test_venue_request_update(self):
         # addfixture to create request
         self.browser.get(self.live_server_url + reverse('artist_dashboard'))
-        self.assertIn('James pub', self.browser.find_element_by_id('request_venue_id_James pub'))
-        self.browser.find_element_by_id('request_id_TestReq1').click()
+        self.assertIn('GigReqTest3', self.browser.find_element_by_id('request_id_GigReqTest3').text)
+        self.browser.find_element_by_id('request_id_GigReqTest3').click()
+        gig_id = self.browser.find_element_by_id('gig_request_id').text
         self.browser.find_element_by_id('update_request').click()
         self.browser.find_element_by_id('id_gig_request_description').clear()
         self.browser.find_element_by_id('id_gig_request_description').send_keys('a new description')
-        self.browser.get(self.live_server_url + reverse('gig_request_detail', args=('gig_id',)))
-        self.assertIn('a new description', self.browser.find_element_by_id('gig_request_description'))
+        self.browser.get(self.live_server_url + reverse('gig_request_detail', args=(gig_id,)))
+        self.assertIn('a new description', self.browser.find_element_by_id('gig_request_description').text)
 
     def test_venue_request_delete(self):
         self.browser.get(self.live_server_url + reverse('artist_dashboard'))
-        self.assertIn('James pub', self.browser.find_element_by_id('request_venue_name_GigReqTest3'))
+        self.assertIn('James pub', self.browser.find_element_by_id('request_venue_name_GigReqTest3').text)
         self.browser.find_element_by_id('request_id_GigReqTest3').click()
         self.browser.find_element_by_id('delete_request').click()
         self.browser.find_element_by_id('submit').click()
-        self.assertIn('Success!', self.browser.find_element_by_id('messages'))
-        self.assertNotIn('James pub', self.browser.find_element_by_id('request_venue_name_James pub'))
+        self.assertIn('deleted', self.browser.find_element_by_id('messages').text)
+        #logic to see if object delteted
 
     def test_venue_request_respond(self):
         # addfixture to create request
         self.browser.get(self.live_server_url + reverse('artist_dashboard'))
-        self.assertIn('James pub', self.browser.find_element_by_id('request_venue_name_James pub'))
-        self.browser.find_element_by_id('request_id_James Pub').click()
+        self.assertIn('James pub', self.browser.find_element_by_id('request_venue_name_GigReqTest3').text)
+        self.browser.find_element_by_id('request_id_GigReqTest3').click()
         self.browser.find_element_by_id('submit').click()
         self.browser.get(self.live_server_url + reverse('my_gigs'))
-        self.assertIn('James pub', self.browser.find_element_by_id('gig_venue_name'))
+        self.assertIn('James pub', self.browser.find_element_by_id('gig_request_venue'))

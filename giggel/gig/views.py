@@ -68,7 +68,7 @@ class GigRequestAtVenueCreate(SuccessMessageMixin, CreateView):
     model = GigRequest
     template_name = 'gig/gig_request_create.html'
     fields = ['gig_request_name', 'gig_request_description', 'gig_request_date']
-    success_url = reverse_lazy('my_gig_requests')
+    success_url = reverse_lazy('artist_dashboard')
     success_message = "%(gig_request_name)s was created successfully"
 
     def form_valid(self, form):
@@ -90,7 +90,7 @@ class GigRequestToArtistCreate(CreateView):
     model = GigRequest
     template_name = 'gig/gig_request_create.html'
     fields = ['gig_request_id', 'gig_request_owner', 'gig_request_name', 'gig_request_description', 'gig_request_confimred', 'gig_request_date', 'gig_request_artist', 'gig_request_venue']
-    success_url = reverse_lazy('my_gig_requests')
+    success_url = reverse_lazy('artist_dashboard')
 
 class GigRequestDetail(DetailView):
     model = GigRequest
@@ -104,7 +104,7 @@ class GigRequestUpdate(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
     slug_field = 'gig_request_id'
     fields = ['gig_request_id', 'gig_request_owner', 'gig_request_name', 'gig_request_description', 'gig_request_confimred', 'gig_request_date', 'gig_request_artist', 'gig_request_venue']
     template_name = 'gig/gig_request_update.html'
-    success_url = reverse_lazy('my_gig_requests')
+    success_url = reverse_lazy('artist_dashboard')
     success_message = "%(gig_request_name)s was updated successfully"
 
     # need to check if user is owner of gig before allowing update
@@ -116,7 +116,7 @@ class GigRequestDelete(LoginRequiredMixin, DeleteView):
     model = GigRequest
     slug_field = 'gig_request_id'
     template_name = 'gig/gig_request_delete.html'
-    success_url = reverse_lazy('my_gig_requests')
+    success_url = reverse_lazy('artist_dashboard')
 
     def post(self, request, *args, **kwargs):
         messages.warning(request, 'Requset has been deleted')
