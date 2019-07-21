@@ -21,4 +21,6 @@
     {{ artist.artist_description }}</li>
 </ul>
 
+<a id='request_gig_from_artist' href="{% url 'gig_request_to_artist' %}?gig_request_artist={{ artist.artist_id }}"> request artist to play at your venue </a>
+
 {% endblock %}

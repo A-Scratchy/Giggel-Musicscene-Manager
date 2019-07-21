@@ -6,6 +6,7 @@ from django.views.generic import DetailView, CreateView, DeleteView, UpdateView,
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.messages.views import SuccessMessageMixin
 from .models import Venue
+from gig.models import Gig, GigRequest
 import random
 import string
 # Create your views here.
@@ -19,8 +20,17 @@ class VenueDetail(DetailView):
 
 
 class VenueDashboard(LoginRequiredMixin, TemplateView):
+    model = Venue
     template_name = 'venue/venue_dashboard.html'
     login_url = reverse_lazy('login')
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        owner = self.request.user
+        context['gig_requests'] = GigRequest.objects.filter(gig_request_venue=self.request.user.venue)
+        context['gigs'] = Gig.objects.filter(gig_venue=self.request.user.venue)
+        return context
+
 
 
 class VenueCreate(View):

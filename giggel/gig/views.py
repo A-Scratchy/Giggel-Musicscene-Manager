@@ -7,6 +7,7 @@ from django.views.generic import DetailView, CreateView, DeleteView, UpdateView,
 from django.http import HttpResponse, HttpResponseRedirect
 from .models import Gig, GigRequest
 from venue.models import Venue
+from artist.models import Artist
 import random
 import string
 
@@ -86,11 +87,27 @@ class GigRequestAtVenueCreate(SuccessMessageMixin, CreateView):
             messages.success(self.request, success_message)
         return HttpResponseRedirect(self.success_url)
 
-class GigRequestToArtistCreate(CreateView):
+class GigRequestToArtistCreate(SuccessMessageMixin, CreateView):
     model = GigRequest
     template_name = 'gig/gig_request_create.html'
-    fields = ['gig_request_id', 'gig_request_owner', 'gig_request_name', 'gig_request_description', 'gig_request_confirmed', 'gig_request_date', 'gig_request_artist', 'gig_request_venue']
-    success_url = reverse_lazy('artist_dashboard')
+    fields = ['gig_request_name', 'gig_request_description', 'gig_request_date']
+    success_url = reverse_lazy('venue_dashboard')
+    success_message = "%(gig_request_name)s was created successfully"
+
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.gig_request_id= "".join(
+                [random.choice(string.digits +
+                               string.ascii_letters) for i in range(20)]
+                )
+        self.object.gig_request_owner = self.request.user
+        self.object.gig_request_venue = self.request.user.venue
+        self.object.gig_request_artist = Artist.objects.get(artist_id=self.request.GET['gig_request_artist'])
+        self.object.save()
+        success_message = super().get_success_message(form.cleaned_data)
+        if success_message:
+            messages.success(self.request, success_message)
+        return HttpResponseRedirect(self.success_url)
 
 class GigRequestDetail(DetailView):
     model = GigRequest
@@ -104,7 +121,7 @@ class GigRequestUpdate(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
     slug_field = 'gig_request_id'
     fields = ['gig_request_id', 'gig_request_owner', 'gig_request_name', 'gig_request_description', 'gig_request_confirmed', 'gig_request_date', 'gig_request_artist', 'gig_request_venue']
     template_name = 'gig/gig_request_update.html'
-    success_url = reverse_lazy('artist_dashboard')
+    success_url = reverse_lazy('profile')
     success_message = "%(gig_request_name)s was updated successfully"
 
     # need to check if user is owner of gig before allowing update
@@ -116,7 +133,7 @@ class GigRequestDelete(LoginRequiredMixin, DeleteView):
     model = GigRequest
     slug_field = 'gig_request_id'
     template_name = 'gig/gig_request_delete.html'
-    success_url = reverse_lazy('artist_dashboard')
+    success_url = reverse_lazy('profile')
 
     def post(self, request, *args, **kwargs):
         messages.warning(request, 'Requset has been deleted')
@@ -140,7 +157,7 @@ class GigRequestConfirm(DetailView):
     slug_field = 'gig_request_id'
     fields = ['gig_request_id', 'gig_request_owner', 'gig_request_name', 'gig_request_description', 'gig_request_confirmed', 'gig_request_date', 'gig_request_artist', 'gig_request_venue']
     template_name = 'gig/gig_request_update.html'
-    success_url = reverse_lazy('artist_dashboard')
+    success_url = reverse_lazy('profile')
     success_message = "%(gig_request_name)s was updated successfully"
 
     def get(self, request, *args, **kwargs):

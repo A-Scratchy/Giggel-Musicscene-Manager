@@ -1,8 +1,245 @@
-.circle {
-  border-radius: 50%;
-}
-
 .highlight {
   background-color: green;
   border: 1px solid red;
+}
+
+body {
+  background-color: #363636;
+  font-family: 'Galada', cursive;
+}
+
+.profile_pic_mini {
+  border-radius: 50%;
+}
+
+#main {
+  z-index:100;
+  top: 0; left: 0; bottom: 0; right: 0;
+}
+
+.click {
+}
+
+.hide{
+  display: none;
+}
+
+.circle{
+  background-color:black;
+  color: #FFFCDC;
+  /* font-familly: sans-serif; */
+  /* font-family: 'Sanchez', serif; */
+  /* font-family: 'Marck Script', cursive; */
+  font-family: 'Galada', cursive;
+  font-size: 1.5em;
+  width: 5vw;
+  height: 5vw;
+  margin: auto;
+  border-radius: 100%;
+  text-align: center;
+  line-height:5vw;
+  hover: cursor;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+}
+
+#profile.animate {
+  animation-name: profile;
+  animation-duration: 0.5s;
+  animation-delay: 0s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes profile {
+  from {transform: translateY(0);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(-120px);
+    opacity:100;
+  }
+}
+
+.rainbow {
+  animation-name: rainbow;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  animation-direction: alternate;
+  animation-duration: 3s;
+}
+
+@keyframes rainbow {
+  0% {color: #FDED2A;}
+  20% {color: #CCBB00;}
+  40% {color: #756C00;}
+  60% {color: #655E10;}
+  80% {color: #58531D;}
+  100%{color: #1F1D0A;}
+}
+
+#profile.deanimate {
+  animation-name: deprofile;
+  animation-duration: 0.5s;
+  animation-delay: 0;
+}
+
+@keyframes deprofile {
+  from {transform: translateY(-120px);
+    opacity:100;
+  }
+  to {
+    transform: translateY(0px);
+    opacity:0;
+  }
+}
+
+/* Gigs */
+
+#gigs.animate {
+  animation-name: gigs;
+  animation-duration: 0.5s;
+  animation-delay: 0;
+  animation-fill-mode: forwards;
+}
+
+@keyframes gigs {
+  from {transform: translateY(0);
+    opacity:0;
+  }
+  to {
+    transform: translateY(120px);
+    opacity:100;
+  }
+}
+
+#gigs.deanimate {
+  animation-name: degigs;
+  animation-duration: 0.5s;
+  animation-delay: 0;
+}
+
+@keyframes degigs {
+  from {transform: translateY(120px);
+        opacity: 100;
+  }
+  to {
+    transform: translateY(0px);
+    opacity:0 }
+}
+
+/* venues */
+
+#venues.animate {
+  animation-name: venues;
+  animation-duration: 0.5s;
+  animation-delay: 0;
+  animation-fill-mode: forwards;
+}
+
+@keyframes venues {
+  from {transform: translateX(0);
+    opacity:0;
+  }
+  to {
+    transform: translateX(120px);
+    opacity:100;
+  }
+}
+
+#venues.deanimate {
+  animation-name: devenues;
+  animation-duration: 0.5s;
+  animation-delay: 0;
+}
+
+@keyframes devenues {
+  from {transform: translateX(120px);
+        opacity: 100;
+  }
+  to {
+    transform: translateX(0px);
+    opacity:0 }
+}
+
+/* artists */
+
+#artists.animate {
+  animation-name: artists;
+  animation-duration: 0.5s;
+  animation-delay: 0;
+  animation-fill-mode: forwards;
+}
+
+@keyframes artists {
+  from {transform: translateX(0);
+    opacity:0;
+  }
+  to {
+    transform: translateX(-120px);
+    opacity:100;
+  }
+}
+
+#artists.deanimate {
+  animation-name: deartists;
+  animation-duration: 0.5s;
+  animation-delay: 0;
+}
+
+@keyframes deartists {
+  from {transform: translateX(-120px);
+        opacity: 100;
+  }
+  to {
+    transform: translateX(0px);
+    opacity:0 }
+}
+
+/* title */
+
+#title.animate {
+  animation-name: title;
+  animation-duration: 1s;
+  animation-delay: 0;
+  animation-fill-mode: forwards;
+}
+
+@keyframes title {
+  from {color: :#555;}
+  to {color:#363636;}
+}
+
+#title.deanimate {
+  animation-name: detitle;
+  animation-duration: 1s;
+  animation-delay: 0;
+  animation-fill-mode: forwards;
+}
+
+@keyframes detitle {
+  from {color:#363636;}
+  to {color:#555;}
+}
+
+.active {
+  color:grey;
+}
+
+.inactive {
+  animation-name: rainbow;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  animation-direction: alternate;
+  animation-duration: 3s;
+}
+
+.first_letter {
+  color: #FDED2A;
+}
+
+.giggel-header {
+  /* margin-top: 100px; */
+  background-color: #363636;
+  color: #555;
+  /* font-size: 200px; */
 }

@@ -25,6 +25,7 @@ from gig import views as gig_views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', main_views.home, name='home'),
+    path('new', main_views.HomeNew.as_view(), name='home_new'),
     path('accounts/', include('django_registration.backends.activation.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
     path('profile/', user_views.profile.as_view(), name='profile'),
