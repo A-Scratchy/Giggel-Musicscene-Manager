@@ -3,7 +3,7 @@ from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
-from django.views.generic import DetailView, CreateView, DeleteView, UpdateView, ListView
+from django.views.generic import DetailView, CreateView, DeleteView, UpdateView, ListView, View
 from django.http import HttpResponse, HttpResponseRedirect
 from .models import Gig, GigRequest
 from venue.models import Venue
@@ -79,7 +79,7 @@ class GigRequestAtVenueCreate(SuccessMessageMixin, CreateView):
                 )
         self.object.gig_request_owner = self.request.user
         self.object.gig_request_artist = self.request.user.artist
-        self.object.gig_request_venue= Venue.objects.get(venue_id=self.request.GET['gig_request_venue'])
+        self.object.gig_request_venue = Venue.objects.get(venue_id=self.request.GET['gig_request_venue'])
         self.object.save()
         success_message = super().get_success_message(form.cleaned_data)
         if success_message:
@@ -89,7 +89,7 @@ class GigRequestAtVenueCreate(SuccessMessageMixin, CreateView):
 class GigRequestToArtistCreate(CreateView):
     model = GigRequest
     template_name = 'gig/gig_request_create.html'
-    fields = ['gig_request_id', 'gig_request_owner', 'gig_request_name', 'gig_request_description', 'gig_request_confimred', 'gig_request_date', 'gig_request_artist', 'gig_request_venue']
+    fields = ['gig_request_id', 'gig_request_owner', 'gig_request_name', 'gig_request_description', 'gig_request_confirmed', 'gig_request_date', 'gig_request_artist', 'gig_request_venue']
     success_url = reverse_lazy('artist_dashboard')
 
 class GigRequestDetail(DetailView):
@@ -102,7 +102,7 @@ class GigRequestUpdate(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
     # need to check if user is owner of gig before allowing update
     model = GigRequest
     slug_field = 'gig_request_id'
-    fields = ['gig_request_id', 'gig_request_owner', 'gig_request_name', 'gig_request_description', 'gig_request_confimred', 'gig_request_date', 'gig_request_artist', 'gig_request_venue']
+    fields = ['gig_request_id', 'gig_request_owner', 'gig_request_name', 'gig_request_description', 'gig_request_confirmed', 'gig_request_date', 'gig_request_artist', 'gig_request_venue']
     template_name = 'gig/gig_request_update.html'
     success_url = reverse_lazy('artist_dashboard')
     success_message = "%(gig_request_name)s was updated successfully"
@@ -134,3 +134,30 @@ class MyGigRequests(ListView):
     def get_queryset(self):
         return GigRequest.objects.filter(gig_request_owner=self.request.user)
     #OR gig requests that involve an artist or venue that they own....
+
+class GigRequestConfirm(DetailView):
+    model = GigRequest
+    slug_field = 'gig_request_id'
+    fields = ['gig_request_id', 'gig_request_owner', 'gig_request_name', 'gig_request_description', 'gig_request_confirmed', 'gig_request_date', 'gig_request_artist', 'gig_request_venue']
+    template_name = 'gig/gig_request_update.html'
+    success_url = reverse_lazy('artist_dashboard')
+    success_message = "%(gig_request_name)s was updated successfully"
+
+    def get(self, request, *args, **kwargs):
+        gig_request = self.get_object()
+        gig = Gig.objects.create(
+    gig_owner = gig_request.gig_request_owner,
+    gig_id = "".join(
+            [random.choice(string.digits +
+                           string.ascii_letters) for i in range(20)]
+            ),
+    gig_artist = gig_request.gig_request_artist,
+    gig_venue = gig_request.gig_request_venue,
+    gig_name = gig_request.gig_request_name,
+    gig_date = gig_request.gig_request_date,
+    gig_description = gig_request.gig_request_description
+        )
+        gig_request.confirm()
+        gig_request.save()
+        messages.warning(request, gig_request.gig_request_confirmed)
+        return HttpResponseRedirect(reverse_lazy('artist_dashboard'))

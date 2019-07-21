@@ -68,7 +68,7 @@ urlpatterns = [
          gig_views.GigRequestUpdate.as_view(), name='gig_request_update'),
     path('gig_request/delete/<slug:slug>/', gig_views.GigRequestDelete.as_view(), name='gig_request_delete'),
     path('my_gig_requests', gig_views.MyGigRequests.as_view(), name='my_gig_requests'),
-
+    path('my_gig_requests/confirm/<slug:slug>/', gig_views.GigRequestConfirm.as_view(), name='gig_request_confirm'),
 ]
 
 if settings.DEBUG:

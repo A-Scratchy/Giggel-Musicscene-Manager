@@ -49,7 +49,7 @@ class VenueUpdate(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
     fields = ['venue_id', 'venue_owner', 'venue_name', 'venue_description']
     template_name = 'venue/venue_update.html'
     success_url = reverse_lazy('venue_dashboard')
-    success_message = '%(venue_nmame)s has been updated successfully'
+    success_message = '%(venue_name)s has been updated successfully'
 
 
 class VenueDelete(LoginRequiredMixin, DeleteView):
@@ -71,6 +71,3 @@ class VenueDelete(LoginRequiredMixin, DeleteView):
 class VenueDirectory(ListView):
     model = Venue
     template_name = 'venue/venue_directory.html'
-
-
-# Create your views here.

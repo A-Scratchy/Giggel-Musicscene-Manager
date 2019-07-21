@@ -12,7 +12,7 @@
         "gig_request_name": "GigReqTest1",
         "gig_request_date": "2020-01-01",
         "gig_request_description": "First test",
-        "gig_request_confimred": false
+        "gig_request_confirmed": false
     }
 },
 {
@@ -28,7 +28,7 @@
         "gig_request_name": "GigReqTest2",
         "gig_request_date": "2019-06-06",
         "gig_request_description": "Second test",
-        "gig_request_confimred": false
+        "gig_request_confirmed": true
     }
 },
 {
@@ -44,7 +44,7 @@
         "gig_request_name": "GigReqTest3",
         "gig_request_date": "2019-01-01",
         "gig_request_description": "Third test",
-        "gig_request_confimred": true
+        "gig_request_confirmed": false
     }
 }
 ]

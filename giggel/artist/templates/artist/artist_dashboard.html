@@ -9,6 +9,7 @@
 {% endblock %}
 
 {% block content %}
+<div class='container text-center'>
   <ul>
     <li id="artist_id">artist id:
       {{ user.artist.artist_id }}</li>
@@ -19,25 +20,52 @@
     <li id="artist_description">artist description:
       {{ user.artist.artist_description }}</li>
   </ul>
+  <a id="artist_update" href="/artist/update/{{user.artist.artist_id}}"><button class=' alert alert-info'>Edit details</button><a/>
+    <a id="artist_delete" href="/artist/delete/{{user.artist.artist_id}}"><button class='alert alert-danger'>Delete my artist</button><a/>
+  <h1>My Gigs</h1>
+
+  <ul>
+      {% for gig in gigs %}
+      <li id="link_{{ gig.gig_name }}">
+        <a href='{% url 'gig_detail' gig.gig_id %}'>{{ gig.gig_name }}
+        -  {{ gig.gig_artist }} @ {{ gig.gig_venue }} on {{ gig.gig_date }}</a>
+
+      {% empty %}
+          <li>We didn't find anything!</li>
+      {% endfor %}
+  </ul>
+
+  <a id="create_gig" href="{% url 'gig_create' %}"><button class="alert alert-info">Create a new gig</button></a>
 
 
 <h1>My requests</h1>
+
+<h3>Pending Gig requests</h3>
 <ul>
-    {% for gig_request in object_list %}
-    <li name="{{ gig_request.gig_request_name }}">
-      <a id='request_id_{{ gig_request.gig_request_name }}' href="{% url 'gig_request_detail' gig_request.gig_request_id %}">{{ gig_request.gig_request_name }}</a>
-      <p id='request_artist_name_{{ gig_request.gig_request_name }}'> -  {{ gig_request.gig_request_artist }} </p>
-      <p id='request_venue_name_{{ gig_request.gig_request_name }}'> - {{ gig_request.gig_request_venue }} </p>
+    {% for gig_request in gig_requests %}
+    {% if gig_request.gig_request_confirmed != True %}
+    <li id="link_{{gig_request.gig_request_name}}" name="{{gig_request.gig_request_name }}">
+      <a href='{% url 'gig_request_detail' gig_request.gig_request_id %}'>{{ gig_request.gig_request_name }}
+      -  {{ gig_request.gig_request_artist }} @ {{ gig_request.gig_request_venue }} on {{ gig_request.Gig_request_date}}</a>
+    {% endif %}
+        {% empty %}
+          <li>We didn't find anything!</li>
+{% endfor %}
+</ul>
+<h3>Accepted Gig requests</h3>
+<ul>
+    {% for gig_request in gig_requests %}
+    {% if gig_request.gig_request_confirmed %}
+    <li name="{{gig_request.gig_request_name }}">
+      <a href='{% url 'gig_request_detail' gig_request.gig_request_id %}'>{{ gig_request.gig_request_name }}
+      -  {{ gig_request.gig_request_artist }} @ {{ gig_request.gig_request_venue }}</a>
+    {% endif %}
 
 
     </li>
-    {% empty %}
-        <li>We didn't find anything!</li>
-    {% endfor %}
+{% endfor %}
 </ul>
 
-  <!-- TODO refactor into reverse urls --!>
 
-  <a id="artist_update" href="/artist/update/{{user.artist.artist_id}}"><button class=' alert alert-info'>Edit details</button><a/>
-    <a id="artist_delete" href="/artist/delete/{{user.artist.artist_id}}"><button class='alert alert-danger'>Delete my artist</button><a/>
+</div>
   {% endblock %}

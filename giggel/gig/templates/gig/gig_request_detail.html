@@ -24,11 +24,11 @@
   <li id="gig_request_venue">venue:
     {{ gig_request.gig_request_venue }}</li>
   <li id="gig_request_confirmed">Confirmed?:
-      {{ gig_request.gig_request_confimred }}</li>
+      {{ gig_request.gig_request_confirmed }}</li>
 </ul>
 
 <!-- button links to update or delte --!>
     <a id="update_gig_request" href="{% url 'gig_request_update' gig_request.gig_request_id %}"><button class="alert alert-info">Update</button></a>
-    <a id="submit" href="{% url 'gig_request_update' gig_request.gig_request_id %}"><button class="alert alert-warning">Respond</button></a>
+    <a id="submit" href="{% url 'gig_request_confirm' gig_request.gig_request_id %}"><button class="alert alert-warning">Respond</button></a>
     <a id="delete_request" href="{% url 'gig_request_delete' gig_request.gig_request_id %}"><button class='alert alert-danger'>Delete request</button><a/>
 {% endblock %}

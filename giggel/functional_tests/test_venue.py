@@ -107,7 +107,7 @@ class VenueTestsExistingUser(LiveServerTestCase):
 
         # User goes to thier profile and loads up thier venue
         # User clicks modify and adds a new description
-        # User clicks save and description is now present on the 
+        # User clicks save and description is now present on the
         # live venue profile
     def test_venue_update(self):
         self.browser.get(self.live_server_url + reverse('profile'))

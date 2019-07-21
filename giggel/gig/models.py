@@ -26,7 +26,11 @@ class GigRequest(models.Model):
     gig_request_name = models.CharField(max_length=80)
     gig_request_date = models.DateField(null=True, blank=True)
     gig_request_description = models.CharField(max_length=250, null=True, blank=True)
-    gig_request_confimred = models.BooleanField(default=False)
+    gig_request_confirmed = models.BooleanField(default=False)
+
+    def confirm(self):
+        self.gig_request_confirmed = True
+        return True
 
     def __str__(self):
         return self.gig_request_name

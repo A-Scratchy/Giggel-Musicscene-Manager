@@ -6,7 +6,7 @@ from django.views.generic import DetailView, CreateView, DeleteView, UpdateView,
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.messages.views import SuccessMessageMixin
 from .models import Artist
-from gig.models import GigRequest
+from gig.models import Gig, GigRequest
 import random
 import string
 # Create your views here.
@@ -20,12 +20,21 @@ class ArtistDetail(DetailView):
 
 
 class ArtistDashboard(LoginRequiredMixin, ListView):
+    model = Artist
     template_name = 'artist/artist_dashboard.html'
     login_url = reverse_lazy('login')
 
-    def get_queryset(self):
+    # def get_queryset(self):
+    #     owner = self.request.user
+    #     return GigRequest.objects.filter(gig_request_artist=self.request.user.artist)
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
         owner = self.request.user
-        return GigRequest.objects.filter(gig_request_artist=self.request.user.artist)
+        context['gig_requests'] = GigRequest.objects.filter(gig_request_artist=self.request.user.artist)
+        context['gigs'] = Gig.objects.filter(gig_artist=self.request.user.artist)
+        return context
+
 
 
 class ArtistCreate(View):
