@@ -5,13 +5,25 @@
 {% block headerText %}Gigs{% endblock %}
 
 {% block content %}
+<div class="directory container border">
+<table id="table" class="table">
+<tr>
+  <th onclick="sortTable(0)">Name</th>
+  <th onclick="sortTable(1)">Artist</th>
+  <th onclick="sortTable(2)">Venue</th>
+  <th>Date</th>
+  <th>Genres</th>
+</tr>
+{% for gig in object_list %}
+<tr>
+    <td id="gig_name_link_{{ gig.gig_name }}"><a href={% url 'gig_detail' gig.gig_id %}>{{ gig.gig_name }}</a></td>
+    <td>{{ gig.gig_artist}}</td>
+    <td>{{ gig.gig_venue}}</td>
+    <td>{{ gig.gig_date}}</td>
+    <td>{{ gig.gig_genres}}</td>
+{% endfor %}
+</<table>
+</div>
 
-<ul>
-    {% for gig in object_list %}
-        <li id="gig_name"><a href={% url 'gig_detail' gig.gig_id %}>{{ gig.gig_name }}</a></li>
-    {% empty %}
-        <li>We didn't find anything!</li>
-    {% endfor %}
-</ul>
 
 {% endblock %}

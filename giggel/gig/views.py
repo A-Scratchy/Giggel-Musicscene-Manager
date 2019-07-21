@@ -60,7 +60,16 @@ class MyGigs(ListView):
     template_name = 'gig/my_gigs.html'
 
     def get_queryset(self):
-        return Gig.objects.filter(gig_owner=self.request.user)
+        try:
+            self.request.user.artist
+            return Gig.objects.filter(gig_artist=self.request.user.artist)
+        except Artist.DoesNotExist:
+            try:
+                 self.request.user.venue
+                 return Gig.objects.filter(gig_venue=self.request.user.venue)
+            except Venue.DoesNotExist:
+                messages.add_message(self.request, messages.WARNING, 'You will need to create and artist or venue first')
+                return HttpResponseRedirect(reverse_lazy('artven'))
 
 
 # Gig requests
@@ -149,7 +158,16 @@ class MyGigRequests(ListView):
     context_object_name = 'gig_request'
 
     def get_queryset(self):
-        return GigRequest.objects.filter(gig_request_owner=self.request.user)
+        try:
+            request.user.artist
+            return GigRequest.objects.filter(gig_request_artist=request.user.artist)
+        except Artist.DoesNotExist:
+            try:
+                 request.user.venue
+                 return GigRequest.objects.filter(gig_request_venue=request.user.venue)
+            except Venue.DoesNotExist:
+                messages.add_message(self.request, messages.WARNING, 'You will need to create and artist or venue first')
+                return HttpResponseRedirect(reverse_lazy('artven'))
     #OR gig requests that involve an artist or venue that they own....
 
 class GigRequestConfirm(DetailView):
@@ -177,4 +195,4 @@ class GigRequestConfirm(DetailView):
         gig_request.confirm()
         gig_request.save()
         messages.warning(request, gig_request.gig_request_confirmed)
-        return HttpResponseRedirect(reverse_lazy('artist_dashboard'))
+        return HttpResponseRedirect(self.success_url)
