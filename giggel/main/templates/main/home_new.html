@@ -1,0 +1,59 @@
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- Load bootstrap -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/base.css' %}">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="{% static 'js/animate.js' %}"></script>
+<link href="https://fonts.googleapis.com/css?family=Galada|Marck+Script|Sanchez&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+      <div class="jumbotron text-center h1 giggel-header" style="background-image: url("") >
+      <span id="title" class="animatable">GiGel</span>
+    </div>
+  </header>
+
+<div class='circle inactive' id='main'>
+  G
+  <div class='click'>
+  click^
+</div>
+</div>
+
+
+
+<a href="{% url 'profile' %}">
+<div class='circle animatable' id='profile'>
+  <span class='first_letter'>P</span>rofile
+</div>
+</a>
+
+<a href="{% url 'gig_directory' %}">
+<div class='circle animatable' id='gigs'>
+   <span class='first_letter'>G</span>igs
+</div>
+</a>
+
+<a href="{% url 'artist_directory' %}">
+<div class='circle animatable' id='artists'>
+   <span class='first_letter'>A</span>rtists
+</div>
+</a>
+
+
+<a href="{% url 'venue_directory' %}">
+<div class='circle animatable' id='venues'>
+  <span class='first_letter'>V</span>enues
+</div>
+</a>
+
+
+
+
+
+
+</body>

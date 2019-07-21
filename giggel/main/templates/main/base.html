@@ -27,7 +27,7 @@
         <ul class="navbar-nav mr-auto">
           <!--links -->
           <li class="nav-item {% block home_active %}{% endblock %}">
-            <a class="nav-link" name="home" href="{% url 'home' %}">Home</a>
+            <a class="nav-link" name="home" href="{% url 'home_new' %}">Home</a>
           </li>
           <li class="nav-item {% block myProfile_active %}{% endblock %}">
             <a class="nav-link" name="myProfile" href="{% url 'profile' %}">My profile</a>
@@ -67,7 +67,7 @@
                 {{ user.username }}</p>
             </li>
             <li>
-              <a class="navbar-brand float-left" href="{% url 'profile' %}"><img class="circle" src="{% static 'img/temp.png' %}" width="30" height="30" alt=""></a>
+              <a class="navbar-brand float-left" href="{% url 'profile' %}"><img class="profile_pic_mini" src="{% static 'img/temp.png' %}" width="30" height="30" alt=""></a>
             </li>
           {% else %}
             <!-- show log in and sign up buttons -->
