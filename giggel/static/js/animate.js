@@ -15,6 +15,32 @@ $(function() {
       $('.animatable').addClass('deanimate');
       $('.click').removeClass('hide');
     }
-
   });
+
+  //   $('#artists').click(function() {
+  //
+  //     if ($('#artists').hasClass('inactive')) {
+  //     $('#artists').addClass('active');
+  //     $('#artists').removeClass('inactive');
+  //     $('.subcircle').addClass('sub_animate');
+  //       $('.subcircle').removeClass('desub_animate');
+  //     }
+  //     else {
+  //        $('#artists').addClass('inactive');
+  //     $('#artists').removeClass('active');
+  //       $('.subcircle').removeClass('sub_animate');
+  //       $('.subcircle').addClass('desub_animate');
+  //     }
+  // });
+
+$('#login').click(function() {
+    $('.lightbox').addClass('show');
+    $('.lightbox').removeClass('hidden');
+  });
+
+$('.close').click(function() {
+  $('.lightbox').removeClass('show');
+  $('.lightbox').addClass('hidden');
+});
+
 });

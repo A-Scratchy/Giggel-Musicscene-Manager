@@ -1,12 +1,64 @@
 :root {
   --main-color: #FFFEF6;
   --color2: #EFCF00;
-  --color3: #666666;
+  --color3: #ff4109;
   --hlink: #EFCF00;
-  --bg1: #111111;
+  --bg1: #ffc100;
   --bg2: #232323;
+  --bg-dark: #342700;
   --title-color: #333333;
   --header-color: #111111;
+  --circ_up: -12vmin;
+  --circ_down: 12vmin;
+  --circ_left: -15vmin;
+  --circ_right: 15vmin;
+  --sub_circ_up: -23vmin;
+  --sub_circ_down: -23vmin;
+  --sub_circ_left: -20vmin;
+  --sub_circ_right: 14vmin;
+  --menu-duration: 1s;
+}
+
+
+
+.close {
+  float: right;
+  margin: -2%;
+  color:red;
+}
+
+#login_form {
+  position: relative;
+  opacity:60;
+  height: 50%;
+  width: 20%;
+  margin-left: 40vw;
+  margin-top: 23vh;
+  z-index: 110;
+  border-radius: 5%;
+  padding:5%;
+  text-align: center;
+  background-color: #EFCF0000;
+  transition-property: all;
+  transition-delay: 1s;
+  transition-duration: 2s;
+}
+
+#login_form.show {
+  transition-property: all;
+  transition-delay: 1s;
+  transition-duration: 2s;
+  display: block;
+  background-color: #AD9000;
+}
+
+#login_form.hidden {
+  opacity: 0;
+  transition-property: all;
+  transition-delay: 0.2s;
+  transition-duration: 2s;
+  display: none;
+  background-color: #EFCF0000;
 }
 
 a {
@@ -15,12 +67,43 @@ a {
 
 body {
   background-color: var(--bg1);
-  /* font-family: 'Galada', cursive; */
-  /* font-familly: sans-serif; */
-  /* font-family: 'Sanchez', serif; */
-  /* font-family: 'Marck Script', cursive; */
   font-family: 'Roboto Slab', serif;
+  font-size: 1.4vmin;
+  color: #FFFFFF;
+}
 
+#shroud {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  z-index:40;
+}
+
+#shroud.animate {
+  animation-name: darker;
+  animation-duration: var(--menu-duration);
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+
+@keyframes darker {
+  from {background-color: var(--bg1);}
+  to {background-color: var(--bg-dark);
+  }
+}
+
+#shroud.deanimate {
+  animation-name: dedarker;
+  animation-duration: var(--menu-duration);
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+
+
+@keyframes dedarker {
+  from {background-color: var(--bg-dark);}
+  to {background-color: var(--bg1);
+  }
 }
 
 .profile_pic_mini {
@@ -46,19 +129,24 @@ body {
   color: var(--main-color);
   border-radius: 100%;
   font-size: 1.5em;
-  width: 5vw;
-  height: 5vw;
+  width: 10vmin;
+  height: 10vmin;
   margin: auto;
   text-align: center;
   line-height:5vw;
   position: absolute;
-  z-index: 0;
+  z-index: 90;
   top: 0; left: 0; bottom: 0; right: 0;
 }
 
-#profile.animate {
+.subcircle{
+  z-index: 80;
+}
+
+
+.circle_top.animate {
   animation-name: profile;
-  animation-duration: 0.5s;
+  animation-duration: var(--menu-duration);
   animation-delay: 0s;
   animation-fill-mode: forwards;
 }
@@ -68,24 +156,24 @@ body {
     opacity: 0;
   }
   to {
-    transform: translateY(-120px);
+    transform: translateY(var(--circ_up));
     opacity:100;
   }
 }
 
 
-#profile.deanimate {
+.circle_top.deanimate {
   animation-name: deprofile;
-  animation-duration: 0.5s;
+  animation-duration: var(--menu-duration);
   animation-delay: 0;
 }
 
 @keyframes deprofile {
-  from {transform: translateY(-120px);
+  from {transform: translateY(var(--circ_up));
     opacity:100;
   }
   to {
-    transform: translateY(0px);
+    transform: translateY(0);
     opacity:0;
   }
 }
@@ -94,7 +182,7 @@ body {
 
 #gigs.animate {
   animation-name: gigs;
-  animation-duration: 0.5s;
+  animation-duration: var(--menu-duration);
   animation-delay: 0;
   animation-fill-mode: forwards;
 }
@@ -104,19 +192,19 @@ body {
     opacity:0;
   }
   to {
-    transform: translateY(120px);
+    transform: translateY(var(--circ_down));
     opacity:100;
   }
 }
 
 #gigs.deanimate {
   animation-name: degigs;
-  animation-duration: 0.5s;
+  animation-duration: var(--menu-duration);
   animation-delay: 0;
 }
 
 @keyframes degigs {
-  from {transform: translateY(120px);
+  from {transform: translateY(var(--circ_down));
         opacity: 100;
   }
   to {
@@ -129,7 +217,7 @@ body {
 
 #venues.animate {
   animation-name: venues;
-  animation-duration: 0.5s;
+  animation-duration: var(--menu-duration); var(--menu-duration)
   animation-delay: 0;
   animation-fill-mode: forwards;
 }
@@ -139,19 +227,19 @@ body {
     opacity:0;
   }
   to {
-    transform: translateX(120px);
+    transform: translateX(var(--circ_right));
     opacity:100;
   }
 }
 
 #venues.deanimate {
   animation-name: devenues;
-  animation-duration: 0.5s;
+  animation-duration: var(--menu-duration);
   animation-delay: 0;
 }
 
 @keyframes devenues {
-  from {transform: translateX(120px);
+  from {transform: translateX(var(--circ_right));
         opacity: 100;
   }
   to {
@@ -162,9 +250,9 @@ body {
 
 /* artists */
 
-#artists.animate {
+.artists.animate {
   animation-name: artists;
-  animation-duration: 0.5s;
+  animation-duration: var(--menu-duration);
   animation-delay: 0;
   animation-fill-mode: forwards;
 }
@@ -174,19 +262,19 @@ body {
     opacity:0;
   }
   to {
-    transform: translateX(-120px);
+    transform: translateX(var(--circ_left));
     opacity:100;
   }
 }
 
-#artists.deanimate {
+.artists.deanimate {
   animation-name: deartists;
-  animation-duration: 0.5s;
+  animation-duration: var(--menu-duration); 0.5s;
   animation-delay: 0;
 }
 
 @keyframes deartists {
-  from {transform: translateX(-120px);
+  from {transform: translateX(var(--circ_left));
         opacity: 100;
   }
   to {
@@ -194,28 +282,131 @@ body {
     opacity:0 }
 }
 
+
+/* subcircles ---------------------------------------------------------------------------------------------- */
+
+#subc1.sub_animate {
+  animation-name: subc1;
+  animation-duration: var(--menu-duration); 0.5s;
+  animation-delay: 0;
+  animation-fill-mode: forwards;
+  opacity: 0;
+}
+
+@keyframes subc1 {
+  from {transform: translateX(0);
+    transform: translateY(0);
+    opacity:0;
+  }
+  to {
+    transform: translate(var(--sub_circ_left), var(--circ_up));
+    opacity:100;
+  }
+}
+
+#subc1.sub_deanimate {
+  animation-name: desubc1;
+  animation-duration: var(--menu-duration); 0.5s;
+  animation-delay: 0;
+  opacity: 0;
+}
+
+@keyframes desubc1 {
+  from {transform: translate(var(--sub_circ_left), var(--circ_up));
+  }
+  to {
+    transform: translateX(0px);
+    opacity:0 }
+}
+
+/* subc2 */
+
+#subc2.sub_animate {
+  animation-name: subc2;
+  animation-duration: var(--menu-duration); 0.5s;
+  animation-delay: 0;
+  animation-fill-mode: forwards;
+}
+
+@keyframes subc2 {
+  from {transform: translate(0,0);
+    opacity:0;
+  }
+  to {
+    transform: translate(var(--sub_circ_left), var(--circ_down));
+    opacity:100;
+  }
+}
+
+#desubc2.sub_deanimate {
+  animation-name: desubc2;
+  animation-duration: var(--menu-duration); 0.5s;
+  animation-delay: 0;
+}
+
+@keyframes desubc2 {
+  from {transform: translate(var(--sub_circ_left), var(--circ_down));
+    opacity: 100;
+  }
+  to {
+    transform: translate(0,0);
+    opacity:0 }
+}
+
+
+/* flash  ---------------------------------------------------------------------------------------*/
+
 .flash {
   animation-name: flash;
   animation-iteration-count: infinite;
   animation-timing-function: linear;
   animation-direction: alternate;
-  animation-duration: 3s;
+  animation-duration: var(--menu-duration); 2s;
 }
 
 @keyframes flash {
-  0% {color: #FDED2A;}
-  20% {color: #CCBB00;}
-  40% {color: #756C00;}
-  60% {color: #655E10;}
-  80% {color: #58531D;}
-  100%{color: #1F1D0A;}
+  0% {
+      color: #FFFFFF;
+  }
+  20% {
+      color: #c9c9c9;
+  }
+  40% {
+      color: #7a7a7a;
+  }
+  60% {
+      color: #333333;
+  }
+  80% {
+      color: #7a7a7a;
+  }
+  100% {
+      color: #c9c9c9;
+}
+}
+
+.click {
+  font-size: 1.5em;
+}
+
+.jump {
+  animation-name: jump;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  animation-direction: alternate;
+  animation-duration: var(--menu-duration); 1s;
+}
+
+@keyframes jump {
+  from {transform: translateY(0);}
+  to {transform: translateY(-2vmin);}
 }
 
 /* title */
 
 #gigel.animate {
   animation-name: title;
-  animation-duration: 1s;
+  animation-duration: var(--menu-duration); 1s;
   animation-delay: 0;
   animation-fill-mode: forwards;
 }
@@ -224,18 +415,18 @@ body {
 
 @keyframes title {
   from {color: var(--title-color);}
-  to {color:var(--header-color);}
+  to {color: transparent;}
 }
 
 #gigel.deanimate {
   animation-name: detitle;
-  animation-duration: 1s;
+  animation-duration: var(--menu-duration); 1s;
   animation-delay: 0;
   animation-fill-mode: forwards;
 }
 
 @keyframes detitle {
-  from {color: var(--header-color);}
+  from {color: transparent;}
   to {color: var(--title-color);}
 }
 
@@ -259,7 +450,7 @@ body {
 }
 
 .gigel {
-  background-color: var(--header-color);
+  background-color: transparent;
   color: var(--title-color);
   font-size: 20vh;
   position: fixed;
