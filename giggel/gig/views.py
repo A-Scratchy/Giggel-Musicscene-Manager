@@ -69,7 +69,7 @@ class MyGigs(ListView):
                  return Gig.objects.filter(gig_venue=self.request.user.venue)
             except Venue.DoesNotExist:
                 messages.add_message(self.request, messages.WARNING, 'You will need to create and artist or venue first')
-                return HttpResponseRedirect(reverse_lazy('artven'))
+                return []
 
 
 # Gig requests
@@ -159,15 +159,15 @@ class MyGigRequests(ListView):
 
     def get_queryset(self):
         try:
-            request.user.artist
+            self.request.user.artist
             return GigRequest.objects.filter(gig_request_artist=request.user.artist)
         except Artist.DoesNotExist:
             try:
-                 request.user.venue
+                 self.request.user.venue
                  return GigRequest.objects.filter(gig_request_venue=request.user.venue)
             except Venue.DoesNotExist:
                 messages.add_message(self.request, messages.WARNING, 'You will need to create and artist or venue first')
-                return HttpResponseRedirect(reverse_lazy('artven'))
+                return []
     #OR gig requests that involve an artist or venue that they own....
 
 class GigRequestConfirm(DetailView):
