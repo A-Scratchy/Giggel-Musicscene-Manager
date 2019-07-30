@@ -1,7 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.dispatch import receiver
-from django.db.models.signals import pre_delete
+from django.db.models.signals import pre_delete, pre_init
+import random
+import string
 
 # Create your models here.
 
@@ -12,16 +14,24 @@ class Artist(models.Model):
     artist_name = models.CharField(max_length=80)
     artist_description = models.CharField(
         max_length=250, null=True, blank=True)
-    artist_profile_pic = models.ImageField(upload_to="img/artist_profile", null=True, blank=True)
-    # artist distance willing to travel
-    # artist genres, multi select list
+    artist_profile_pic = models.ImageField(upload_to="img/artist_profile", default="/img/artist_profile/user.jpeg")
+    artist_genres = models.CharField(max_length=200, blank=False, null=False)
+    artist_location = models.CharField(max_length=100)
 
     def __str__(self):
         return self.artist_name
 
 
-@receiver(pre_delete, sender=Artist, dispatch_uid='question_delete_signal')
+@receiver(pre_delete, sender=Artist)
 def reset_account_type(sender, instance, using, **kwargs):
     user = instance.artist_owner
     user.profile.account_type = 'none'
     user.save()
+
+@receiver(pre_init, sender=Artist)
+def assign_unique_id(sender, *args, **kwargs):
+    artist_id = "".join(
+            [random.choice(string.digits +
+                           string.ascii_letters) for i in range(20)]
+            )
+    kwargs['artist_id'] = artist_id

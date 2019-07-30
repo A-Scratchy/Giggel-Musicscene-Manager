@@ -8,11 +8,23 @@
 {% endblock %}
 
 {% block content %}
-<ul>
+
+<div class="directory container">
     {% for venue in object_list %}
-        <li id="venue_name"><a href={% url 'venue_detail' venue.venue_id %}>{{ venue.venue_name }}</a></li>
-    {% empty %}
-        <li>We didn't find anything!</li>
+        <a href="{% url 'venue_detail' venue.venue_id %}">
+            <div class="row">
+                <div class="col-5">
+                    <img class="img-thumbnail" src="{% static 'img/temp.png' %}" id="{{ venue.venue_id }}_venue_pic"><!--{{ venue.venue_profile_pic }}--></img>
+                </div>
+                <div class="col-7">
+                        <p id="{{ venue.venue_id }}_venue_name">{{ venue.venue_name }}</p>
+                        <p id="{{ venue.venue_id }}_venue_town">{{ venue.venue_location }}</p>
+                        <p id="{{ venue.venue_id }}_venue_genres">{{ venue.venue_genres }}</p>
+                </div>
+            </div>
+        </a>
+        <span class="line"></span>
     {% endfor %}
-</ul>
+</div>
+
 {% endblock %}

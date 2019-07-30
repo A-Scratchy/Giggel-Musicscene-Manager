@@ -8,39 +8,23 @@
 {% endblock %}
 
 {% block content %}
-<div id="main" class="main row">
 
-    <!-- main content of page -->
-    <div id="content" class="col-12">
-      <!-- display gig info -->
-<h2 class="page_title">{{ gig.gig_name }}</h2>
-
-<div class="list">
+<div class="directory container">
     {% for artist in object_list %}
-<a href="{% url 'artist_detail' artist.artist_id %}">
-    <div class="list_entry row">
-      <div class="col">
-        <h2 id="artist_name">{{ artist.artist_description }}</h2>
-    </div>
-    <div class="col">
-        <h2 id="artist_name">{{ artist.artist_name }}</h2>
-    </div>
-    <div class="col">
-        <img src="{% static 'img/user.jpeg' %}" />
-    </div>
-</div>
-    </a>
-    {% empty %}
-        <li>We didn't find anything!</li>
+        <a href="{% url 'artist_detail' artist.artist_id %}">
+            <div class="row">
+                <div class="col-5">
+                    <img class="img-thumbnail" src="{{ MEDIA_URL }}{{ artist.artist_profile_pic}}" id="{{ artist.artist_id }}_artist_pic"></img>
+                </div>
+                <div class="col-7">
+                        <p id="{{ artist.artist_id }}_artist_name">{{ artist.artist_name }}</p>
+                        <p id="{{ artist.artist_id }}_artist_town">{{ artist.artist_location }}</p>
+                        <p id="{{ artist.artist_id }}_artist_genres">{{ artist.artist_genres }}</p>
+                </div>
+            </div>
+        </a>
+        <span class="line"></span>
     {% endfor %}
 </div>
-    </div>
-
-
-<!-- button links to update or delete -->
-
-    </div>
-</div>
-
 
 {% endblock %}

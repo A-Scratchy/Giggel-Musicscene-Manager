@@ -10,15 +10,23 @@
 
 {% block content %}
 
-<h1 class='title'>  {{ artist.artist_name }} </h1>
-<img id="artist_profile_pic" src="{% static 'img/artist_profile/adult-artists-back-view-354304.jpg' %}"/>
+<div class="profile container">
+    <div class="row">
+        <div class="col">
+            <img class="img-thumbnail" id="artist_profile_pic" src="{{ MEDIA_URL }}{{ user.artist.artist_profile_pic}}"/>
+        </div>
+        <div class="col">
+            <h1 class='name'>{{ artist.artist_name }}</h1>
+            <h3 class='name'>{{ artist.artist_genres }}</h3>
+            <h3 class='name'>{{ artist.artist_location }}</h3>
+        </div>
+    </div>
+</div>
+<div class="profile container">
+    <h3 class='description'>{{ artist.artist_description }}</h3>
+</div>
 
-
-<ul>
-  <li id="artist_description">artist description:
-    {{ artist.artist_description }}</li>
-</ul>
-
-<a id='request_gig_from_artist' href="{% url 'gig_request_to_artist' %}?gig_request_artist={{ artist.artist_id }}"> request artist to play at your venue </a>
+<a class="btn btn-outline-info" id='request_gig_from_artist' href="{% url 'gig_request_to_artist' %}?gig_request_artist={{ artist.artist_id }}">
+    Request artist to play at your venue </a>
 
 {% endblock %}

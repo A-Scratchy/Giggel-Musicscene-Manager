@@ -10,16 +10,19 @@
 
 {% block content %}
 <div class='container text-center'>
-  <ul>
-    <li id="artist_id">artist id:
-      {{ user.artist.artist_id }}</li>
-    <li id="artist_name">artist name:
-      {{ user.artist.artist_name }}</li>
-    <li id="artist_owner">artist owner:
-      {{ user.artist.artist_owner }}</li>
-    <li id="artist_description">artist description:
-      {{ user.artist.artist_description }}</li>
-  </ul>
+    <div class="profile container">
+        <div class="row">
+            <div class="col">
+                <img class="img-thumbnail" id="artist_profile_pic" src="{{ MEDIA_URL }}{{ user.artist.artist_profile_pic}}"/>
+            </div>
+            <div class="col">
+                <h1 class='name'>{{ user.artist.artist_name }}</h1>
+                <h3 class='name'>{{ user.artist.artist_genres }}</h3>
+                <h3 class='name'>{{ user.artist.artist_location }}</h3>
+                <h3 class='name'>{{ user.artist.artist_profile_pic }}</h3>
+            </div>
+        </div>
+    </div>
   <a id="artist_update" href="/artist/update/{{user.artist.artist_id}}"><button class=' alert alert-info'>Edit details</button><a/>
     <a id="artist_delete" href="/artist/delete/{{user.artist.artist_id}}"><button class='alert alert-danger'>Delete my artist</button><a/>
   <h1>My Gigs</h1>

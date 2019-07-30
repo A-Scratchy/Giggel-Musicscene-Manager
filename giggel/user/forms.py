@@ -13,5 +13,4 @@ class updateProfileForm(UserChangeForm):
 
     class Meta:
         model = Profile
-        fields = ('county',
-                  'birth_date', 'account_type')
+        fields = ('account_type',)

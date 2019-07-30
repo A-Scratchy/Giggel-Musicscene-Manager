@@ -1,4 +1,4 @@
-from django.shortcuts import render 
+from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
@@ -23,12 +23,9 @@ class updateProfile(LoginRequiredMixin, UpdateView):
     template_name = 'user/update.html'
     pslug = 'pk'
     model = Profile
-    fields = ['county', 'birth_date', 'account_type']
+    fields = ['account_type',]
     success_url = reverse_lazy('profile')
 
 
 class ArtVenCreate(LoginRequiredMixin, TemplateView):
     template_name = 'user/artven.html'
-
-
-

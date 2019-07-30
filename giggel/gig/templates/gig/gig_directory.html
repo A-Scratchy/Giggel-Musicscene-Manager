@@ -1,29 +1,31 @@
 {% extends "main/base.html" %}
 {% load static %}
-{% block title %}My Gigs{% endblock %}
+{% block title %}Gigle - Gigs{% endblock %}
 
 {% block headerText %}Gigs{% endblock %}
 
 {% block content %}
-<div class="directory container">
-<table id="table" class="table table-dark">
-<tr>
-  <th onclick="sortTable(0)">Name</th>
-  <th onclick="sortTable(1)">Artist</th>
-  <th onclick="sortTable(2)">Venue</th>
-  <th>Date</th>
-  <th>Genres</th>
-</tr>
-{% for gig in object_list %}
-<tr>
-    <td id="gig_name_link_{{ gig.gig_name }}"><a href={% url 'gig_detail' gig.gig_id %}>{{ gig.gig_name }}</a></td>
-    <td>{{ gig.gig_artist}}</td>
-    <td>{{ gig.gig_venue}}</td>
-    <td>{{ gig.gig_date}}</td>
-    <td>{{ gig.gig_genres}}</td>
-{% endfor %}
-</<table>
-</div>
 
+    <div class="directory container">
+        {% for gig in object_list %}
+                <div class="row">
+                    <div class="col">
+                        <p id="{{ gig.gig_id }}_gig_date">{{ gig.gig_date }}</p>
+                    </div>
+                    <div class="col">
+                        <a id="{{ gig.gig_id }}_venue" href="{% url 'venue_detail' gig.gig_venue.venue_id %}">
+                            <p id="{{ gig.gig_id }}_gig_venue">{{ gig.gig_venue }}</p>
+                            <p id="{{ gig.gig_id }}_gig_town">{{ gig.gig_venue.venue_town }}</p>
+                        </a>
+                    </div>
+                    <div class="col">
+                        <a id="{{ gig.gig_id }}_artist" href="{% url 'artist_detail' gig.gig_artist.artist_id %}">
+                            <p id="{{ gig.gig_id }}_gig_artist">{{ gig.gig_artist }}</p>
+                        </a>
+                    </div>
+                </div>
+            <span class="line"></span>
+        {% endfor %}
+    </div>
 
 {% endblock %}

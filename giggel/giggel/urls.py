@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.conf import settings
+from django.conf.urls.static import static
 from django.urls import path, include
 from main import views as main_views
 from user import views as user_views
@@ -70,7 +71,7 @@ urlpatterns = [
     path('gig_request/delete/<slug:slug>/', gig_views.GigRequestDelete.as_view(), name='gig_request_delete'),
     path('my_gig_requests', gig_views.MyGigRequests.as_view(), name='my_gig_requests'),
     path('my_gig_requests/confirm/<slug:slug>/', gig_views.GigRequestConfirm.as_view(), name='gig_request_confirm'),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG:
     import debug_toolbar
