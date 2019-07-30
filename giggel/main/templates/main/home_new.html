@@ -36,25 +36,25 @@
 
         <a href="{% url 'profile' %}">
         <div class='circle circle_top animatable' id='profile'>
-          <span class='first_letter'>P</span>rofile
+          <p class='first_letter'>Profile</p>
         </div>
         </a>
 
         <a href="{% url 'gig_directory' %}">
         <div class='circle animatable' id='gigs'>
-           <span class='first_letter'>G</span>igs
+           Gigs
         </div>
         </a>
 
 {% else %}
 
         <div class='circle circle_top animatable' id='login'>
-          <span class='first_letter'>L</span>og In
+          <p class='first_letter'>Log In</p>
         </div>
 
         <a href="{% url 'django_registration_register' %}">
         <div class='circle animatable' id='gigs'>
-           <span class='first_letter'>S</span>ign Up
+           <p class='first_letter'>Sign Up</p>
         </div>
         </a>
 
@@ -81,28 +81,14 @@
 
         <a href="{% url 'artist_directory' %}">
         <div class='inactive artists circle animatable' id='artists'>
-           <span class='first_letter'>A</span>rtists
+           <p class='first_letter'>Artists</p>
         </div>
         </a>
 
         <a href="{% url 'venue_directory' %}">
         <div class='circle animatable' id='venues'>
-          <span class='first_letter'>V</span>enues
+          <p class='first_letter'>Venues</p>
         </div>
-
-<!-- artist subcricles -->
-
-        <a href="{% url 'artist_directory' %}">
-        <div class='artists circle subcircle animatable' id='subc1'>
-           <span class='first_letter'>D</span>irectory
-        </div>
-        </a>
-
-        <a href="{% url 'gig_directory' %}">
-        <div class='artists circle subcircle animatable' id='subc2'>
-           <span class='first_letter'>A</span>nother
-        </div>
-        </a>
 
 </div>
 </a>

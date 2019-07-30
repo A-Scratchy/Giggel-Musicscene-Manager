@@ -8,6 +8,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from .models import Gig, GigRequest
 from venue.models import Venue
 from artist.models import Artist
+from django.core.paginator import Paginator
 import random
 import string
 
@@ -25,6 +26,15 @@ class GigDetail(DetailView):
     template_name = 'gig/gig_detail.html'
     slug_field = 'gig_id'
     context_object_name = 'gig'
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        owner = self.request.user
+        context['gigs'] = Gig.objects.all()
+        paginator = Paginator(context['gigs'], 8) # Show 25 gigs per page
+        page = self.request.GET.get('page')
+        context['pag_gigs'] = paginator.get_page(page)
+        return context
 
 class GigUpdate(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
     # need to check if user is owner of gig before allowing update

@@ -7,28 +7,80 @@
 
 {% block content %}
 
-<!-- Display gig info --!>
-<ul>
-  <li id="gig_id">gig id:
-    {{ gig.gig_id }}</li>
-  <li id="gig_name">gig name:
-    {{ gig.gig_name }}</li>
-  <li id="gig_owner">gig owner:
-    {{ gig.gig_owner }}</li>
-  <li id="gig_date">gig date:
-    {{ gig.gig_date }}</li>
-  <li id="gig_description">gig description:
-    {{ gig.gig_description }}</li>
-  <li id="gig_artist">artist:
-    {{ gig.gig_artist }}</li>
-  <li id="gig_venue">venue:
-    {{ gig.gig_venue }}</li>
-</ul>
+<!-- main body of page -->
+<div id="main" class="main row">
 
-<!-- button links to update or delte --!>
-    <a id="update_gig" href="{% url 'gig_update' gig.gig_id %}"><button class="alert alert-info">Update</button></a>
-    <a id="delete_gig" href="{% url 'gig_delete' gig.gig_id %}"><button class='alert alert-danger'>Delete gig</button><a/>
+  <!-- sidebar containing title -->
+    <div id="aside" class="closed text-center col-2">
+
+      <div class="nav_list">
+        <small class="close"><</small>
+        <h3>Other Gigs</h3>
+      <ul>
+          {% for gig in pag_gigs %}
+          <li class="navlist_item" id="link_{{ gig.gig_name }}">
+            <a href="{% url 'gig_detail' gig.gig_id %}">
+              <p class="nav_list_item_title">{{ gig.gig_name }}</p>
+            </a>
+            <p class="nav_list_item_subtitle"> {{ gig.gig_artist }} @ {{ gig.gig_venue }} <p>
+              <p class="nav_list_item_subtitle">{{ gig.gig_date }}<p>
+          {% empty %}
+              <li>We didn't find anything!</li>
+          {% endfor %}
+      </ul>
+
+      <!-- pagination links -->
+      <div class="pagination">
+          <span class="step-links">
+
+              {% if pag_gigs.has_previous %}
+                  <a href="?page=1">&laquo; first</a>
+                  <a href="?page={{ pag_gigs.previous_page_number }}">previous</a>
+              {% endif %}
+
+              <span class="current">
+                  {{ pag_gigs.number }} / {{ pag_gigs.paginator.num_pages }}
+              </span>
+
+              {% if pag_gigs.has_next %}
+                  <a href="?page={{ pag_gigs.next_page_number }}">next</a>
+                  <a href="?page={{ pag_gigs.paginator.num_pages }}">last &raquo;</a>
+              {% endif %}
+          </span>
+      </div>
+    </div>
+    </div>
+
+    <!-- main content of page -->
+    <div id="content" class="col-xl-10 col-12">
+      <!-- display gig info -->
+<h2 class="page_title">{{ gig.gig_name }}</h2>
+      <div class="detail_box">
+      <ul>
+        <li id="gig_id">
+          {{ gig.gig_id }}</li>
+        <li id="gig_name">
+          {{ gig.gig_name }}</li>
+        <li id="gig_owner">
+          {{ gig.gig_owner }}</li>
+        <li id="gig_date">
+          {{ gig.gig_date }}</li>
+        <li id="gig_description">
+          {{ gig.gig_description }}</li>
+        <li id="gig_artist">
+          {{ gig.gig_artist }}</li>
+        <li id="gig_venue">
+          {{ gig.gig_venue }}</li>
+      </ul>
+      <div class="buttons">
+      <a id="update_gig" href="{% url 'gig_update' gig.gig_id %}"><button class="alert alert-info">Update</button></a>
+      <a id="delete_gig" href="{% url 'gig_delete' gig.gig_id %}"><button class='alert alert-danger'>Delete gig</button></a>
+      </div>
+    </div>
+
+
+<!-- button links to update or delete -->
+
+    </div>
+</div>
 {% endblock %}
-
-
-

@@ -10,13 +10,11 @@
 
 {% block content %}
 
+<h1 class='title'>  {{ artist.artist_name }} </h1>
+<img id="artist_profile_pic" src="{% static 'img/artist_profile/adult-artists-back-view-354304.jpg' %}"/>
+
+
 <ul>
-  <li id="artist_id">artist id:
-    {{ artist.artist_id }}</li>
-  <li id="artist_name">artist name:
-    {{ artist.artist_name }}</li>
-  <li id="artist_owner">artist owner:
-    {{ artist.artist_owner }}</li>
   <li id="artist_description">artist description:
     {{ artist.artist_description }}</li>
 </ul>

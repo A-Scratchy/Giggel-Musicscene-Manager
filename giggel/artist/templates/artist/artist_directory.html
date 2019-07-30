@@ -8,13 +8,39 @@
 {% endblock %}
 
 {% block content %}
+<div id="main" class="main row">
 
-<ul>
+    <!-- main content of page -->
+    <div id="content" class="col-12">
+      <!-- display gig info -->
+<h2 class="page_title">{{ gig.gig_name }}</h2>
+
+<div class="list">
     {% for artist in object_list %}
-        <li id="artist_name"><a href={% url 'artist_detail' artist.artist_id %}>{{ artist.artist_name }}</a></li>
+<a href="{% url 'artist_detail' artist.artist_id %}">
+    <div class="list_entry row">
+      <div class="col">
+        <h2 id="artist_name">{{ artist.artist_description }}</h2>
+    </div>
+    <div class="col">
+        <h2 id="artist_name">{{ artist.artist_name }}</h2>
+    </div>
+    <div class="col">
+        <img src="{% static 'img/user.jpeg' %}" />
+    </div>
+</div>
+    </a>
     {% empty %}
         <li>We didn't find anything!</li>
     {% endfor %}
-</ul>
+</div>
+    </div>
+
+
+<!-- button links to update or delete -->
+
+    </div>
+</div>
+
 
 {% endblock %}

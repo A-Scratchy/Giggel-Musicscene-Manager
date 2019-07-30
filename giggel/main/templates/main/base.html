@@ -1,6 +1,5 @@
 <!doctype html>
 <html lang="en">
-
   <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -9,12 +8,14 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <script src="https://kit.fontawesome.com/db3a26830e.js"></script>
     <title>
       {% block title %}{% endblock %}
     </title>
   </head>
 
   <body>
+
     <!-- navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <!-- Logo - to add later when designed-->
@@ -83,11 +84,11 @@
     </nav>
 
     <!-- header content logo etc.. -->
-    <header>
+    <!-- <header>
         <div class="jumbotron text-center h1 title" >
         {% block headerText %}{% endblock %}
       </div>
-    </header>
+    </header> -->
 
     <div id="messages">
     <!-- display any messges -->
@@ -114,6 +115,7 @@
     {% endfor %}
 {% endif %}
     </div>
+
 
     <!-- main page content -->
     {% block content %}

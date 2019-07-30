@@ -12,7 +12,7 @@ class Artist(models.Model):
     artist_name = models.CharField(max_length=80)
     artist_description = models.CharField(
         max_length=250, null=True, blank=True)
-    # artist profile pic
+    artist_profile_pic = models.ImageField(upload_to="img/artist_profile", null=True, blank=True)
     # artist distance willing to travel
     # artist genres, multi select list
 

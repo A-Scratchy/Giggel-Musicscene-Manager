@@ -1,0 +1,65 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <!-- Logo - to add later when designed-->
+  <a class="navbar-brand" href=""><img src="{% static 'img/temp.png' %}" width="30" height="30" alt=""></a>
+  <!-- dropdown for small screens -->
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <!--links -->
+      <li class="nav-item {% block home_active %}{% endblock %}">
+        <a class="nav-link" name="home" href="{% url 'home_new' %}">Home</a>
+      </li>
+      <li class="nav-item {% block myProfile_active %}{% endblock %}">
+        <a class="nav-link" name="myProfile" href="{% url 'profile' %}">My profile</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" name="Django admin" href="{% url 'admin:index' %}">Django-admin</a>
+      </li>
+      <li class="nav-item {% block settings_active %}{% endblock %}">
+        <a class="nav-link" name="settings" href="#">Settings</a>
+      </li>
+      <!-- dropdown menu -->
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="directories" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Directories</a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" id="artist_directory" href="{% url 'artist_directory' %}">Artists</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" id="venue_directory" href="{% url 'venue_directory' %}">Venues</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" id='gig_directory' href="{% url 'gig_directory' %}">Gigs</a>
+      {% if user.is_authenticated %}
+      <li class="nav-item {% block add_gig_active %}{% endblock %}">
+          <a class="nav-link" name="add_gig" href="{% url 'gig_create' %}"> Add a gig</a>
+      </li>
+      {% endif %}
+        </div>
+      </li>
+    </ul>
+    <!-- right side of nav -->
+    <ul class="navbar-nav">
+      {% if user.is_authenticated %}
+        <!-- show log out button nd user info + pic-->
+        <li class="nav-item">
+          <a class="nav-link" name="logout" href="{% url 'logout' %}">Log out</a>
+        </li>
+        <li class="nav-item">
+          <p class="nav-link disabled" name="loggedInUser" href="#">Current user:
+            {{ user.username }}</p>
+        </li>
+        <li>
+          <a class="navbar-brand float-left" href="{% url 'profile' %}"><img class="profile_pic_mini" src="{% static 'img/temp.png' %}" width="30" height="30" alt=""></a>
+        </li>
+      {% else %}
+        <!-- show log in and sign up buttons -->
+        <li class="nav-item">
+          <a class="nav-link" name="signup" href="{% url 'django_registration_register' %}">Sign up</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" name="login" href="{% url 'login' %}">Log in</a>
+        </li>
+      {% endif %}
+    </ul>
+  </div>
+</nav>

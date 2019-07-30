@@ -6,16 +6,34 @@
 
 {% block content %}
 
-<ul>
-    {% for gig in object_list %}
-    <li id="link_{{ gig.gig_name }}">
-      <a href='{% url 'gig_detail' gig.gig_id %}'>{{ gig.gig_name }}
-      -  {{ gig.gig_artist }} @ {{ gig.gig_venue }} on {{ gig.gig_date }}</a>
+<!-- main body of page -->
+<div id="main" class="main row">
 
-    {% empty %}
-        <li>We didn't find anything!</li>
-    {% endfor %}
-</ul>
+  <!-- sidebar containing title -->
+    <div id="aside" class="text-center col-2">
+        <p>shimidybobs</p>
+    </div>
+    <!-- main content of page -->
+    <div id="content" class="col-10">
 
-<a id="create_gig" href="{% url 'gig_create' %}"><button class="alert alert-info">Create a new gig</button></a>
+      <ul>
+          {% for gig in object_list %}
+          <li id="link_{{ gig.gig_name }}">
+            <a href='{% url 'gig_detail' gig.gig_id %}'>
+              <p class="nav_list_title">{{ gig.gig_name }}</p>
+            </a>
+            <p class="nav_list_sub"> {{ gig.gig_artist }} @ {{ gig.gig_venue }} on {{ gig.gig_date }}<p>
+
+          {% empty %}
+              <li>We didn't find anything!</li>
+          {% endfor %}
+      </ul>
+
+      <a id="create_gig" href="{% url 'gig_create' %}"><button class="alert alert-info">Create a new gig</button></a>
+
+
+</div>
+</div>
+
+
 {% endblock %}
