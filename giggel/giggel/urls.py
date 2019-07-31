@@ -25,8 +25,7 @@ from gig import views as gig_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('old', main_views.HomeNew, name='home_new'),
-    path('', main_views.HomeNew.as_view(), name='home_new'),
+    path('', main_views.Home.as_view(), name='home'),
     path('accounts/', include('django_registration.backends.activation.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
     path('profile/', user_views.profile.as_view(), name='profile'),
@@ -62,8 +61,7 @@ urlpatterns = [
     path('gig/directory', gig_views.GigDirectory.as_view(), name='gig_directory'),
     path('my_gigs', gig_views.MyGigs.as_view(), name='my_gigs'),
     #gig_request
-    path('gig_request_at_venue/create', gig_views.GigRequestAtVenueCreate.as_view(), name='gig_request_at_venue'),
-    path('gig_request_to_artist/create', gig_views.GigRequestToArtistCreate.as_view(), name='gig_request_to_artist'),
+    path('gig_request/create', gig_views.GigRequestCreate.as_view(), name='gig_request'),
     path('gig_request/detail/<slug:slug>/',
          gig_views.GigRequestDetail.as_view(), name='gig_request_detail'),
     path('gig_request/update/<slug:slug>/',

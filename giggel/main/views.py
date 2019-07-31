@@ -7,9 +7,8 @@ from django.contrib.auth.views import LoginView
 
 # Create your views here.
 
-
-def home(request):
-    return render(request, 'main/home.html', {})
+class Home(TemplateView):
+    template_name = 'main/home.html'
 
 class HomeNew(TemplateView, LoginView):
     template_name = 'main/home_new.html'

@@ -10,7 +10,10 @@
         {% for gig in object_list %}
                 <div class="row">
                     <div class="col">
+                        <a id="{{ gig.gig_id }}_gig" href="{% url 'gig_detail' gig.gig_id %}">
                         <p id="{{ gig.gig_id }}_gig_date">{{ gig.gig_date }}</p>
+                        </a>
+
                     </div>
                     <div class="col">
                         <a id="{{ gig.gig_id }}_venue" href="{% url 'venue_detail' gig.gig_venue.venue_id %}">

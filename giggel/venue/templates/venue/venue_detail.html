@@ -5,22 +5,28 @@
 {% endblock %}
 {% block title %}Venue{% endblock %}
 
-{% block headerText %}{{ user.username }}
-{% endblock %}
-
 {% block content %}
 
-<ul>
-  <li id="venue_id">venue id:
-    {{ venue.venue_id }}</li>
-  <li id="venue_name">venue name:
-    {{ venue.venue_name }}</li>
-  <li id="venue_owner">venue owner:
-    {{ venue.venue_owner }}</li>
-  <li id="venue_description">venue description:
-    {{ venue.venue_description }}</li>
-</ul>
-
-<a id='request_gig_at_venue' href="{% url 'gig_request_at_venue' %}?gig_request_venue={{ venue.venue_id }}"> request gig here </a>
+<div class="profile container">
+    <div class="row">
+        <div class="col">
+            <img class="img-thumbnail" id="venue_profile_pic"
+                 src="{{ MEDIA_URL }}{{ venue.venue_profile_pic}}"/>
+        </div>
+        <div class="col">
+            <h1 class='name'>{{ venue.venue_name }}</h1>
+            <h3 class='name'>{{ venue.venue_genres }}</h3>
+            <h3 class='name'>{{ venue.venue_location }}</h3>
+            <p class='description'>{{ venue.venue_description }}</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="buttons">
+            <a class="btn btn-outline-info" id='request_gig_at_venue'
+               href="{% url 'gig_request' %}?gig_request_venue={{ venue.venue_id }}">
+               request gig here</a>
+        </div>
+    </div>
+</div>
 
 {% endblock %}

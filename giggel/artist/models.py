@@ -15,7 +15,7 @@ class Artist(models.Model):
     artist_description = models.CharField(
         max_length=250, null=True, blank=True)
     artist_profile_pic = models.ImageField(upload_to="img/artist_profile", default="/img/artist_profile/user.jpeg")
-    artist_genres = models.CharField(max_length=200, blank=False, null=False)
+    artist_genres = models.CharField(max_length=200, blank=True, null=True)
     artist_location = models.CharField(max_length=100)
 
     def __str__(self):
@@ -28,10 +28,10 @@ def reset_account_type(sender, instance, using, **kwargs):
     user.profile.account_type = 'none'
     user.save()
 
-@receiver(pre_init, sender=Artist)
-def assign_unique_id(sender, *args, **kwargs):
-    artist_id = "".join(
-            [random.choice(string.digits +
-                           string.ascii_letters) for i in range(20)]
-            )
-    kwargs['artist_id'] = artist_id
+# @receiver(pre_init, sender=Artist)
+# def assign_unique_id(sender, *args, **kwargs):
+#     artist_id = "".join(
+#             [random.choice(string.digits +
+#                            string.ascii_letters) for i in range(20)]
+#             )
+#     kwargs['artist_id'] = artist_id

@@ -5,7 +5,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.views.generic import DetailView, CreateView, DeleteView, UpdateView, ListView, View
 from django.http import HttpResponse, HttpResponseRedirect
-from .models import Gig, GigRequest
+from .models import Gig, GigRequest, GigRequestForm
 from venue.models import Venue
 from artist.models import Artist
 from django.core.paginator import Paginator
@@ -17,9 +17,30 @@ import string
 class GigCreate(SuccessMessageMixin, CreateView):
     model = Gig
     template_name = 'gig/gig_create.html'
-    fields = ['gig_owner', 'gig_id', 'gig_artist', 'gig_venue', 'gig_name', 'gig_date', 'gig_description']
+    fields = ['gig_artist', 'gig_venue', 'gig_date', 'gig_description']
     success_url = reverse_lazy('my_gigs')
-    success_message = '%(gig_name)s was created successfully'
+    success_message = 'Gig was created successfully'
+
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.gig_owner = self.request.user
+        self.object.gig_id= "".join(
+                [random.choice(string.digits +
+                               string.ascii_letters) for i in range(20)]
+                )
+        # check if user has artist or venue
+        if self.request.user.profile.account_type == 'artist':
+            self.object.gig_artist = self.request.user.artist
+        elif self.request.user.profile.account_type == 'venue':
+            self.object.gig_venue = self.request.user.venue
+        else:
+            messages.warning(self.request, 'account has no artist or venue')
+            return HttpResponseRedirect(self.success_url)
+        self.object.save()
+        success_message = super().get_success_message(form.cleaned_data)
+        if success_message:
+            messages.success(self.request, success_message)
+        return HttpResponseRedirect(self.success_url)
 
 class GigDetail(DetailView):
     model = Gig
@@ -40,10 +61,10 @@ class GigUpdate(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
     # need to check if user is owner of gig before allowing update
     model = Gig
     slug_field = 'gig_id'
-    fields = ['gig_id', 'gig_owner', 'gig_name', 'gig_description']
+    fields = ['gig_id', 'gig_owner', 'gig_description']
     template_name = 'gig/gig_update.html'
     success_url = reverse_lazy('my_gigs')
-    success_message = '%(gig_name)s was updated successfully'
+    success_message = 'Gig was updated successfully'
 
 class GigDelete(LoginRequiredMixin, DeleteView):
     model = Gig
@@ -84,12 +105,12 @@ class MyGigs(ListView):
 
 # Gig requests
 
-class GigRequestAtVenueCreate(SuccessMessageMixin, CreateView):
+class GigRequestCreate(SuccessMessageMixin, CreateView):
     model = GigRequest
     template_name = 'gig/gig_request_create.html'
-    fields = ['gig_request_name', 'gig_request_description', 'gig_request_date']
     success_url = reverse_lazy('artist_dashboard')
     success_message = "%(gig_request_name)s was created successfully"
+    form_class = GigRequestForm
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
@@ -98,30 +119,16 @@ class GigRequestAtVenueCreate(SuccessMessageMixin, CreateView):
                                string.ascii_letters) for i in range(20)]
                 )
         self.object.gig_request_owner = self.request.user
-        self.object.gig_request_artist = self.request.user.artist
-        self.object.gig_request_venue = Venue.objects.get(venue_id=self.request.GET['gig_request_venue'])
-        self.object.save()
-        success_message = super().get_success_message(form.cleaned_data)
-        if success_message:
-            messages.success(self.request, success_message)
-        return HttpResponseRedirect(self.success_url)
-
-class GigRequestToArtistCreate(SuccessMessageMixin, CreateView):
-    model = GigRequest
-    template_name = 'gig/gig_request_create.html'
-    fields = ['gig_request_name', 'gig_request_description', 'gig_request_date']
-    success_url = reverse_lazy('venue_dashboard')
-    success_message = "%(gig_request_name)s was created successfully"
-
-    def form_valid(self, form):
-        self.object = form.save(commit=False)
-        self.object.gig_request_id= "".join(
-                [random.choice(string.digits +
-                               string.ascii_letters) for i in range(20)]
-                )
-        self.object.gig_request_owner = self.request.user
-        self.object.gig_request_venue = self.request.user.venue
-        self.object.gig_request_artist = Artist.objects.get(artist_id=self.request.GET['gig_request_artist'])
+        # check if user has artist or venue
+        if self.request.user.profile.account_type == 'artist':
+            self.object.gig_request_artist = self.request.user.artist
+            self.object.gig_request_venue = Venue.objects.get(venue_id=self.request.GET['gig_request_venue'])
+        elif self.request.user.profile.account_type == 'venue':
+            self.object.gig_request_venue = self.request.user.venue
+            self.object.gig_request_artist = Artist.objects.get(artist_id=self.request.GET['gig_request_artist'])
+        else:
+            messages.warning(self.request, 'account has no artist or venue')
+            return HttpResponseRedirect(self.success_url)
         self.object.save()
         success_message = super().get_success_message(form.cleaned_data)
         if success_message:
@@ -198,7 +205,6 @@ class GigRequestConfirm(DetailView):
             ),
     gig_artist = gig_request.gig_request_artist,
     gig_venue = gig_request.gig_request_venue,
-    gig_name = gig_request.gig_request_name,
     gig_date = gig_request.gig_request_date,
     gig_description = gig_request.gig_request_description
         )
