@@ -20,7 +20,7 @@ class VenueTestsAnonUser(LiveServerTestCase):
     def test_venue_read_anon(self):
         self.browser.get(self.live_server_url + reverse('venue_detail',
                          args=('111111',)))
-        self.assertIn('venue name: TestVenue1',
+        self.assertIn('TestVenue1',
                       self.browser.find_element_by_id('venue_name').text)
 
 
@@ -55,8 +55,6 @@ class VenueTestsNewUser(LiveServerTestCase):
     def test_create_venue(self):
         self.browser.get(self.live_server_url)
         self.browser.find_element_by_name('myProfile').click()
-        self.browser.find_element_by_id('create_artven').click()
-        self.assertIn('Choose', self.browser.title)
         self.browser.find_element_by_id('create_venue').click()
         self.assertIn('Update venue', self.browser.title)
         self.browser.find_element_by_id('id_venue_id').send_keys('99999')
@@ -97,22 +95,21 @@ class VenueTestsExistingUser(LiveServerTestCase):
                        'value': client.cookies.get('sessionid').value
                                  })
 
-    def test_venue_read_dashboard(self):
-        self.browser.get(self.live_server_url + reverse('profile'))
-        self.assertIn('TestUser1', self.browser.find_element_by_id(
-            'username').text)
-        self.browser.find_element_by_id('venue_dashboard').click()
-        self.assertIn('TestVenue1', self.browser.find_element_by_id(
-            'venue_name').text)
+    # def test_venue_read_dashboard(self):
+    #     self.browser.get(self.live_server_url + reverse('profile'))
+    #     self.assertIn('TestUser1', self.browser.find_element_by_id(
+    #         'username').text)
+    #     self.browser.find_element_by_id('venue_dashboard').click()
+    #     self.assertIn('TestVenue1', self.browser.find_element_by_id(
+    #         'venue_name').text)
 
         # User goes to thier profile and loads up thier venue
         # User clicks modify and adds a new description
         # User clicks save and description is now present on the
         # live venue profile
+
     def test_venue_update(self):
         self.browser.get(self.live_server_url + reverse('profile'))
-        self.assertIn('Profile', self.browser.title)
-        self.browser.find_element_by_id('venue_dashboard').click()
         self.browser.find_element_by_id('venue_update').click()
         self.assertIn('Update venue', self.browser.title)
         new_description = 'a description of an venue'
@@ -124,19 +121,15 @@ class VenueTestsExistingUser(LiveServerTestCase):
 
     def test_venue_delete(self):
         self.browser.get(self.live_server_url + reverse('profile'))
-        self.assertIn('Profile', self.browser.title)
-        self.browser.find_element_by_id('venue_dashboard').click()
         self.browser.find_element_by_id('venue_delete').click()
         self.browser.find_element_by_id('submit').click()
-        self.assertIn('Profile', self.browser.title)
         self.browser.get(self.live_server_url
                          + reverse('venue_detail', args=('111111',)))
         self.assertNotIn('Venue', self.browser.title)
 
     def test_venue_directory(self):
         self.browser.get(self.live_server_url)
-        self.browser.find_element_by_id('directories').click()
         self.browser.find_element_by_id('venue_directory').click()
         self.assertIn('Venue directory', self.browser.title)
         self.assertIn('TestVenue1',
-                      self.browser.find_element_by_id('venue_name').text)
+                      self.browser.find_element_by_id('111111_venue_name').text)

@@ -14,10 +14,10 @@
                  src="{{ MEDIA_URL }}{{ venue.venue_profile_pic}}"/>
         </div>
         <div class="col">
-            <h1 class='name'>{{ venue.venue_name }}</h1>
-            <h3 class='name'>{{ venue.venue_genres }}</h3>
-            <h3 class='name'>{{ venue.venue_location }}</h3>
-            <p class='description'>{{ venue.venue_description }}</p>
+            <h1 id="venue_name" class='name'>{{ venue.venue_name }}</h1>
+            <h3 id="venue_genres" class='name'>{{ venue.venue_genres }}</h3>
+            <h3 id="venue_location" class='name'>{{ venue.venue_location }}</h3>
+            <p id="venue_description" class='description'>{{ venue.venue_description }}</p>
         </div>
     </div>
     <div class="row">

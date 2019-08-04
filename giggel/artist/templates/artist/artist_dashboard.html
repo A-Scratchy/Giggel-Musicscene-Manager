@@ -14,10 +14,10 @@
                 <img class="img-thumbnail" id="artist_profile_pic" src="{{ MEDIA_URL }}{{ artist.artist_profile_pic}}"/>
             </div>
             <div class="col">
-                <h1 class='name'>{{ user.artist.artist_name }}</h1>
-                <h3 class='name'>{{ user.artist.artist_genres }}</h3>
-                <h3 class='name'>{{ user.artist.artist_location }}</h3>
-                <h3 class='name'>{{ user.artist.artist_profile_pic }}</h3>
+                <h1 id="artist_name" class='name'>{{ user.artist.artist_name }}</h1>
+                <h3 id="artist_genres" class='name'>{{ user.artist.artist_genres }}</h3>
+                <h3 id="artist_location" class='name'>{{ user.artist.artist_location }}</h3>
+                <h3 id="artist_description" class='name'>{{ user.artist.artist_description}}</h3>
             </div>
         </div>
         <a id="artist_update" href="/artist/update/{{user.artist.artist_id}}"><button class=' alert alert-info'>Edit details</button><a/>

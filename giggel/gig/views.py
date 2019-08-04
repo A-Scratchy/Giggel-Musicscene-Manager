@@ -5,7 +5,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.views.generic import DetailView, CreateView, DeleteView, UpdateView, ListView, View
 from django.http import HttpResponse, HttpResponseRedirect
-from .models import Gig, GigRequest, GigRequestForm
+from .models import Gig, GigRequest, GigRequestForm, GigForm
 from venue.models import Venue
 from artist.models import Artist
 from django.core.paginator import Paginator
@@ -17,7 +17,7 @@ import string
 class GigCreate(SuccessMessageMixin, CreateView):
     model = Gig
     template_name = 'gig/gig_create.html'
-    fields = ['gig_artist', 'gig_venue', 'gig_date', 'gig_description']
+    form_class = GigForm
     success_url = reverse_lazy('my_gigs')
     success_message = 'Gig was created successfully'
 
@@ -61,7 +61,7 @@ class GigUpdate(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
     # need to check if user is owner of gig before allowing update
     model = Gig
     slug_field = 'gig_id'
-    fields = ['gig_id', 'gig_owner', 'gig_description']
+    form_class = GigForm
     template_name = 'gig/gig_update.html'
     success_url = reverse_lazy('my_gigs')
     success_message = 'Gig was updated successfully'
@@ -145,7 +145,7 @@ class GigRequestUpdate(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
     # need to check if user is owner of gig before allowing update
     model = GigRequest
     slug_field = 'gig_request_id'
-    fields = ['gig_request_id', 'gig_request_owner', 'gig_request_name', 'gig_request_description', 'gig_request_confirmed', 'gig_request_date', 'gig_request_artist', 'gig_request_venue']
+    form_class = GigRequestForm
     template_name = 'gig/gig_request_update.html'
     success_url = reverse_lazy('profile')
     success_message = "%(gig_request_name)s was updated successfully"
@@ -190,7 +190,7 @@ class MyGigRequests(ListView):
 class GigRequestConfirm(DetailView):
     model = GigRequest
     slug_field = 'gig_request_id'
-    fields = ['gig_request_id', 'gig_request_owner', 'gig_request_name', 'gig_request_description', 'gig_request_confirmed', 'gig_request_date', 'gig_request_artist', 'gig_request_venue']
+    form_class = GigRequestForm
     template_name = 'gig/gig_request_update.html'
     success_url = reverse_lazy('profile')
     success_message = "%(gig_request_name)s was updated successfully"

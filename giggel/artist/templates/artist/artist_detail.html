@@ -10,20 +10,22 @@
 <div class="profile container">
     <div class="row">
         <div class="col">
-            <img class="img-thumbnail" id="artist_profile_pic"
-                 src="{{ MEDIA_URL }}{{ artist.artist_profile_pic}}"/>
+            <!-- <img class="img-thumbnail" id="artist_profile_pic"
+                 src="{{ MEDIA_URL }}{{ artist.artist_profile_pic}}"/> -->
+                 <!--random pic for testing  -->
+                 <img class="img-thumbnail" src="http://lorempixel.com/400/200/nightlife/">
         </div>
         <div class="col">
-            <h1 class='name'>{{ artist.artist_name }}</h1>
-            <h3 class='name'>{{ artist.artist_genres }}</h3>
-            <h3 class='name'>{{ artist.artist_location }}</h3>
-            <P class='description'>{{ artist.artist_description }}</P>
+            <h1 id="artist_name" class='name'>{{ artist.artist_name }}</h1>
+            <h3 id="artist_genres" class='name'>{{ artist.artist_genres }}</h3>
+            <h3 id="artist_location" class='name'>{{ artist.artist_location }}</h3>
+            <P id="artist_description" class='description'>{{ artist.artist_description }}</P>
         </div>
     </div>
     <div class="row">
         <div class="buttons">
             <a class="btn btn-outline-info" id='request_gig_from_artist'
-               href="{% url 'gig_request_to_artist' %}?
+               href="{% url 'gig_request' %}?
                gig_request_artist={{ artist.artist_id }}">
                Request artist to play at your venue</a>
         </div>
