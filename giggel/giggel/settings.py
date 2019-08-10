@@ -26,7 +26,9 @@ SECRET_KEY = 'tuo9ott6nx18dbe%dxa%wc6(a*&xsw48u2dl12-1b!nhzzfmpz'
 DEBUG = True
 
 ALLOWED_HOSTS = ['10.0.1.51',
-'127.0.0.1']
+                'giggel-eb.scspjimdpm.us-west-2.elasticbeanstalk.com',
+                '127.0.0.1']
+
 # Django_regestartion settings
 ACCOUNT_ACTIVATION_DAYS = 7
 
