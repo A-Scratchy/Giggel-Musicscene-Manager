@@ -19,17 +19,17 @@ class VenueDetail(DetailView):
     context_object_name = 'venue'
 
 
-class VenueDashboard(LoginRequiredMixin, TemplateView):
-    model = Venue
-    template_name = 'venue/venue_dashboard.html'
-    login_url = reverse_lazy('login')
-
-    def get_context_data(self, *args, **kwargs):
-        context = super().get_context_data(*args, **kwargs)
-        owner = self.request.user
-        context['gig_requests'] = GigRequest.objects.filter(gig_request_venue=self.request.user.venue)
-        context['gigs'] = Gig.objects.filter(gig_venue=self.request.user.venue)
-        return context
+# class VenueDashboard(LoginRequiredMixin, TemplateView):
+#     model = Venue
+#     template_name = 'venue/venue_dashboard.html'
+#     login_url = reverse_lazy('login')
+#
+#     def get_context_data(self, *args, **kwargs):
+#         context = super().get_context_data(*args, **kwargs)
+#         owner = self.request.user
+#         context['gig_requests'] = GigRequest.objects.filter(gig_request_venue=self.request.user.venue)
+#         context['gigs'] = Gig.objects.filter(gig_venue=self.request.user.venue)
+#         return context
 
 
 

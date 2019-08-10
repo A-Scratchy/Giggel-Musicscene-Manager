@@ -10,10 +10,8 @@
 <div class="profile container">
     <div class="row">
         <div class="col">
-            <!-- <img class="img-thumbnail" id="artist_profile_pic"
-                 src="{{ MEDIA_URL }}{{ artist.artist_profile_pic}}"/> -->
-                 <!--random pic for testing  -->
-                 <img class="img-thumbnail" src="http://lorempixel.com/400/200/nightlife/">
+            <img class="img-thumbnail" id="artist_profile_pic"
+                 src="{{ MEDIA_URL }}{{ artist.artist_profile_pic}}"/>
         </div>
         <div class="col">
             <h1 id="artist_name" class='name'>{{ artist.artist_name }}</h1>
@@ -22,6 +20,7 @@
             <P id="artist_description" class='description'>{{ artist.artist_description }}</P>
         </div>
     </div>
+    {% if user.venue %}
     <div class="row">
         <div class="buttons">
             <a class="btn btn-outline-info" id='request_gig_from_artist'
@@ -30,6 +29,7 @@
                Request artist to play at your venue</a>
         </div>
     </div>
+    {% endif %}
 </div>
 
 {% endblock %}

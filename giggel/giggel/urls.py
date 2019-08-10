@@ -37,8 +37,8 @@ urlpatterns = [
     path('artist/update/<slug:slug>/',
          artist_views.ArtistUpdate.as_view(), name='artist_update'),
     path('artist/delete/<slug:slug>/', artist_views.ArtistDelete.as_view(), name='artist_delete'),
-    path('artist/dashboard', artist_views.ArtistDashboard.as_view(),
-         name='artist_dashboard'),
+    # path('artist/dashboard', artist_views.ArtistDashboard.as_view(),
+    #      name='artist_dashboard'),
     path('profile/artven', user_views.ArtVenCreate.as_view(), name='artven'),
     path('artist/directory', artist_views.ArtistDirectory.as_view(), name='artist_directory'),
     #venue
@@ -48,8 +48,8 @@ urlpatterns = [
     path('venue/update/<slug:slug>/',
          venue_views.VenueUpdate.as_view(), name='venue_update'),
     path('venue/delete/<slug:slug>/', venue_views.VenueDelete.as_view(), name='venue_delete'),
-    path('venue/dashboard', venue_views.VenueDashboard.as_view(),
-         name='venue_dashboard'),
+    # path('venue/dashboard', venue_views.VenueDashboard.as_view(),
+    #      name='venue_dashboard'),
     path('venue/directory', venue_views.VenueDirectory.as_view(), name='venue_directory'),
     #gigs
     path('gig/create', gig_views.GigCreate.as_view(), name='gig_create'),

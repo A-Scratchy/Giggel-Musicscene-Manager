@@ -20,6 +20,7 @@
             <p id="venue_description" class='description'>{{ venue.venue_description }}</p>
         </div>
     </div>
+    {% if user.artist %}
     <div class="row">
         <div class="buttons">
             <a class="btn btn-outline-info" id='request_gig_at_venue'
@@ -27,6 +28,7 @@
                request gig here</a>
         </div>
     </div>
+    {% endif %}
 </div>
 
 {% endblock %}

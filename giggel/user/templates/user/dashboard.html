@@ -8,42 +8,68 @@
 
 <div class='container text-center'>
 
+{% if user.venue %}
+<!-- ~~~~~~~~~~~~~~~~~~~~~~ Venue profile ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
     <div class="profile container">
+        <h1 id="venue_name" class='name'>{{ user.venue.venue_name }}</h1>
         <div class="row">
             <div class="col">
-                <img class="img-thumbnail" id="artist_profile_pic" src="{{ MEDIA_URL }}{{ artist.artist_profile_pic}}"/>
+                <img class="img-thumbnail" id="venue_profile_pic" src="{{ MEDIA_URL }}{{ venue.venue_profile_pic}}"/>
             </div>
             <div class="col">
-                <h1 id="artist_name" class='name'>{{ user.artist.artist_name }}</h1>
+                <h3 id="venue_genres" class='name'>{{ user.venue.venue_genres }}</h3>
+                <h3 id="venue_location" class='name'>{{ user.venue.venue_location }}</h3>
+                <h3 id="venue_description" class='name'>{{ user.venue.venue_description }}</h3>
+            </div>
+        </div>
+            <a id="venue_update" href="/venue/update/{{user.venue.venue_id}}"><button class='alert alert-info'>Edit details</button></a>
+            <a id="venue_delete" href="/venue/delete/{{user.venue.venue_id}}"><button class='alert alert-danger'>Delete my venue</button></a>
+    </div>
+{% endif %}
+
+{% if user.artist %}
+<!-- ~~~~~~~~~~~~~~~~~~~~~~ Artist profile ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+    <div class="profile container">
+        <h1 id="artist_name" class='name'>{{ user.artist.artist_name }}</h1>
+        <div class="row">
+            <div class="col">
+                <img class="img-thumbnail" id="artist_profile_pic" src="{{ MEDIA_URL }}{{ user.artist.artist_profile_pic }}"/>
+            </div>
+            <div class="col">
                 <h3 id="artist_genres" class='name'>{{ user.artist.artist_genres }}</h3>
                 <h3 id="artist_location" class='name'>{{ user.artist.artist_location }}</h3>
                 <h3 id="artist_description" class='name'>{{ user.artist.artist_description}}</h3>
             </div>
         </div>
-        <a id="artist_update" href="/artist/update/{{user.artist.artist_id}}"><button class=' alert alert-info'>Edit details</button><a/>
-        <a id="artist_delete" href="/artist/delete/{{user.artist.artist_id}}"><button class='alert alert-danger'>Delete my artist</button><a/>
+            <a id="artist_update" href="/artist/update/{{user.artist.artist_id}}"><button class='alert alert-info'>Edit details</button></a>
+            <a id="artist_delete" href="/artist/delete/{{user.artist.artist_id}}"><button class='alert alert-danger'>Delete my artist</button></a>
     </div>
 
+{% endif %}
+<!-- ~~~~~~~~~~~~~~~~~~~~~~ My gigs ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
     <div id="my_gigs" class="container">
         <h1>My Gigs</h1>
 
-            {% for gig in gigs %}
-            <div class="row" id="link_{{ gig.gig_name }}">
-                <a href="{% url 'gig_detail' gig.gig_id %}">
-                    {{ gig.gig_date }} -
-                    {{ gig.gig_artist }} @
-                    {{ gig.gig_venue }}
-                </a>
+        {% for gig in gigs %}
+        <div class="row" id="link_{{ gig.gig_name }}">
+            <div class="col">
+            <a href="{% url 'gig_detail' gig.gig_id %}">
+                {{ gig.gig_date }}
+            </a>
+            </div>
+            <div class="col">{{ gig.gig_venue }}</div>
+            <div class="col">{{ gig.gig_venue }}</div>
          </div>
-          {% empty %}
-                <div class="row">We didn't find anything!</div>
-          {% endfor %}
-
-        <a id="create_gig" href="{% url 'gig_create' %}"><button class="alert alert-info">Create a new gig</button></a>
+      {% empty %}
+            <div class="row">We didn't find anything!</div>
+      {% endfor %}
+            <a id="create_gig" href="{% url 'gig_create' %}"><button class='alert alert-info'>Create a new gig</button></a>
     </div>
-
+<!-- ~~~~~~~~~~~~~~~~~~~~~~ Gig requests ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
     <div id="my_gig_requests" class="container">
+
         <h1>My requests</h1>
+
         <h3>Pending Gig requests</h3>
             {% for gig_request in gig_requests %}
                 {% if gig_request.gig_request_confirmed != True %}
@@ -62,7 +88,9 @@
                     <div class="row">-
                     </div>
             {% endfor %}
-
+    </div>
+<!-- ~~~~~~~~~~~~~~~~~~~~~~ Historic Gig requests ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+    <div id="accepted_gig_requests" class="container">
         <h3>Accepted Gig requests</h3>
             {% for gig_request in gig_requests %}
                 {% if gig_request.gig_request_confirmed %}
@@ -81,6 +109,7 @@
                     </div>
             {% endfor %}
     </div>
+
 </div>
 
- {% endblock %}
+{% endblock %}

@@ -8,6 +8,10 @@
 
 <div class='container text-center'>
 
+{% if user.venue %}
+
+    <h3>>My Venue</h3
+
     <div class="profile container">
         <div class="row">
             <div class="col">
@@ -24,16 +28,24 @@
         <a id="venue_delete" href="/venue/delete/{{user.venue.venue_id}}"><button class='alert alert-danger'>Delete my venue</button><a/>
     </div>
 
+{% endif %}
+
+
+
+
+
     <div id="my_gigs" class="container">
         <h1>My Gigs</h1>
 
             {% for gig in gigs %}
             <div class="row" id="link_{{ gig.gig_name }}">
+                <div class="col">
                 <a href="{% url 'gig_detail' gig.gig_id %}">
-                    {{ gig.gig_date }} -
-                    {{ gig.gig_venue }} @
-                    {{ gig.gig_venue }}
+                    {{ gig.gig_date }}
                 </a>
+                </div>
+                <div class="col">{{ gig.gig_venue }}</div>
+                <div class="col">{{ gig.gig_venue }}</div>
          </div>
           {% empty %}
                 <div class="row">We didn't find anything!</div>
