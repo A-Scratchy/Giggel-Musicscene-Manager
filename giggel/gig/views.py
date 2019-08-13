@@ -108,8 +108,8 @@ class MyGigs(ListView):
 class GigRequestCreate(SuccessMessageMixin, CreateView):
     model = GigRequest
     template_name = 'gig/gig_request_create.html'
-    success_url = reverse_lazy('artist_dashboard')
-    success_message = "%(gig_request_name)s was created successfully"
+    success_url = reverse_lazy('profile')
+    success_message = "Gig request was created successfully"
     form_class = GigRequestForm
 
     def form_valid(self, form):
@@ -118,7 +118,8 @@ class GigRequestCreate(SuccessMessageMixin, CreateView):
                 [random.choice(string.digits +
                                string.ascii_letters) for i in range(20)]
                 )
-        self.object.gig_request_owner = self.request.user
+        owner = self.request.user
+        self.object.gig_request_owner = owner
         # check if user has artist or venue
         if self.request.user.profile.account_type == 'artist':
             self.object.gig_request_artist = self.request.user.artist
@@ -148,7 +149,7 @@ class GigRequestUpdate(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
     form_class = GigRequestForm
     template_name = 'gig/gig_request_update.html'
     success_url = reverse_lazy('profile')
-    success_message = "%(gig_request_name)s was updated successfully"
+    success_message = "gig request was updated successfully"
 
     # need to check if user is owner of gig before allowing update
     def get_queryset(self):
@@ -193,7 +194,7 @@ class GigRequestConfirm(DetailView):
     form_class = GigRequestForm
     template_name = 'gig/gig_request_update.html'
     success_url = reverse_lazy('profile')
-    success_message = "%(gig_request_name)s was updated successfully"
+    success_message = "gig request was updated successfully"
 
     def get(self, request, *args, **kwargs):
         gig_request = self.get_object()
