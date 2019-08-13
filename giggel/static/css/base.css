@@ -6,7 +6,7 @@
   --bg1: #ffc100;
   --bg2: #232323;
   --bg-dark: #342700;
-  --title-color: #333333;
+  --title-color: #92ccc0;
   --header-color: #111111;
   --circ_up: -12vmin;
   --circ_down: 12vmin;
@@ -19,9 +19,32 @@
   --menu-duration: 1s;
 }
 
+body {
+    font-family: 'Roboto Slab', serif;
+    background-color: #222222;
+}
+
+.home {
+    background-image: url('../img/aditya-chinchure-ZhQCZjr9fHo-unsplash.jpg');
+    background-size: cover;
+    background-position: center bottom;
+    height: 90vh;
+    overflow: hidden;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 5vh;
+}
+
+nav {
+z-index: 100;
+}
+
 p, h1, h2, h3, h4, a {
 color: var(--main-text-color);
-color: black;
 }
 
 ul {
@@ -30,4 +53,51 @@ ul {
 
 a:hover {
   text-decoration: none;
+}
+
+.gigel {
+    background-color: transparent;
+    color: var(--title-color);
+    font-size: 20vmin;
+    position: fixed;
+    top: 10vh; left: 0; bottom: 0; right: 0;
+    z-index: 1;
+    font-family: 'Roboto Slab', serif;
+}
+
+/* directories */
+
+.directory {
+    padding-top: 5vh;
+    padding-bottom: 15vh;
+    color: yellow;
+}
+
+.profile_pic {
+    height: 10em;
+    width: 10em;
+    background-color: transparent;
+    border: transparent;
+}
+
+.grow:hover {
+    font-size: 1.5em;
+    transition: all 0.1s;
+    color: pink;
+}
+
+.directory_entry {
+    color: yellow;
+    margin-bottom: 3vh;
+    padding: 4px;
+    border-top: 1px solid yellow;
+    border-bottom: 1px solid yellow;
+    /* border-radius: 5px; */
+    /* background-color: #f0f7ffe6; */
+}
+
+.directory_entry:hover {
+    background-color: #5e6014b3;
+    transition: all;
+    transition-duration: 0.6s;
 }
