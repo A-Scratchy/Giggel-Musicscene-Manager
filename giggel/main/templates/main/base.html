@@ -38,10 +38,6 @@
               <li class="nav-item {% block myProfile_active %}{% endblock %}">
                 <a class="nav-link" id="myProfile" name="myProfile" href="{% url 'profile' %}">My profile</a>
               </li>
-              <!-- directories -->
-              <li class="nav-item">
-                <p class="nav-link disabled">| Directories |</p>
-              </li>
               <!-- Artists -->
               <li class="nav-item">
                 <a class="nav-link" id="artist_directory" href="{% url 'artist_directory' %}">Artists</a>
@@ -128,7 +124,7 @@
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Footer ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
       <footer class="page-footer font-small bg-secondary">
-        <div class="text-center py-2">
+        <div class="text-center">
           <p>Design - 2019 a scratcherd</p>
         </div>
       </footer>

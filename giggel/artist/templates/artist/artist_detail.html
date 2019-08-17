@@ -7,13 +7,13 @@
 
 {% block content %}
 
-<div class="profile container">
+<div class="profile container p-5">
     <div class="row">
-        <div class="col">
-            <img class="img-thumbnail" id="artist_profile_pic"
+        <div class="col-sm">
+            <img class="img-thumbnail profile_detail_pic" id="artist_profile_pic"
                  src="{{ MEDIA_URL }}{{ artist.artist_profile_pic}}"/>
         </div>
-        <div class="col">
+        <div class="col-sm">
             <h1 id="artist_name" class='name'>{{ artist.artist_name }}</h1>
             <h3 id="artist_genres" class='name'>{{ artist.artist_genres }}</h3>
             <h3 id="artist_location" class='name'>{{ artist.artist_location }}</h3>

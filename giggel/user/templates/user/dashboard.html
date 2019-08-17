@@ -15,11 +15,11 @@
 <!-- ~~~~~~~~~~~~~~~~~~~~~~ Venue profile ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
     <div class="profile container">
         <h1 id="venue_name" class='name'>{{ user.venue.venue_name }}</h1>
-        <div class="row">
-            <div class="col">
-                <img class="img-thumbnail" id="venue_profile_pic" src="{{ MEDIA_URL }}{{ venue.venue_profile_pic}}"/>
+        <div class="row p-4">
+            <div class="col-sm">
+                <img class="img-thumbnail" id="venue_profile_pic" src="{{ MEDIA_URL }}{{ user.venue.venue_profile_pic}}"/>
             </div>
-            <div class="col">
+            <div class="col-sm">
                 <h3 id="venue_genres" class='name'>{{ user.venue.venue_genres }}</h3>
                 <h3 id="venue_location" class='name'>{{ user.venue.venue_location }}</h3>
                 <h3 id="venue_description" class='name'>{{ user.venue.venue_description }}</h3>
@@ -34,11 +34,11 @@
 <!-- ~~~~~~~~~~~~~~~~~~~~~~ Artist profile ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
     <div class="profile container">
         <h1 id="artist_name" class='name'>{{ user.artist.artist_name }}</h1>
-        <div class="row">
-            <div class="col">
+        <div class="row p-4">
+            <div class="col-sm">
                 <img class="img-thumbnail" id="artist_profile_pic" src="{{ MEDIA_URL }}{{ user.artist.artist_profile_pic }}"/>
             </div>
-            <div class="col">
+            <div class="col-sm">
                 <h3 id="artist_genres" class='name'>{{ user.artist.artist_genres }}</h3>
                 <h3 id="artist_location" class='name'>{{ user.artist.artist_location }}</h3>
                 <h3 id="artist_description" class='name'>{{ user.artist.artist_description}}</h3>
@@ -50,18 +50,18 @@
 
 {% endif %}
 <!-- ~~~~~~~~~~~~~~~~~~~~~~ My gigs ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-    <div id="my_gigs" class="container">
+    <div id="my_gigs" class="container card">
         <h1>My Gigs</h1>
 
         {% for gig in gigs %}
-        <div class="row" id="link_{{ gig.gig_name }}">
+        <div class="row directory_entry m-2" id="link_{{ gig.gig_name }}">
             <div class="col">
             <a href="{% url 'gig_detail' gig.gig_id %}">
                 {{ gig.gig_date }}
             </a>
             </div>
-            <div class="col">{{ gig.gig_venue }}</div>
-            <div class="col">{{ gig.gig_venue }}</div>
+            <div class="col"><p>{{ gig.gig_venue }}</p></div>
+            <div class="col"><p>{{ gig.gig_venue }}</p></div>
          </div>
       {% empty %}
             <div class="row">We didn't find anything!</div>
@@ -69,21 +69,21 @@
             <a id="create_gig" href="{% url 'gig_create' %}"><button class='alert alert-info'>Create a new gig</button></a>
     </div>
 <!-- ~~~~~~~~~~~~~~~~~~~~~~ Gig requests ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-    <div id="my_gig_requests" class="container">
+    <div id="my_gig_requests" class="container card">
 
         <h1>My requests</h1>
 
         <h3>Pending Gig requests</h3>
             {% for gig_request in gig_requests %}
                 {% if gig_request.gig_request_confirmed != True %}
-                    <div class="row" id="link_{{gig_request.gig_request_name}}" name="{{gig_request.gig_request_name }}">
+                    <div class="row directory_entry m-2" id="link_{{gig_request.gig_request_name}}" name="{{gig_request.gig_request_name }}">
                             <div class="col">
                                 <a href="{% url 'gig_request_detail' gig_request.gig_request_id %}">
                                     {{ gig_request.gig_request_date }}
                                 </a>
                             </div>
-                            <div class="col">{{ gig_request.gig_request_artist }}</div>
-                            <div class="col">{{ gig_request.gig_request_venue }}</div>
+                            <div class="col"><p>{{ gig_request.gig_request_artist }}</p></div>
+                            <div class="col"><p>{{ gig_request.gig_request_venue }}</p></div>
 
                     </div>
                 {% endif %}
@@ -93,18 +93,18 @@
             {% endfor %}
     </div>
 <!-- ~~~~~~~~~~~~~~~~~~~~~~ Historic Gig requests ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-    <div id="accepted_gig_requests" class="container">
+    <div id="accepted_gig_requests" class="container card">
         <h3>Accepted Gig requests</h3>
             {% for gig_request in gig_requests %}
                 {% if gig_request.gig_request_confirmed %}
-                    <div class="row" name="{{gig_request.gig_request_name }}">
+                    <div class="row directory_entry m-2" name="{{gig_request.gig_request_name }}">
                             <div class="col">
                                 <a href="{% url 'gig_request_detail' gig_request.gig_request_id %}">
                                     {{ gig_request.gig_request_date }}
                                 </a>
                             </div>
-                            <div class="col">{{ gig_request.gig_request_artist }}</div>
-                            <div class="col">{{ gig_request.gig_request_venue }}</div>
+                            <div class="col"><p>{{ gig_request.gig_request_artist }}</p></div>
+                            <div class="col"><p>{{ gig_request.gig_request_venue }}</p></div>
                     </div>
                 {% endif %}
                 {% empty %}

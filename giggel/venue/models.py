@@ -13,7 +13,7 @@ class Venue(models.Model):
     venue_town = models.CharField(max_length=100, null=True, blank=True)
     venue_description = models.CharField(
         max_length=250, null=True, blank=True)
-    venue_profile_pic = models.ImageField(upload_to="img/venue_profile", null=True, blank=True)
+    venue_profile_pic = models.ImageField(upload_to="img/venue_profile",  default="/img/venue_profile/default.jpeg")
     venue_genres = models.CharField(max_length=200, null=True, blank=True)
     venue_location = models.CharField(max_length=100)
 

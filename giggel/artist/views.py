@@ -64,7 +64,7 @@ class ArtistUpdate(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
     slug_field = 'artist_id'
     fields = ['artist_id', 'artist_owner', 'artist_name', 'artist_description', 'artist_profile_pic', 'artist_genres', 'artist_location']
     template_name = 'artist/artist_update.html'
-    success_url = reverse_lazy('artist_dashboard')
+    success_url = reverse_lazy('profile')
     success_message = '%(artist_name)s has been updated successfully'
 
 

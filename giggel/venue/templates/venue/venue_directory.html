@@ -10,16 +10,24 @@
 {% block content %}
 
 <div class="directory container">
+    <div class="toolbar">
+        Filters: _________ location: ___________ Genre: ______________
+    </div>
     {% for venue in object_list %}
         <a href="{% url 'venue_detail' venue.venue_id %}">
-            <div class="row">
+            <div class="row directory_entry m-2">
                 <div class="col-5">
-                    <img class="img-thumbnail" src="{% static 'img/temp.png' %}" id="{{ venue.venue_id }}_venue_pic"><!--{{ venue.venue_profile_pic }}--></img>
+                    <img class="img-thumbnail rofile_pic m-1" src="{{ MEDIA_URL }}{{ venue.venue_profile_pic}}" id="{{ venue.venue_id }}_venue_pic"><!--{{ venue.venue_profile_pic }}--></img>
                 </div>
                 <div class="col-7">
                         <p id="{{ venue.venue_id }}_venue_name">{{ venue.venue_name }}</p>
                         <p id="{{ venue.venue_id }}_venue_town">{{ venue.venue_location }}</p>
                         <p id="{{ venue.venue_id }}_venue_genres">{{ venue.venue_genres }}</p>
+                        <i class="grow far fa-envelope"></i>
+                        <i class="grow far fa-heart"></i>
+                        <i class="grow far fa-star"></i>
+                        <i class="grow far fa-flag"></i>
+                        <i class="grow fas fa-award"></i>
                 </div>
             </div>
         </a>

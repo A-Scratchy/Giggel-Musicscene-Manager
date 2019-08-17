@@ -7,13 +7,13 @@
 
 {% block content %}
 
-<div class="profile container">
-    <div class="row">
-        <div class="col">
-            <img class="img-thumbnail" id="venue_profile_pic"
+<div class="profile container text-center">
+    <div class="row p-5">
+        <div class="col-sm">
+            <img class="img-thumbnail profile_deailt_pic" id="venue_profile_pic"
                  src="{{ MEDIA_URL }}{{ venue.venue_profile_pic}}"/>
         </div>
-        <div class="col">
+        <div class="col-sm">
             <h1 id="venue_name" class='name'>{{ venue.venue_name }}</h1>
             <h3 id="venue_genres" class='name'>{{ venue.venue_genres }}</h3>
             <h3 id="venue_location" class='name'>{{ venue.venue_location }}</h3>
@@ -29,6 +29,26 @@
         </div>
     </div>
     {% endif %}
-</div>
 
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~ Gigs ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+    <div id="gigs" class="container card">
+        <h1>Gigs at this venue:</h1>
+
+        {% for gig in gigs %}
+        <div class="row" id="link_{{ gig.gig_name }}">
+            <div class="col">
+            <a href="{% url 'gig_detail' gig.gig_id %}">
+                {{ gig.gig_date }}
+            </a>
+            </div>
+            <div class="col"><p>{{ gig.gig_venue }}</p></div>
+            <div class="col"><p>{{ gig.gig_venue }}</p></div>
+         </div>
+      {% empty %}
+            <div class="row"><p>We didn't find anything!</p></div>
+      {% endfor %}
+            <a id="create_gig" href="{% url 'gig_create' %}"><button class='alert alert-info'>Create a new gig</button></a>
+    </div>
+</div>
 {% endblock %}

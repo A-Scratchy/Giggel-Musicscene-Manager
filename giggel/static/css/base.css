@@ -32,11 +32,16 @@ body {
     overflow: hidden;
 }
 
+.card {
+    background: black;
+    margin-top: 5%;
+}
+
 footer {
-    position: fixed;
-    bottom: 0;
+    position: relative;
     width: 100%;
     height: 5vh;
+    margin-top: 5%;
 }
 
 nav {
@@ -45,6 +50,15 @@ z-index: 100;
 
 p, h1, h2, h3, h4, a {
 color: var(--main-text-color);
+}
+
+h1, h2, h3, h4, h5 {
+    margin-top: 3%;
+    margin-bottom: 3%;
+}
+
+h1, h2 {
+    color: var(--title-color);
 }
 
 ul {
@@ -73,12 +87,18 @@ a:hover {
     color: yellow;
 }
 
+.profile_detail_pic {
+    width: 30vw;
+    background-color: transparent;
+    border: transparent;
+}
+
 .profile_pic {
-    height: 10em;
     width: 10em;
     background-color: transparent;
     border: transparent;
 }
+
 
 .grow:hover {
     font-size: 1.5em;
@@ -90,8 +110,8 @@ a:hover {
     color: yellow;
     margin-bottom: 3vh;
     padding: 4px;
-    border-top: 1px solid yellow;
-    border-bottom: 1px solid yellow;
+    border-top: 1px solid var(--title-color);
+    border-bottom: 1px solid var(--title-color);
     /* border-radius: 5px; */
     /* background-color: #f0f7ffe6; */
 }
