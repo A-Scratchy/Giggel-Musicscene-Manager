@@ -24,8 +24,8 @@
                 <h3 id="venue_description" class='name'>{{ user.venue.venue_description }}</h3>
             </div>
         </div>
-        <a id="venue_update" href="/venue/update/{{user.venue.venue_id}}"><button class=' alert alert-info'>Edit details</button><a/>
-        <a id="venue_delete" href="/venue/delete/{{user.venue.venue_id}}"><button class='alert alert-danger'>Delete my venue</button><a/>
+        <a id="venue_update" href="/venue/update/{{user.venue.venue_id}}"><button class=' btn btn-outline-primary'>Edit details</button><a/>
+        <a id="venue_delete" href="/venue/delete/{{user.venue.venue_id}}"><button class='btn btn-outline-danger'>Delete my venue</button><a/>
     </div>
 
 {% endif %}
@@ -51,7 +51,7 @@
                 <div class="row">We didn't find anything!</div>
           {% endfor %}
 
-        <a id="create_gig" href="{% url 'gig_create' %}"><button class="alert alert-info">Create a new gig</button></a>
+        <a id="create_gig" href="{% url 'gig_create' %}"><button class="btn btn-outline-primary">Create a new gig</button></a>
     </div>
 
     <div id="my_gig_requests" class="container">

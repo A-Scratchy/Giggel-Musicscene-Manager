@@ -1,39 +1,24 @@
 :root {
-  --main-text-color: #FFFEF6;
-  --color2: #EFCF00;
-  --color3: #ff4109;
-  --hlink: #EFCF00;
-  --bg1: #ffc100;
-  --bg2: #232323;
-  --bg-dark: #342700;
-  --title-color: #92ccc0;
-  --header-color: #111111;
-  --circ_up: -12vmin;
-  --circ_down: 12vmin;
-  --circ_left: -15vmin;
-  --circ_right: 15vmin;
-  --sub_circ_up: -23vmin;
-  --sub_circ_down: -23vmin;
-  --sub_circ_left: -20vmin;
-  --sub_circ_right: 14vmin;
-  --menu-duration: 1s;
+    /* color scheme */
+  --c1: #fffafb;
+  --c2: #6AAEAA;
+  --c3: #1a2d26;
+  --c4: #131515;
+  --c5: #000000;
+}
+
+nav {
+    z-index: 100;
+    background-color: var(--c4);
 }
 
 body {
     font-family: 'Roboto Slab', serif;
-    background-color: #222222;
-}
-
-.home {
-    background-image: url('../img/aditya-chinchure-ZhQCZjr9fHo-unsplash.jpg');
-    background-size: cover;
-    background-position: center bottom;
-    height: 90vh;
-    overflow: hidden;
+    background-color: var(--c5);
 }
 
 .card {
-    background: black;
+    background: var(--c4);
     margin-top: 5%;
 }
 
@@ -42,14 +27,16 @@ footer {
     width: 100%;
     height: 5vh;
     margin-top: 5%;
+    background-color: var(--c4);
 }
 
-nav {
-z-index: 100;
+p, a {
+    font-size: 1em;
+    line-height: normal;
 }
 
 p, h1, h2, h3, h4, a {
-color: var(--main-text-color);
+    color: var(--c1);
 }
 
 h1, h2, h3, h4, h5 {
@@ -58,7 +45,7 @@ h1, h2, h3, h4, h5 {
 }
 
 h1, h2 {
-    color: var(--title-color);
+    color: var(--c2);
 }
 
 ul {
@@ -69,9 +56,23 @@ a:hover {
   text-decoration: none;
 }
 
+.btn {
+    margin: 10px;
+}
+
+/* home page */
+
+.home {
+    background-image: url('../img/aditya-chinchure-ZhQCZjr9fHo-unsplash.jpg');
+    background-size: cover;
+    background-position: center bottom;
+    height: 90vh;
+    overflow: hidden;
+}
+
 .gigel {
     background-color: transparent;
-    color: var(--title-color);
+    color: var(--c2);
     font-size: 20vmin;
     position: fixed;
     top: 10vh; left: 0; bottom: 0; right: 0;
@@ -84,11 +85,10 @@ a:hover {
 .directory {
     padding-top: 5vh;
     padding-bottom: 15vh;
-    color: yellow;
 }
 
 .profile_detail_pic {
-    width: 30vw;
+    width: 15vw;
     background-color: transparent;
     border: transparent;
 }
@@ -103,21 +103,19 @@ a:hover {
 .grow:hover {
     font-size: 1.5em;
     transition: all 0.1s;
-    color: pink;
+    color: var(--c2);
 }
 
 .directory_entry {
-    color: yellow;
+    color: var(--c2);
     margin-bottom: 3vh;
-    padding: 4px;
-    border-top: 1px solid var(--title-color);
-    border-bottom: 1px solid var(--title-color);
-    /* border-radius: 5px; */
-    /* background-color: #f0f7ffe6; */
+    padding: 1em;
+    border-top: 1px solid var(--c2);
+    border-bottom: 1px solid var(--c2);
 }
 
 .directory_entry:hover {
-    background-color: #5e6014b3;
+    background-color: var(--c2);
     transition: all;
     transition-duration: 0.6s;
 }
