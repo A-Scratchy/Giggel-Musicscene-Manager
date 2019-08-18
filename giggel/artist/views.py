@@ -18,6 +18,11 @@ class ArtistDetail(DetailView):
     slug_field = 'artist_id'
     context_object_name = 'artist'
 
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        owner = self.object
+        context['gigs'] = Gig.objects.filter(gig_artist=owner)
+        return context
 
 # class ArtistDashboard(LoginRequiredMixin, ListView):
 #     model = Artist

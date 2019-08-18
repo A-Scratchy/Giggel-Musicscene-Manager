@@ -18,6 +18,11 @@ class VenueDetail(DetailView):
     slug_field = 'venue_id'
     context_object_name = 'venue'
 
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        owner = self.object
+        context['gigs'] = Gig.objects.filter(gig_venue=owner)
+        return context
 
 # class VenueDashboard(LoginRequiredMixin, TemplateView):
 #     model = Venue

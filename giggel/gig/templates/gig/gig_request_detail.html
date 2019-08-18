@@ -9,23 +9,23 @@
 <div class="profile container">
     <div class="row">
         <div class="col">
-            <img class="img-thumbnail" id="gig_request_profile_pic" src="{{ MEDIA_URL }}{{ gig_request.gig_request_profile_pic}}"/>
-            <img class="img-thumbnail" id="gig_request_profile_pic" src="{{ MEDIA_URL }}{{ gig_request.gig_request_profile_pic}}"/>
+            <img class="img-thumbnail profile_detail_pic" id="gig_request_profile_pic" src="{{ MEDIA_URL }}{{ gig_request.gig_request_venue.venue_profile_pic}}"/>
+        </div>
+        <div class="col">
+            <img class="img-thumbnail profile_detail_pic" id="gig_request_profile_pic" src="{{ MEDIA_URL }}{{ gig_request.gig_request_artist.artist_profile_pic}}"/>
         </div>
         <div class="col">
             <h1 class=''>{{ gig_request.gig_request_date }}</h1>
             <h3 class=''>{{ gig_request.gig_request_artist }}</h3>
-            <h3 class=''>{{ gig_request.gig_request_venue }}</h3>
+            <h3 class=''><a href="{% url 'venue_detail' gig_request.gig_request_venue.venue_id %}">{{ gig_request.gig_request_venue }}</a></h3>
             <h3 class=''>{{ gig_request.gig_request_venue.venue_location }}</h3>
-            <h3 class=''>{{ gig_request.gig_request_artist.artist_genres }}</h3>
             <p class='description'>{{ gig_request.gig_request_message}}</p>
-            <p class=''> {{ gig_request.gig_request_confirmed }}</p>
+            <a id="update_gig_request" href="{% url 'gig_request_update' gig_request.gig_request_id %}"><button class="btn btn-outline-primary">Update request</button></a>
         </div>
      </div>
      <div class="buttons">
-         <a id="update_gig_request" href="{% url 'gig_request_update' gig_request.gig_request_id %}"><button class="btn btn-outline-primary">Update</button></a>
-         <a id="submit" href="{% url 'gig_request_confirm' gig_request.gig_request_id %}"><button class="btn btn-outline-danger">Respond</button></a>
-         <a id="delete_request" href="{% url 'gig_request_delete' gig_request.gig_request_id %}"><button class='btn btn-outline-danger'>Delete request</button><a/>
+         <a id="submit" href="{% url 'gig_request_confirm' gig_request.gig_request_id %}"><button class="btn btn-outline-success">Accept</button></a>
+         <a id="delete_request" href="{% url 'gig_request_delete' gig_request.gig_request_id %}"><button class='btn btn-outline-danger'>Deny</button><a/>
      </div>
 </div>
 

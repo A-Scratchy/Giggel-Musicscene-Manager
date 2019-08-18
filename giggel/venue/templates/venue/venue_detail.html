@@ -10,7 +10,7 @@
 <div class="profile container text-center">
     <div class="row p-5">
         <div class="col-sm">
-            <img class="img-thumbnail profile_deailt_pic" id="venue_profile_pic"
+            <img class="img-thumbnail profile_detail_pic" id="venue_profile_pic"
                  src="{{ MEDIA_URL }}{{ venue.venue_profile_pic}}"/>
         </div>
         <div class="col-sm">
@@ -22,7 +22,7 @@
     </div>
     {% if user.artist %}
     <div class="row">
-        <div class="buttons">
+        <div class="col buttons">
             <a class="btn btn-outline-info" id='request_gig_at_venue'
                href="{% url 'gig_request' %}?gig_request_venue={{ venue.venue_id }}">
                request gig here</a>
@@ -36,19 +36,19 @@
         <h1>Gigs at this venue:</h1>
 
         {% for gig in gigs %}
-        <div class="row" id="link_{{ gig.gig_name }}">
+        <div class="row directory_entry m-2" id="link_{{ gig.gig_name }}">
             <div class="col">
             <a href="{% url 'gig_detail' gig.gig_id %}">
-                {{ gig.gig_date }}
-            </a>
-            </div>
-            <div class="col"><p>{{ gig.gig_venue }}</p></div>
-            <div class="col"><p>{{ gig.gig_venue }}</p></div>
+                {{ gig.gig_date }}</a></div>
+            <div class="col">
+            <a href="{% url 'artist_detail' gig.gig_artist.artist_id %}">
+            {{ gig.gig_artist }}</a></div>
+            <div class="col"><a href="{% url 'venue_detail' gig.gig_venue.venue_id %}">
+            {{ gig.gig_venue }}</a></div>
          </div>
       {% empty %}
-            <div class="row"><p>We didn't find anything!</p></div>
+            <div class="row">We didn't find anything!</div>
       {% endfor %}
-            <a id="create_gig" href="{% url 'gig_create' %}"><button class='btn btn-outline-primary'>Create a new gig</button></a>
     </div>
 </div>
 {% endblock %}
