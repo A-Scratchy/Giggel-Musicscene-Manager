@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_registration',
     'debug_toolbar',
+    'django_filters',
 ]
 
 MIDDLEWARE = [

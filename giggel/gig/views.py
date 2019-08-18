@@ -1,4 +1,5 @@
 from django.urls import reverse_lazy, reverse
+from django_filters.views import FilterView
 from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -82,10 +83,9 @@ class GigDelete(LoginRequiredMixin, DeleteView):
         return self.model.objects.filter(gig_owner=owner)
 
 
-class GigDirectory(ListView):
+class GigDirectory(FilterView):
     model = Gig
     template_name = 'gig/gig_directory.html'
-
 
 class MyGigs(ListView):
     template_name = 'gig/my_gigs.html'

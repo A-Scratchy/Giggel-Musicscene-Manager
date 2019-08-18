@@ -7,7 +7,36 @@
 {% block content %}
 
     <div class="directory container">
-        {% for gig in object_list %}
+<!-- -----------------filters --------------------------- -->
+        <form class="form" action="" method="get">
+            <div class="form-row align-items-center">
+                    {{ form.non_field_errors }}
+
+                <div class="fieldWrapper">
+                    {{ filter.form.gig_artist.errors }}
+                    <label class"" for="{{ filter.form.gig_artist.id_for_label }}">gig_artist:</label>
+                    {{ filter.form.gig_artist }}
+                </div>
+
+                <div class="fieldWrapper">
+                    {{ filter.form.gig_venue.errors }}
+                    <label for="{{ filter.form.gig_venue.id_for_label }}">gig_venue:</label>
+                    {{ filter.form.gig_venue }}
+                </div>
+
+                <div class="fieldWrapper">
+                    {{ filter.form.gig_date.errors }}
+                    <label for="{{ filter.form.gig_date.id_for_label }}">Dates:</label>
+                    {{ filter.form.gig_date }}
+                </div>
+
+                    <button type="submit" class="btn btn-outline-info">Filter</button>
+            </div>
+        </form>
+
+<!-- ---------------- list of gigs --------------------------- -->
+
+    {% for gig in filter.qs %}
                 <div class="row directory_entry m-2">
                     <div class="col">
                         <a id="{{ gig.gig_id }}_gig" href="{% url 'gig_detail' gig.gig_id %}">

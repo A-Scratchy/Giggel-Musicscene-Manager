@@ -60,6 +60,10 @@ a:hover {
     margin: 10px;
 }
 
+label {
+    color: var(--c2);
+}
+
 /* home page */
 
 .home {
