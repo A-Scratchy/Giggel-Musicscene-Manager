@@ -1,6 +1,7 @@
 {% extends "main/base.html" %}
 {% load static %}
 {% block title %}Update gig{% endblock %}
+{% load crispy_forms_tags %}
 
 {% block headerText %}Update Gig{% endblock %}
 
@@ -10,7 +11,7 @@
     {% csrf_token %}
     <fieldset class="form-group">
       <legend class="border-bottom mb-4">Update</legend>
-      {{ form.as_p}}
+      {{ form|crispy}}
     </fieldset>
     <div class="form-group">
       <button id="submit" class="btn btn-outline-info" type="submit">Update</button>

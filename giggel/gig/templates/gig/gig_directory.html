@@ -1,5 +1,6 @@
 {% extends "main/base.html" %}
 {% load static %}
+{% load crispy_forms_tags %}
 {% block title %}Gigle - Gigs{% endblock %}
 
 {% block headerText %}Gigs{% endblock %}
@@ -8,30 +9,9 @@
 
     <div class="directory container">
 <!-- -----------------filters --------------------------- -->
-        <form class="form" action="" method="get">
-            <div class="form-row align-items-center">
-                    {{ form.non_field_errors }}
-
-                <div class="fieldWrapper">
-                    {{ filter.form.gig_artist.errors }}
-                    <label class"" for="{{ filter.form.gig_artist.id_for_label }}">gig_artist:</label>
-                    {{ filter.form.gig_artist }}
-                </div>
-
-                <div class="fieldWrapper">
-                    {{ filter.form.gig_venue.errors }}
-                    <label for="{{ filter.form.gig_venue.id_for_label }}">gig_venue:</label>
-                    {{ filter.form.gig_venue }}
-                </div>
-
-                <div class="fieldWrapper">
-                    {{ filter.form.gig_date.errors }}
-                    <label for="{{ filter.form.gig_date.id_for_label }}">Dates:</label>
-                    {{ filter.form.gig_date }}
-                </div>
-
-                    <button type="submit" class="btn btn-outline-info">Filter</button>
-            </div>
+        <form class="form-inline" action="" method="get">
+            {{ filter.form|crispy }}
+             <button id="submit" class="btn btn-outline-info" type="submit">Go!</button>
         </form>
 
 <!-- ---------------- list of gigs --------------------------- -->

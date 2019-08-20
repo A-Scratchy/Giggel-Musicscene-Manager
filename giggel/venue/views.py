@@ -61,7 +61,7 @@ class VenueUpdate(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
     # need to check if user is owner of venue before allowing update
     model = Venue
     slug_field = 'venue_id'
-    fields = ['venue_id', 'venue_owner', 'venue_name', 'venue_description', 'venue_profile_pic', 'venue_genres', 'venue_location']
+    fields = ['venue_name', 'venue_description', 'venue_profile_pic', 'venue_genres', 'venue_location']
     template_name = 'venue/venue_update.html'
     success_url = reverse_lazy('profile')
     success_message = '%(venue_name)s has been updated successfully'

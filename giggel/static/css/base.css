@@ -2,7 +2,7 @@
     /* color scheme */
   --c1: #fffafb;
   --c2: #6AAEAA;
-  --c3: #1a2d26;
+  --c3: #beb3bf;
   --c4: #131515;
   --c5: #000000;
 }
@@ -15,6 +15,9 @@ nav {
 body {
     font-family: 'Roboto Slab', serif;
     background-color: var(--c5);
+    color: var(--c1);
+    height: 100%;
+    margin-bottom: 150px;
 }
 
 .card {
@@ -23,10 +26,8 @@ body {
 }
 
 footer {
-    position: relative;
     width: 100%;
-    height: 5vh;
-    margin-top: 5%;
+    padding: 15px;
     background-color: var(--c4);
 }
 
@@ -52,8 +53,29 @@ ul {
   list-style: none;
 }
 
+a {
+    color: var(--c3);
+    line-height: 3em;
+}
+
 a:hover {
   text-decoration: none;
+  color: var(--c5);
+}
+
+#messages {
+    text-align: center;
+    padding-bottom: 10px;
+}
+
+.form-control {
+    background-color: var(--C4);
+
+}
+
+.form-control:focus {
+    background-color: var(--C2);
+    color: var(--C5);
 }
 
 .btn {
@@ -122,4 +144,12 @@ label {
     background-color: var(--c2);
     transition: all;
     transition-duration: 0.6s;
+}
+
+/* gig requests */
+
+.request {
+    font-size: 0.8em;
+    line-height: 1em;
+    color: grey;
 }

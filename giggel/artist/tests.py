@@ -8,18 +8,19 @@ from .models import Artist
 
 class BasicUnitTestsArtist(TestCase):
 
-    def test_artist_dashboard_url_retruns_correct_template(self):
+    def test_dashboard_url_retruns_correct_template(self):
         username = 'testUser'
         self.user = User.objects.create_user(
             username=username, password='AB12345')
+        self.user.profile.account_type = 'artist'
         self.client.login(username=username, password='AB12345')
         self.user.artist = Artist.objects.create(artist_owner=self.user,
                                                  artist_name='DJtest',
                                                  artist_id='djtest5364')
-        response = self.client.get(reverse('artist_dashboard'))
-        self.assertEqual(response.status_code, 200)
+        response = self.client.get(reverse('profile'))
+        print(reverse('profile'))
         self.assertTemplateUsed(
-            response, 'artist/artist_dashboard.html')
+            response, 'user/dashboard.html')
 
     def test_artist_detail_url_retruns_correct_template(self):
         username = 'testUser'
@@ -42,10 +43,10 @@ class BasicUnitTestsArtist(TestCase):
         self.user.artist = Artist.objects.create(artist_owner=self.user,
                                                  artist_name='DJtest',
                                                  artist_id='djtest5364')
-        response = self.client.get(reverse('artist_dashboard'))
+        response = self.client.get(reverse('profile'))
         self.assertEqual(response.status_code, 302)
-        self.assertTemplateNotUsed(response, 'artist/artist_dashboard.html')
-   
+        self.assertTemplateNotUsed(response, 'user/dashboard.html')
+
         # to do
     def test_venue_update_url_returns_correct_template(serlf):
         pass

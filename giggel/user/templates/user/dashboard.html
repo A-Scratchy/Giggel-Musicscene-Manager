@@ -80,16 +80,19 @@
             {% for gig_request in gig_requests %}
                 {% if gig_request.gig_request_confirmed != True %}
                     <div class="row directory_entry m-2" id="link_{{gig_request.gig_request_name}}" name="{{gig_request.gig_request_name }}">
-                            <div class="col">
+                            <div class="col-sm">
                                 <a href="{% url 'gig_request_detail' gig_request.gig_request_id %}">
                                     {{ gig_request.gig_request_date }}
                                 </a>
                             </div>
-                            <div class="col"><a href="{% url 'artist_detail' gig_request.gig_request_artist.artist_id %}">
+                            <div class="col-sm"><a href="{% url 'artist_detail' gig_request.gig_request_artist.artist_id %}">
                             {{ gig_request.gig_request_artist }}</a></div>
-                            <div class="col"><a href="{% url 'venue_detail' gig_request.gig_request_venue.venue_id %}">
+                            <div class="col-sm"><a href="{% url 'venue_detail' gig_request.gig_request_venue.venue_id %}">
                             {{ gig_request.gig_request_venue }}</a></div>
-                            <div class="col text-secondary"> {{ gig_request.gig_request_message }}
+                            <div class="col-lg">
+                                <a class="request" href="{% url 'gig_request_detail' gig_request.gig_request_id %}">
+                                {{ gig_request.gig_request_message }}
+                                </a>
                             </div>
                     </div>
                 {% endif %}
@@ -104,15 +107,22 @@
         <h3>Accepted Gig requests</h3>
             {% for gig_request in gig_requests %}
                 {% if gig_request.gig_request_confirmed %}
-                    <div class="row directory_entry m-2" name="{{gig_request.gig_request_name }}">
-                            <div class="col">
-                                <a href="{% url 'gig_request_detail' gig_request.gig_request_id %}">
-                                    {{ gig_request.gig_request_date }}
-                                </a>
-                            </div>
-                            <div class="col"><p>{{ gig_request.gig_request_artist }}</p></div>
-                            <div class="col"><p>{{ gig_request.gig_request_venue }}</p></div>
-                    </div>
+                <div class="row directory_entry m-2" id="link_{{gig_request.gig_request_name}}" name="{{gig_request.gig_request_name }}">
+                        <div class="col-sm">
+                            <a href="{% url 'gig_request_detail' gig_request.gig_request_id %}">
+                                {{ gig_request.gig_request_date }}
+                            </a>
+                        </div>
+                        <div class="col-sm"><a href="{% url 'artist_detail' gig_request.gig_request_artist.artist_id %}">
+                        {{ gig_request.gig_request_artist }}</a></div>
+                        <div class="col-sm"><a href="{% url 'venue_detail' gig_request.gig_request_venue.venue_id %}">
+                        {{ gig_request.gig_request_venue }}</a></div>
+                        <div class="col-lg">
+                            <a class="request" href="{% url 'gig_request_detail' gig_request.gig_request_id %}">
+                            {{ gig_request.gig_request_message }}
+                            </a>
+                        </div>
+                </div>
                 {% endif %}
                 {% empty %}
                     <div class="row">-

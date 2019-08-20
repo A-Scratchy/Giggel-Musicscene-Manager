@@ -86,6 +86,7 @@ class GigDelete(LoginRequiredMixin, DeleteView):
 class GigDirectory(FilterView):
     model = Gig
     template_name = 'gig/gig_directory.html'
+    filterset_fields =  ['gig_artist', 'gig_venue', 'gig_date']
 
 class MyGigs(ListView):
     template_name = 'gig/my_gigs.html'

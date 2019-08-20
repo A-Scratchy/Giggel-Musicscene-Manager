@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'django_registration',
     'debug_toolbar',
     'django_filters',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -170,8 +171,9 @@ INTERNAL_IPS = [
     '127.0.0.1',
 ]
 
-
 LOGIN_REDIRECT_URL = '/profile/'
 LOGOUT_REDIRECT_URL = '/'
 
 MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'

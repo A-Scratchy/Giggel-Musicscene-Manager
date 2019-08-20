@@ -9,10 +9,9 @@
         "gig_id": "123kjgh123KVh1",
         "gig_artist": 18,
         "gig_venue": 19,
-        "gig_name": "Jim's First Gig",
         "gig_date": "2019-05-05",
         "gig_description": "Jim's first ever gig!"
         }
-    
+
     }
 ]

@@ -1,29 +1,18 @@
 {% extends "main/base.html" %}
+{% load crispy_forms_tags %}
 {% block title %}Register{% endblock %}
 {% block headerText %}Register{% endblock %}
 {% block content %}
-  <form method="POST">
-    {% csrf_token %}
-    <fieldset class="form-group">
-      <legend class="border-bottom mb-4">Sign up</legend>
-      {% if form.errors %}
-        {% for field in form %}
-          {% for error in field.errors %}
-            <div class="btn btn-outline-danger">
-              <p name="error_text">{{ error|escape }}</p>
-            </div>
-          {% endfor %}
-        {% endfor %}
-        {% for error in form.non_field_errors %}
-          <div class="btn btn-outline-danger">
-            <strong>{{ error|escape }}</strong>
-          </div>
-        {% endfor %}
-      {% endif %}
-      {{ form.as_p}}
-    </fieldset>
-    <div class="form-group">
-      <button id="submit" class="btn btn-outline-info" type="submit">Sign up</button>
-    </div>
-  </form>
+<div class="container text-center">
+    <form method="POST">
+        {% csrf_token %}
+            <fieldset class="form-group">
+              <legend class="border-bottom mb-4">Sign up</legend>
+              {{ form|crispy}}
+            </fieldset>
+        <div class="form-group">
+          <button id="submit" class="btn btn-outline-info" type="submit">Sign up</button>
+        </div>
+    </form>
+  </div>
 {% endblock %}
