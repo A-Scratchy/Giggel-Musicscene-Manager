@@ -99,25 +99,25 @@ EMAIL_FILE_PATH = os.path.join(BASE_DIR, "sent_emails")
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
-#local dev
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
-
-# # staging
+# #local dev
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'ebdb',
-#         'USER': 'admin',
-#         'PASSWORD': 'OnionClub#99',
-#         'HOST': 'aa1oymr9ybz1l24.caoqq891tdbi.us-east-1.rds.amazonaws.com',
-#         'PORT': '3306',
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
 #     }
 # }
+
+# staging
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'giggel-dev',
+        'USER': 'admin',
+        'PASSWORD': 'OnionClub#99',
+        'HOST': 'giggel-dev.caoqq891tdbi.us-east-1.rds.amazonaws.com',
+        'PORT': '3306',
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
