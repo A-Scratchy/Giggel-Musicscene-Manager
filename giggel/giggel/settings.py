@@ -99,7 +99,7 @@ EMAIL_FILE_PATH = os.path.join(BASE_DIR, "sent_emails")
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
-local dev
+#local dev
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
