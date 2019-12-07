@@ -25,7 +25,6 @@ SECRET_KEY = 'tuo9ott6nx18dbe%dxa%wc6(a*&xsw48u2dl12-1b!nhzzfmpz'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-# Allowing all whilst still in BETA. Contains no PII
 ALLOWED_HOSTS = ['*']
 
 # Django_regestartion settings
