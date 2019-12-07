@@ -18,22 +18,27 @@ class ArtistDetail(DetailView):
     slug_field = 'artist_id'
     context_object_name = 'artist'
 
-
-class ArtistDashboard(LoginRequiredMixin, ListView):
-    model = Artist
-    template_name = 'artist/artist_dashboard.html'
-    login_url = reverse_lazy('login')
-
-    # def get_queryset(self):
-    #     owner = self.request.user
-    #     return GigRequest.objects.filter(gig_request_artist=self.request.user.artist)
-
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
-        owner = self.request.user
-        context['gig_requests'] = GigRequest.objects.filter(gig_request_artist=self.request.user.artist)
-        context['gigs'] = Gig.objects.filter(gig_artist=self.request.user.artist)
+        owner = self.object
+        context['gigs'] = Gig.objects.filter(gig_artist=owner)
         return context
+
+# class ArtistDashboard(LoginRequiredMixin, ListView):
+#     model = Artist
+#     template_name = 'artist/artist_dashboard.html'
+#     login_url = reverse_lazy('login')
+#
+#     # def get_queryset(self):
+#     #     owner = self.request.user
+#     #     return GigRequest.objects.filter(gig_request_artist=self.request.user.artist)
+#
+#     def get_context_data(self, *args, **kwargs):
+#         context = super().get_context_data(*args, **kwargs)
+#         owner = self.request.user
+#         context['gig_requests'] = GigRequest.objects.filter(gig_request_artist=self.request.user.artist)
+#         context['gigs'] = Gig.objects.filter(gig_artist=self.request.user.artist)
+#         return context
 
 
 
@@ -62,9 +67,9 @@ class ArtistUpdate(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
     # need to check if user is owner of artist before allowing update
     model = Artist
     slug_field = 'artist_id'
-    fields = ['artist_id', 'artist_owner', 'artist_name', 'artist_description']
+    fields = ['artist_name', 'artist_description', 'artist_profile_pic', 'artist_genres', 'artist_location']
     template_name = 'artist/artist_update.html'
-    success_url = reverse_lazy('artist_dashboard')
+    success_url = reverse_lazy('profile')
     success_message = '%(artist_name)s has been updated successfully'
 
 

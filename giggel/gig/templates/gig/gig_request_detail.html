@@ -1,34 +1,32 @@
 
 {% extends "main/base.html" %}
 {% load static %}
-{% block title %}gig request - {{ gig_request.gig_request_name }}{% endblock %}
+{% block title %}gig_request request - {{ gig_request.gig_request_name }}{% endblock %}
 
 {% block headerText %}{{ gig_request.gig_request_name }} - {{ gig_request.gig_request_date }}{% endblock %}
 
 {% block content %}
+<div class="profile container">
+    <div class="row">
+        <div class="col">
+            <img class="img-thumbnail profile_detail_pic" id="gig_request_profile_pic" src="{{ MEDIA_URL }}{{ gig_request.gig_request_venue.venue_profile_pic}}"/>
+        </div>
+        <div class="col">
+            <img class="img-thumbnail profile_detail_pic" id="gig_request_profile_pic" src="{{ MEDIA_URL }}{{ gig_request.gig_request_artist.artist_profile_pic}}"/>
+        </div>
+        <div class="col">
+            <h1 class=''>{{ gig_request.gig_request_date }}</h1>
+            <h3 class=''>{{ gig_request.gig_request_artist }}</h3>
+            <h3 class=''><a href="{% url 'venue_detail' gig_request.gig_request_venue.venue_id %}">{{ gig_request.gig_request_venue }}</a></h3>
+            <h3 class=''>{{ gig_request.gig_request_venue.venue_location }}</h3>
+            <p class='description'>{{ gig_request.gig_request_message}}</p>
+            <a id="update_gig_request" href="{% url 'gig_request_update' gig_request.gig_request_id %}"><button class="btn btn-outline-primary">Update request</button></a>
+        </div>
+     </div>
+     <div class="buttons">
+         <a id="submit" href="{% url 'gig_request_confirm' gig_request.gig_request_id %}"><button class="btn btn-outline-success">Accept</button></a>
+         <a id="delete_request" href="{% url 'gig_request_delete' gig_request.gig_request_id %}"><button class='btn btn-outline-danger'>Deny</button><a/>
+     </div>
+</div>
 
-<!-- Display gig_request info --!>
-<ul>
-  <li id="gig_request_id">gig_request id:
-    {{ gig_request.gig_request_id }}</li>
-  <li id="gig_request_name">gig_request name:
-    {{ gig_request.gig_request_name }}</li>
-  <li id="gig_request_owner">gig_request owner:
-    {{ gig_request.gig_request_owner }}</li>
-  <li id="gig_request_date">gig_request date:
-    {{ gig_request.gig_request_date }}</li>
-  <li id="gig_request_description">gig_request description:
-    {{ gig_request.gig_request_description }}</li>
-  <li id="gig_request_artist">artist:
-    {{ gig_request.gig_request_artist }}</li>
-  <li id="gig_request_venue">venue:
-    {{ gig_request.gig_request_venue }}</li>
-  <li id="gig_request_confirmed">Confirmed?:
-      {{ gig_request.gig_request_confirmed }}</li>
-</ul>
-
-<!-- button links to update or delte --!>
-    <a id="update_gig_request" href="{% url 'gig_request_update' gig_request.gig_request_id %}"><button class="alert alert-info">Update</button></a>
-    <a id="submit" href="{% url 'gig_request_confirm' gig_request.gig_request_id %}"><button class="alert alert-warning">Respond</button></a>
-    <a id="delete_request" href="{% url 'gig_request_delete' gig_request.gig_request_id %}"><button class='alert alert-danger'>Delete request</button><a/>
 {% endblock %}

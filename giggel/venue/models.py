@@ -10,9 +10,13 @@ class Venue(models.Model):
     venue_owner = models.OneToOneField(User, on_delete=models.CASCADE)
     venue_id = models.SlugField(max_length=80, default='')
     venue_name = models.CharField(max_length=80)
+    venue_town = models.CharField(max_length=100, null=True, blank=True)
     venue_description = models.CharField(
         max_length=250, null=True, blank=True)
-    
+    venue_profile_pic = models.ImageField(upload_to="img/venue_profile",  default="/img/venue_profile/default.jpeg")
+    venue_genres = models.CharField(max_length=200, null=True, blank=True)
+    venue_location = models.CharField(max_length=100)
+
     def __str__(self):
         return self.venue_name
 

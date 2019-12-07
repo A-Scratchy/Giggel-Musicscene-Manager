@@ -6,7 +6,8 @@
           "artist_owner": 1,
           "artist_id": "111111",
           "artist_name": "TestArtist1",
-          "artist_description": "a test artist"
+          "artist_description": "a test artist",
+          "artist_location": "Testington"
       }
   },
   {
@@ -18,7 +19,8 @@
         ],
         "artist_id": "f0MPVSK4bsye8rSxzOdZ",
         "artist_name": "Jim",
-        "artist_description": "just Jim"
+        "artist_description": "just Jim",
+        "artist_location": "Testington"
     }
   }
 ]

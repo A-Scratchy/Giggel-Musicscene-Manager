@@ -18,18 +18,23 @@ class VenueDetail(DetailView):
     slug_field = 'venue_id'
     context_object_name = 'venue'
 
-
-class VenueDashboard(LoginRequiredMixin, TemplateView):
-    model = Venue
-    template_name = 'venue/venue_dashboard.html'
-    login_url = reverse_lazy('login')
-
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
-        owner = self.request.user
-        context['gig_requests'] = GigRequest.objects.filter(gig_request_venue=self.request.user.venue)
-        context['gigs'] = Gig.objects.filter(gig_venue=self.request.user.venue)
+        owner = self.object
+        context['gigs'] = Gig.objects.filter(gig_venue=owner)
         return context
+
+# class VenueDashboard(LoginRequiredMixin, TemplateView):
+#     model = Venue
+#     template_name = 'venue/venue_dashboard.html'
+#     login_url = reverse_lazy('login')
+#
+#     def get_context_data(self, *args, **kwargs):
+#         context = super().get_context_data(*args, **kwargs)
+#         owner = self.request.user
+#         context['gig_requests'] = GigRequest.objects.filter(gig_request_venue=self.request.user.venue)
+#         context['gigs'] = Gig.objects.filter(gig_venue=self.request.user.venue)
+#         return context
 
 
 
@@ -56,9 +61,9 @@ class VenueUpdate(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
     # need to check if user is owner of venue before allowing update
     model = Venue
     slug_field = 'venue_id'
-    fields = ['venue_id', 'venue_owner', 'venue_name', 'venue_description']
+    fields = ['venue_name', 'venue_description', 'venue_profile_pic', 'venue_genres', 'venue_location']
     template_name = 'venue/venue_update.html'
-    success_url = reverse_lazy('venue_dashboard')
+    success_url = reverse_lazy('profile')
     success_message = '%(venue_name)s has been updated successfully'
 
 

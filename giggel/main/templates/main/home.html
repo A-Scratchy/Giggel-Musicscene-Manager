@@ -2,74 +2,11 @@
 {% load static %}
 {% block home_active %}active{% endblock %}
 {% block title %}Giggel{% endblock %}
-
-{% block headerText %}Giggel{% endblock %}
-
 {% block content %}
-  <div class="fluid-container m-5">
+<div class='home'>
+    <div class="fluid-container background">
+        <h1 class="gigel text-center jumbatron ">Giggel</h1>
 
-    <!-- row 1 -->
-    <div class="row">
-
-      <!-- column 1 -->
-      <div class="col-7 p-5">
-        <div class="row">
-          <!-- image - column 1a-->
-          <div class="col-8">
-            <img src="{% static 'img/temp.png' %}" class="img-fluid border circle float-right" alt="Pic">
-          </div>
-          <!-- info for image - column 1b-->
-          <div class="col-4 align-self-center">
-            <h3 class="text-center">Welcome to giggel!</h3>
-            <h5 class="text-center">Here you can do things like</h5>
-            <ul>
-              <li>Look up nearby venues</li>
-              <li>See whos playing near you</li>
-              <li>Set up your own profile</li>
-              <li>Request gigs or book artists</li>
-            </ul>
-          </div>
-        </div>
-        <!-- end of column 1-->
-      </div>
-
-      <!-- column 2 -->
-      <div class="col-5"></div>
-
-      <!-- end of row 1-->
     </div>
-
-    <!-- row 2 -->
-    <div class="row">
-
-      <!-- column 3 -->
-      <div class="col-5"></div>
-
-      <!-- column 4 -->
-      <div class="col-7 p-5">
-        <div class="row">
-          <!-- info for image - column 4a-->
-          <div class="col-6 align-self-center">
-            <h3 class="text-center">Giggel helps artists and venues by:</h3>
-            <ul>
-              <li>Connecting them together</li>
-              <li>Giving the artist the tools to find and manage gigs</li>
-              <li>Make it easy for venues to find quality acts</li>
-              <li>Building a database of artists and venues</li>
-            </ul>
-          </div>
-          <!-- image - column 4b-->
-          <div class="col-6">
-            <img src="{% static 'img/temp.png' %}" class="img-fluid" alt="Pic">
-          </div>
-        </div>
-        <!-- end of column 4-->
-      </div>
-      <!-- end of row 2-->
-    </div>
-
-    <div></div>
-    <div></div>
-    <div></div>
-
-  {% endblock %}
+</div>
+ {% endblock %}

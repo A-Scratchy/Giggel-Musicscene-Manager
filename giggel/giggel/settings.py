@@ -46,6 +46,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_registration',
     'debug_toolbar',
+    'django_filters',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -70,6 +72,7 @@ TEMPLATES = [
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
+                'django.template.context_processors.media',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
@@ -96,13 +99,25 @@ EMAIL_FILE_PATH = os.path.join(BASE_DIR, "sent_emails")
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
+# local dev
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+# }
+
+# staging
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'ebdb',
+        'USER': 'admin',
+        'PASSWORD': 'OnionClub#99',
+        'HOST': 'aa1oymr9ybz1l24.caoqq891tdbi.us-east-1.rds.amazonaws.com',
+        'PORT': '3306',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
@@ -143,16 +158,20 @@ USE_TZ = True
 STATIC_ROOT = '/static/'
 STATIC_URL = '/static/'
 
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static"),
+    os.path.join(BASE_DIR, 'static'),
 ]
 
 INTERNAL_IPS = [
     '127.0.0.1',
 ]
 
-
 LOGIN_REDIRECT_URL = '/profile/'
 LOGOUT_REDIRECT_URL = '/'
 
 MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
