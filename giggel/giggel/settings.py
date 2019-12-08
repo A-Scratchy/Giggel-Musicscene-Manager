@@ -114,7 +114,7 @@ DATABASES = {
         'NAME': 'giggel-dev',
         'USER': 'admin',
         'PASSWORD': 'OnionClub#99',
-        'HOST': 'giggel-dev.caoqq891tdbi.us-east-1.rds.amazonaws.com',
+        'HOST': 'aauqtnq52k7bgt.caoqq891tdbi.us-east-1.rds.amazonaws.com',
         'PORT': '3306',
     }
 }
