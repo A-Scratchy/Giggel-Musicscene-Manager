@@ -111,7 +111,7 @@ EMAIL_FILE_PATH = os.path.join(BASE_DIR, "sent_emails")
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'giggel-dev',
+        'NAME': 'aauqtnq52k7bgt',
         'USER': 'admin',
         'PASSWORD': 'OnionClub#99',
         'HOST': 'aauqtnq52k7bgt.caoqq891tdbi.us-east-1.rds.amazonaws.com',
