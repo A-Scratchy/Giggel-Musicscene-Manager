@@ -20,6 +20,11 @@ body {
   height: 100%;
 }
 
+p, a {
+  font-size: 1.3em;
+  line-height: normal;
+}
+
 .row {
   justify-content: center;
 }
@@ -46,11 +51,7 @@ footer {
   background-color: var(--c4);
 }
 
-p,
-a {
-  font-size: 1.3em;
-  line-height: normal;
-}
+
 
 p,
 h1,
@@ -74,6 +75,7 @@ h1,
 h2 {
   color: var(--c2);
 }
+
 
 ul {
   list-style: none;
@@ -116,6 +118,23 @@ a:hover {
 
 /* small screens */
 @media only screen and (max-width: 799px) {
+
+    p, a {
+  font-size: 1em;
+  line-height: normal;
+}
+
+h3 {
+    font-size: 1.2em;
+}
+
+.card .container {
+    padding: 0;
+    margin: 0;
+}
+
+
+
   form {
     width: 90vw;
     margin: auto;
@@ -208,11 +227,19 @@ label {
 .grow:hover {
   font-size: 1.9em;
   transition: all 0.1s;
-  color: var(--c2);
+  color: var(--c1);
 }
 
-.clicked {
+.fa-star.clicked {
     color: yellow;
+}
+
+.fa-heart.clicked {
+    color: red;
+}
+
+.fa-flag.clicked {
+    color: green;
 }
 
 .noDataText {

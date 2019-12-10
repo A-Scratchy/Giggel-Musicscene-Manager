@@ -12,6 +12,10 @@ $(function () {
   $('[data-toggle="popover"]').popover()
 })
 
-$('.star').click( function()  {
+$('.fill').click( function()  {
   $( this ).toggleClass('fa clicked');
+})
+
+$('.mail').click( function()  {
+  window.alert('sending email...')
 })

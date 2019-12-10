@@ -1,20 +1,21 @@
 {% extends "main/base.html" %}
 {% load static %}
 {% block myProfile_active %}Artist -
-  {{ user.Artist.artist_name }}
+{{ user.Artist.artist_name }}
 {% endblock %}
 {% block title %}Artist{% endblock %}
 
 {% block content %}
 <div class='container text-center'>
 
-{% if user.venue %}
-<!-- ~~~~~~~~~~~~~~~~~~~~~~ Venue profile ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-    <div class="profile container card">
+    {% if user.venue %}
+    <!-- ~~~~~~~~~~~~~~~~~~~~~~ Venue profile ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+    <div class="container card">
         <h1 id="venue_name" class='name'>{{ venue.venue_name }}</h1>
         <div class="row p-4">
             <div class="col-sm img-container">
-                <img class="img-thumbnail directory profile_detail_pic" id="venue_profile_pic" src="{{ MEDIA_URL }}{{ user.venue.venue_profile_pic}}"/>
+                <img class="img-thumbnail directory profile_detail_pic" id="venue_profile_pic"
+                    src="{{ MEDIA_URL }}{{ user.venue.venue_profile_pic}}" />
             </div>
             <div class="col-sm card">
                 <h3 id="venue_genres" class='name'>{{ venue.venue_genres }}</h3>
@@ -23,37 +24,43 @@
             </div>
         </div>
         <div class="row p-4">
-            <a id="venue_update" href="/venue/update/{{user.venue.venue_id}}"><button class='btn btn-primary'>Edit details</button></a>
-            <a id="venue_delete" href="/venue/delete/{{user.venue.venue_id}}"><button class='btn btn-danger'>Delete my venue</button></a>
+            <a id="venue_update" href="/venue/update/{{user.venue.venue_id}}"><button class='btn btn-primary'>Edit
+                    details</button></a>
+            <a id="venue_delete" href="/venue/delete/{{user.venue.venue_id}}"><button class='btn btn-danger'>Delete my
+                    venue</button></a>
         </div>
     </div>
-{% endif %}
+    {% endif %}
 
-{% if user.artist %}
-<!-- ~~~~~~~~~~~~~~~~~~~~~~ Artist profile ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-<div class="profile container p-5 text-center">
-    <div class="profile container card">
+    {% if user.artist %}
+    <!-- ~~~~~~~~~~~~~~~~~~~~~~ Artist profile ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+    <div class="container card">
         <h1 id="artist_name" class='name'>{{ artist.artist_name }}</h1>
         <div class="row p-4">
             <div class="col-md col-6 m-4 img-container text-center">
-                <img class="img-thumbnail profile_detail_pic" id="artist_profile_pic" src="{{ MEDIA_URL }}{{ artist.artist_profile_pic}}"/>
+                <img class="img-thumbnail profile_detail_pic" id="artist_profile_pic"
+                    src="{{ MEDIA_URL }}{{ artist.artist_profile_pic}}" />
             </div>
             <div class="col-md col-6 m-4 p-0 card bg-dark">
-                <div class="card-header p-0"><h3>Details</h3></div>
+                <div class="card-header p-0">
+                    <h3>Details</h3>
+                </div>
                 <div class="card-body">
-                <h3 id="artist_genres" class='name'>Genre: {{ artist.artist_genres }}</h3>
-                <h3 id="artist_location" class='name'>Location: {{ artist.artist_location }}</h3>
-                <h3 id="artist_description" class='name'>Description:{{ .artist.artist_description}}</h3>
-            </div>
+                    <h3 id="artist_genres" class='name'>Genre:</h3> <p class="text-secondary">{{ artist.artist_genres }}<p>
+                    <h3 id="artist_location" class='name'>Location: </h3><p class="text-secondary">{{ artist.artist_location }}</p>
+                    <h3 id="artist_description" class='name'>Description:</h3><p class="text-secondary">{{ .artist.artist_description}}</p>
+                </div>
             </div>
         </div>
         <div class="row p-4">
-            <a id="artist_update" href="/artist/update/{{user.artist.artist_id}}"><button class='btn btn-primary'>Edit details</button></a>
-            <a id="artist_delete" href="/artist/delete/{{user.artist.artist_id}}"><button class='btn btn-danger'>Delete my artist</button></a>
+            <a id="artist_update" href="/artist/update/{{user.artist.artist_id}}"><button class='btn btn-primary'>Edit
+                    details</button></a>
+            <a id="artist_delete" href="/artist/delete/{{user.artist.artist_id}}"><button class='btn btn-danger'>Delete
+                    my artist</button></a>
         </div>
     </div>
 
-{% endif %}
+    {% endif %}
 
     <div id="my_gigs" class="container card">
         <h1>Gigs</h1>
@@ -61,18 +68,21 @@
         {% for gig in gigs %}
         <div class="row directory_entry m-2" id="link_{{ gig.gig_name }}">
             <div class="col">
-            <a href="{% url 'gig_detail' gig.gig_id %}">
-                {{ gig.gig_date }}</a></div>
+                <a href="{% url 'gig_detail' gig.gig_id %}">
+                    {{ gig.gig_date }}</a></div>
             <div class="col">
-            <a href="{% url 'artist_detail' gig.gig_artist.artist_id %}">
-            {{ gig.gig_artist }}</a></div>
+                <a href="{% url 'artist_detail' gig.gig_artist.artist_id %}">
+                    {{ gig.gig_artist }}</a></div>
             <div class="col"><a href="{% url 'venue_detail' gig.gig_venue.venue_id %}">
-            {{ gig.gig_venue }}</a></div>
-         </div>
-      {% empty %}
-            <div class="row"><div class="col">
-            <h3>No gigs :-(</h3></div></div>
-      {% endfor %}
+                    {{ gig.gig_venue }}</a></div>
+        </div>
+        {% empty %}
+        <div class="row">
+            <div class="col">
+                <h3>No gigs :-(</h3>
+            </div>
+        </div>
+        {% endfor %}
     </div>
 
 </div>
