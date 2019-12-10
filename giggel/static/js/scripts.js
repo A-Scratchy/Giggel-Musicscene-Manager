@@ -11,3 +11,7 @@ $(function () {
 $(function () {
   $('[data-toggle="popover"]').popover()
 })
+
+$('.star').click( function()  {
+  $( this ).toggleClass('fa clicked');
+})

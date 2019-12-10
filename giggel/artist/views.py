@@ -21,24 +21,8 @@ class ArtistDetail(DetailView):
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
         owner = self.object
-        context['gigs'] = Gig.objects.filter(gig_artist=owner)
+        context['gigs'] = Gig.objects.filter(gig_artist=owner).order_by('-gig_date')
         return context
-
-# class ArtistDashboard(LoginRequiredMixin, ListView):
-#     model = Artist
-#     template_name = 'artist/artist_dashboard.html'
-#     login_url = reverse_lazy('login')
-#
-#     # def get_queryset(self):
-#     #     owner = self.request.user
-#     #     return GigRequest.objects.filter(gig_request_artist=self.request.user.artist)
-#
-#     def get_context_data(self, *args, **kwargs):
-#         context = super().get_context_data(*args, **kwargs)
-#         owner = self.request.user
-#         context['gig_requests'] = GigRequest.objects.filter(gig_request_artist=self.request.user.artist)
-#         context['gigs'] = Gig.objects.filter(gig_artist=self.request.user.artist)
-#         return context
 
 
 

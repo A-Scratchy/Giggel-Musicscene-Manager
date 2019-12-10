@@ -1,6 +1,6 @@
 {% extends "main/base.html" %}
 {% load static %}
-{% block myProfile_directories %}
+{% block myProfile_directories %}active
 {% endblock %}
 {% block title %}Venue directory{% endblock %}
 
@@ -9,30 +9,40 @@
 
 {% block content %}
 
-<div class="directory container">
-    <div class="toolbar">
-        Filters: _________ location: ___________ Genre: ______________
-    </div>
-    {% for venue in object_list %}
-        <a href="{% url 'venue_detail' venue.venue_id %}">
+<div class='container text-center'>
+    <h1>Venue Directory</h1>
+
+
+    <div class="directory card container">
+        <div class="toolbar">
+            <!-- Filters: _________ location: ___________ Genre: ______________ -->
+        </div>
+        {% for venue in object_list %}
+        
             <div class="row directory_entry m-2">
-                <div class="col-5">
-                    <img class="img-thumbnail rofile_pic m-1" src="{{ MEDIA_URL }}{{ venue.venue_profile_pic}}" id="{{ venue.venue_id }}_venue_pic"><!--{{ venue.venue_profile_pic }}--></img>
+                <div class="col-5-lg col-sm img-container-directory">
+                        <a href="{% url 'venue_detail' venue.venue_id %}">
+                    <img class="img-thumbnail profile_pic m-1" src="{{ MEDIA_URL }}{{ venue.venue_profile_pic}}"
+                        id="{{ venue.venue_id }}_venue_pic"></img>
+                    </a>
                 </div>
-                <div class="col-7">
-                        <p id="{{ venue.venue_id }}_venue_name">{{ venue.venue_name }}</p>
-                        <p id="{{ venue.venue_id }}_venue_town">{{ venue.venue_location }}</p>
-                        <p id="{{ venue.venue_id }}_venue_genres">{{ venue.venue_genres }}</p>
-                        <i class="grow far fa-envelope"></i>
-                        <i class="grow far fa-heart"></i>
-                        <i class="grow far fa-star"></i>
-                        <i class="grow far fa-flag"></i>
-                        <i class="grow fas fa-award"></i>
+                <div class="col-7-lg col-sm">
+                        <a href="{% url 'venue_detail' venue.venue_id %}">
+                    <p id="{{ venue.venue_id }}_venue_name">{{ venue.venue_name }}</p>
+                </a>
+                    <p id="{{ venue.venue_id }}_venue_town" class="text-secondary">{{ venue.venue_location }}</p>
+                    <p id="{{ venue.venue_id }}_venue_genres" class="text-secondary">{{ venue.venue_genres }}</p>
+                    <span>
+                    <i class="grow far fa-envelope"></i>
+                    <i class="grow far fa-heart"></i>
+                    <i class="grow star far fa-star"></i>
+                    <i class="grow far fa-flag"></i>
+                    </span>
                 </div>
             </div>
-        </a>
-        <span class="line"></span>
-    {% endfor %}
-</div>
 
+        <span class="line"></span>
+        {% endfor %}
+    </div>
+</div>
 {% endblock %}

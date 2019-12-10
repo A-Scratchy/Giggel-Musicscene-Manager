@@ -16,6 +16,7 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
@@ -23,7 +24,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'tuo9ott6nx18dbe%dxa%wc6(a*&xsw48u2dl12-1b!nhzzfmpz'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -124,13 +125,9 @@ if 'RDS_HOSTNAME' in os.environ:
 else:
     DATABASES = {
         'default': {
-            'ENGINE': 'django.db.backends.mysql',
-            'NAME': 'aauqtnq52k7bgt',
-            'USER': 'admin',
-            'PASSWORD': 'OnionClub#99',
-            'HOST': 'aauqtnq52k7bgt.caoqq891tdbi.us-east-1.rds.amazonaws.com',
-            'PORT': '3306',
-        }
+         'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+     }
     }
 
 # Password validation

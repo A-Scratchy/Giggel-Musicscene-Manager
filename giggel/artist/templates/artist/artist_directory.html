@@ -9,30 +9,40 @@
 
 {% block content %}
 
-<div class="directory container">
-    <div class="toolbar">
-        Filters: _________ location: ___________ Genre: ______________
-    </div>
-    {% for artist in object_list %}
-        <a href="{% url 'artist_detail' artist.artist_id %}">
+<div class='container text-center'>
+    <h1>Artist Directory</h1>
+
+
+    <div class="directory card container">
+        <div class="toolbar">
+            <!-- Filters: _________ location: ___________ Genre: ______________ -->
+        </div>
+        {% for artist in object_list %}
+        
             <div class="row directory_entry m-2">
-                <div class="col-5">
-                    <img class="img-thumbnail profile_pic m-1" src="{{ MEDIA_URL }}{{ artist.artist_profile_pic}}" id="{{ artist.artist_id }}_artist_pic"></img>
+                <div class="col-5-lg col-sm img-container-directory">
+                        <a href="{% url 'artist_detail' artist.artist_id %}">
+                    <img class="img-thumbnail profile_pic m-1" src="{{ MEDIA_URL }}{{ artist.artist_profile_pic}}"
+                        id="{{ artist.artist_id }}_artist_pic"></img>
+                    </a>
                 </div>
-                <div class="col-7">
-                        <p id="{{ artist.artist_id }}_artist_name">{{ artist.artist_name }}</p>
-                        <p id="{{ artist.artist_id }}_artist_town">{{ artist.artist_location }}</p>
-                        <p id="{{ artist.artist_id }}_artist_genres">{{ artist.artist_genres }}</p>
-                        <i class="grow far fa-envelope"></i>
-                        <i class="grow far fa-heart"></i>
-                        <i class="grow far fa-star"></i>
-                        <i class="grow far fa-flag"></i>
-                        <i class="grow fas fa-award"></i>
+                <div class="col-7-lg col-sm">
+                        <a href="{% url 'artist_detail' artist.artist_id %}">
+                    <p id="{{ artist.artist_id }}_artist_name">{{ artist.artist_name }}</p>
+                </a>
+                    <p id="{{ artist.artist_id }}_artist_town" class="text-secondary">{{ artist.artist_location }}</p>
+                    <p id="{{ artist.artist_id }}_artist_genres" class="text-secondary">{{ artist.artist_genres }}</p>
+                    <span>
+                    <i class="grow far fa-envelope"></i>
+                    <i class="grow far fa-heart"></i>
+                    <i class="grow star far fa-star"></i>
+                    <i class="grow far fa-flag"></i>
+                    </span>
                 </div>
             </div>
-        </a>
-        <span class="line"></span>
-    {% endfor %}
-</div>
 
+        <span class="line"></span>
+        {% endfor %}
+    </div>
+</div>
 {% endblock %}

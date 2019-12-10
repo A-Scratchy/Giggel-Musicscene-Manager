@@ -6,32 +6,57 @@
 {% block title %}Artist{% endblock %}
 
 {% block content %}
+<div class='container text-center'>
 
+{% if user.venue %}
+<!-- ~~~~~~~~~~~~~~~~~~~~~~ Venue profile ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+    <div class="profile container card">
+        <h1 id="venue_name" class='name'>{{ venue.venue_name }}</h1>
+        <div class="row p-4">
+            <div class="col-sm img-container">
+                <img class="img-thumbnail directory profile_detail_pic" id="venue_profile_pic" src="{{ MEDIA_URL }}{{ user.venue.venue_profile_pic}}"/>
+            </div>
+            <div class="col-sm card">
+                <h3 id="venue_genres" class='name'>{{ venue.venue_genres }}</h3>
+                <h3 id="venue_location" class='name'>{{ venue.venue_location }}</h3>
+                <h3 id="venue_description" class='name'>{{ venue.venue_description }}</h3>
+            </div>
+        </div>
+        <div class="row p-4">
+            <a id="venue_update" href="/venue/update/{{user.venue.venue_id}}"><button class='btn btn-primary'>Edit details</button></a>
+            <a id="venue_delete" href="/venue/delete/{{user.venue.venue_id}}"><button class='btn btn-danger'>Delete my venue</button></a>
+        </div>
+    </div>
+{% endif %}
+
+{% if user.artist %}
+<!-- ~~~~~~~~~~~~~~~~~~~~~~ Artist profile ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 <div class="profile container p-5 text-center">
-    <div class="row">
-        <div class="col-sm">
-            <img class="img-thumbnail profile_detail_pic" id="artist_profile_pic"
-                 src="{{ MEDIA_URL }}{{ artist.artist_profile_pic}}"/>
+    <div class="profile container card">
+        <h1 id="artist_name" class='name'>{{ artist.artist_name }}</h1>
+        <div class="row p-4">
+            <div class="col-md col-6 m-4 img-container text-center">
+                <img class="img-thumbnail profile_detail_pic" id="artist_profile_pic" src="{{ MEDIA_URL }}{{ artist.artist_profile_pic}}"/>
+            </div>
+            <div class="col-md col-6 m-4 p-0 card bg-dark">
+                <div class="card-header p-0"><h3>Details</h3></div>
+                <div class="card-body">
+                <h3 id="artist_genres" class='name'>Genre: {{ artist.artist_genres }}</h3>
+                <h3 id="artist_location" class='name'>Location: {{ artist.artist_location }}</h3>
+                <h3 id="artist_description" class='name'>Description:{{ .artist.artist_description}}</h3>
+            </div>
+            </div>
         </div>
-        <div class="col-sm">
-            <h1 id="artist_name" class='name'>{{ artist.artist_name }}</h1>
-            <h3 id="artist_genres" class='name'>{{ artist.artist_genres }}</h3>
-            <h3 id="artist_location" class='name'>{{ artist.artist_location }}</h3>
-            <P id="artist_description" class='description'>{{ artist.artist_description }}</P>
+        <div class="row p-4">
+            <a id="artist_update" href="/artist/update/{{user.artist.artist_id}}"><button class='btn btn-primary'>Edit details</button></a>
+            <a id="artist_delete" href="/artist/delete/{{user.artist.artist_id}}"><button class='btn btn-danger'>Delete my artist</button></a>
         </div>
     </div>
-    {% if user.venue %}
-    <div class="row">
-        <div class="buttons">
-            <a class="btn btn-outline-info" id='request_gig_from_artist'
-               href="{% url 'gig_request' %}?gig_request_artist={{ artist.artist_id }}">
-               Request artist to play at your venue</a>
-        </div>
-    </div>
-    {% endif %}
+
+{% endif %}
 
     <div id="my_gigs" class="container card">
-        <h1>My Gigs</h1>
+        <h1>Gigs</h1>
 
         {% for gig in gigs %}
         <div class="row directory_entry m-2" id="link_{{ gig.gig_name }}">
@@ -50,6 +75,7 @@
       {% endfor %}
     </div>
 
+</div>
 </div>
 
 {% endblock %}

@@ -24,9 +24,10 @@ class GigForm(ModelForm):
     class Meta:
         model = Gig
         fields = ['gig_date', 'gig_description', 'gig_artist', 'gig_venue' ]
+        ordering = ['gig_date']
         widgets = {
-        'gig_date': forms.DateInput(format='%d-%m-%Y', attrs={'class':'datePicker', 'readonly':'true'}),
-        }
+                'gig_date': forms.DateInput(format='%d-%m-%Y', attrs={'class':'datePicker dates', 'readonly':'true'}),
+                }
 
 class GigRequest(models.Model):
     gig_request_owner = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -49,6 +50,9 @@ class GigRequestForm(ModelForm):
     class Meta:
         model = GigRequest
         fields = ['gig_request_date', 'gig_request_message']
+        ordering = ['gig_date']
         widgets = {
-        'gig_request_date': forms.DateInput(format='%d-%m-%Y', attrs={'class':'datePicker', 'readonly':'true'}),
+        'gig_request_date': forms.DateInput(format='%d-%m-%Y', attrs={'class':'datePicker dates', 'readonly':'true'}),
+        'gig_request_artist': forms.Select(attrs={'class':'Picker venueOnly'}),
+        'gig_request_venue': forms.Select( attrs={'class':'artistOnly',}),
         }

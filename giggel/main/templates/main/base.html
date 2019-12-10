@@ -8,8 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Load bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.css">
+    <link rel="stylesheet" href="{% static 'css/datepicker.css' %}">
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
     <title>
       {% block title %}{% endblock %}
@@ -20,7 +19,7 @@
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~ Navbar ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
-      <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+      <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
           <!-- Logo - to add later when designed-->
           <span class="navbar-brand giggel_G">G</span>
           <!-- dropdown for small screens -->
@@ -118,12 +117,12 @@
       </header>
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~ Main page content ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-      <main>
+      <main id="main">
             {% block content %}{% endblock %}
       </main>
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Footer ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-      <footer class="fixed-bottom">
+      <footer class="sticky-bottom mt-4">
         <div class="text-center">
           <p>Design - 2019 a scratcherd</p>
         </div>
