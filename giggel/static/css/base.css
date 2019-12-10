@@ -16,8 +16,7 @@ body {
     font-family: 'Roboto Slab', serif;
     background-color: var(--c5);
     color: var(--c1);
-    height: 100%;
-    margin-bottom: 150px;
+    height: 100vh;
 }
 
 .card {
@@ -92,7 +91,7 @@ label {
     background-image: url('../img/aditya-chinchure-ZhQCZjr9fHo-unsplash.jpg');
     background-size: cover;
     background-position: center bottom;
-    height: 90vh;
+    height: 99vh;
     overflow: hidden;
 }
 
