@@ -88,7 +88,7 @@ WSGI_APPLICATION = 'giggel.wsgi.application'
 # EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
 # EMAIL_FILE_PATH = os.path.join(BASE_DIR, "sent_emails")
 
-Live emails
+#Live emails
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'mail.privateemail.com'
 EMAIL_PORT = 587
