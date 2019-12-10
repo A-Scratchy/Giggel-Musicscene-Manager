@@ -116,6 +116,8 @@ a:hover {
   }
 }
 
+
+
 /* small screens */
 @media only screen and (max-width: 799px) {
 
@@ -189,6 +191,11 @@ label {
   right: 0;
   z-index: 1;
   font-family: "Roboto Slab", serif;
+  animation-name: flash;
+  animation-duration: 5s;
+  animation-delay: 0;
+  animation-direction: alternate;
+  animation-iteration-count: infinite;
 }
 
 .datepicker {
@@ -271,3 +278,24 @@ label {
   line-height: 1em;
   color: grey;
 }
+
+@keyframes flash {
+    0% {
+        color: rgb(162, 229, 255);
+    }
+    20% {
+        color: #b3edff;
+    }
+    40% {
+        color: #97e4fb;
+    }
+    60% {
+        color: #84e2ff;
+    }
+    80% {
+        color: #46d4ff;
+    }
+    100% {
+        color: #22cbff;
+  }
+  }
