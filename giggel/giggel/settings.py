@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'tuo9ott6nx18dbe%dxa%wc6(a*&xsw48u2dl12-1b!nhzzfmpz'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -85,16 +85,16 @@ WSGI_APPLICATION = 'giggel.wsgi.application'
 # Email settings
 
 # dev file EMAIL_USE_TLS
-EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
-EMAIL_FILE_PATH = os.path.join(BASE_DIR, "sent_emails")
+# EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
+# EMAIL_FILE_PATH = os.path.join(BASE_DIR, "sent_emails")
 
-# Live emails
-#EMAIL_USE_TLS = True
-#EMAIL_HOST = 'mail.privateemail.com'
-#EMAIL_PORT = 587
-#EMAIL_HOST_USER = 'admin@giggel.co.uk'
-# EMAIL_HOST_PASSWORD = 'DjangoBango#99'
-#DEFAULT_FROM_EMAIL = 'admin@giggel.co.uk'
+Live emails
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'mail.privateemail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'admin@giggel.co.uk'
+EMAIL_HOST_PASSWORD = 'DjangoBango#99'
+DEFAULT_FROM_EMAIL = 'admin@giggel.co.uk'
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
